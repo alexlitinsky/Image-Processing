@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+
+import model.modifiers.Modifier;
+
 /**
  * Class to represent an image.
  */
@@ -27,16 +30,24 @@ public class Image {
     this.imagePixels = new Pixel[height][width];
   }
 
+  /**
+   *
+   * @param x the x coordinate
+   * @param y the y coordinate
+   * @param r the red color value
+   * @param g the green color value
+   * @param b the blue color value
+   */
   public void assignPixels(int x, int y, int r, int g, int b) {
     imagePixels[y][x] = new Pixel(r, g, b);
   }
 
   public String toString() {
     Appendable output = new StringBuilder();
-    for (int i = 0; i < width; i++) {
-      for (int j = 0; j < height; j++) {
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
         try {
-          output.append(imagePixels[j][i].toString());
+          output.append(imagePixels[i][j].toString());
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
@@ -45,27 +56,31 @@ public class Image {
     return output.toString();
   }
 
-  /**
-   * Renders a image
-   * @return a buffered image
-   */
-  public BufferedImage renderImage() {
-    BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        // might be a simpler way of doing these following operations?
-        Color col = new new Color(Integer.parseInt(imagePixels[i][j].toString().substring(0, 1)),
-                Integer.parseInt(imagePixels[i][j].toString().substring(2, 3)),
-                Integer.parseInt(imagePixels[i][j].toString().substring(4, 5)));
-        img.setRGB(j, i, col.getRGB());
-      }
-    }
-    return img;
-  }
+  // for future assignment brainstorming
+//  /**
+//   * Renders a image
+//   * @return a buffered image
+//   */
+//  public BufferedImage renderImageRGB() {
+//    BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+//    for (int i = 0; i < height; i++) {
+//      for (int j = 0; j < width; j++) {
+//        // might be a simpler way of doing these following operations?
+//        Color col = new Color(Integer.parseInt(imagePixels[i][j].toString().substring(0, 1)),
+//                Integer.parseInt(imagePixels[i][j].toString().substring(2, 3)),
+//                Integer.parseInt(imagePixels[i][j].toString().substring(4, 5)));
+//        Color newCol = new Color(imagePixels[i][j].red, imagePixels[i][j].green,
+//                imagePixels[i][j].blue);
+//        img.setRGB(j, i, newCol.getRGB());
+//      }
+//    }
+//    return img;
+//  }
+
 
   // might need to change canvas size in the future
 
-  public void applyFilter(Modifer mod) throws IllegalArgumentException {
+  public void applyFilter(Modifier mod) throws IllegalArgumentException {
     if (mod == null) { throw new IllegalArgumentException("Null modifier"); }
     this.imagePixels = mod.apply(this);
   }
@@ -81,7 +96,7 @@ public class Image {
     return copy;
   }
 
-  public int[] getProps() {
+  public int[] getDimensions() {
     return new int[] {this.width, this.height};
   }
 
