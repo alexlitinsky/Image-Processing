@@ -14,17 +14,17 @@ public class ImageUtil {
 
   /**
    * Read an image file in the PPM format and print the colors.
-   *
-   * @param filename the path of the file.
+   * @param filename the name of the file being read
+   * @return the image read from the PPM file
+   * @throws IllegalArgumentException if no file with the given name can be found
    */
-  public static void readPPM(String filename) {
+  public static Image readPPM(String filename) {
     Scanner sc;
 
     try {
       sc = new Scanner(new FileInputStream(filename));
     } catch (FileNotFoundException e) {
-      System.out.println("File " + filename + " not found!");
-      return;
+      throw new IllegalArgumentException("Filename " + filename + "not found!");
     }
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines
@@ -63,6 +63,10 @@ public class ImageUtil {
       }
     }
 
+<<<<<<< HEAD
+=======
+    return image;
+>>>>>>> 0a3b2370c4a36af328a88695a18b9c5e084f17b2
   }
 
   //demo main
