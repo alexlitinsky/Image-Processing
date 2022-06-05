@@ -17,13 +17,7 @@ public class Pixel {
     this.blue = blue;
   }
 
-  public String toString() {
-    StringBuilder build = new StringBuilder();
-    build.append("(" + red + ", ");
-    build.append(green + ", ");
-    build.append(blue + ") ");
-    return build.toString();
+  public int[] getRBG() {
+    return new int[] {this.red, this.green, this.blue};
   }
-
-
 }

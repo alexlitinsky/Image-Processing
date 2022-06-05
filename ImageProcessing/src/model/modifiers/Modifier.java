@@ -1,6 +1,6 @@
 package model.modifiers;
 
-import model.Image;
+import model.ImageModel;
 import model.Pixel;
 
 /**
@@ -11,5 +11,5 @@ public interface Modifier {
    * Applies a modifier to an image
    * @param img the original image
    */
-  public Pixel[][] apply(Image img);
+  public Pixel[][] apply(ImageModel img);
 }

@@ -1,9 +1,8 @@
-import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import model.Image;
+import model.ImageModel;
 
 
 /**
@@ -14,11 +13,12 @@ public class ImageUtil {
 
   /**
    * Read an image file in the PPM format and print the colors.
+   *
    * @param filename the name of the file being read
    * @return the image read from the PPM file
    * @throws IllegalArgumentException if no file with the given name can be found
    */
-  public static Image readPPM(String filename) {
+  public static ImageModel readPPM(String filename) {
     Scanner sc;
 
     try {
@@ -51,7 +51,7 @@ public class ImageUtil {
     int maxValue = sc.nextInt();
     System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
-    Image image = new Image(width, height);
+    ImageModel image = new ImageModel(width, height);
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
@@ -63,23 +63,20 @@ public class ImageUtil {
       }
     }
 
-<<<<<<< HEAD
-=======
     return image;
->>>>>>> 0a3b2370c4a36af328a88695a18b9c5e084f17b2
-  }
 
-  //demo main
-  public static void main(String[] args) {
-    String filename;
-
-    if (args.length > 0) {
-      filename = args[0];
-    } else {
-      filename = "sample.ppm";
-    }
-
-    ImageUtil.readPPM(filename);
+//  //demo main
+//  public static void main(String[] args) {
+//    String filename;
+//
+//    if (args.length > 0) {
+//      filename = args[0];
+//    } else {
+//      filename = "sample.ppm";
+//    }
+//
+//    ImageUtil.readPPM(filename);
+//  }
   }
 }
 

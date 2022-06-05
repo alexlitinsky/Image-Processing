@@ -1,16 +1,12 @@
 package model;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
 
 import model.modifiers.Modifier;
 
 /**
  * Class to represent an image.
  */
-public class Image {
+public class ImageModel {
   private int width;
   private int height;
   protected Pixel[][] imagePixels;
@@ -21,7 +17,7 @@ public class Image {
    * @param width
    * @param height
    */
-  public Image(int width, int height) throws IllegalArgumentException {
+  public ImageModel(int width, int height) throws IllegalArgumentException {
     if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException("Invalid width or height.");
     }
@@ -40,20 +36,6 @@ public class Image {
    */
   public void assignPixels(int x, int y, int r, int g, int b) {
     imagePixels[y][x] = new Pixel(r, g, b);
-  }
-
-  public String toString() {
-    Appendable output = new StringBuilder();
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        try {
-          output.append(imagePixels[i][j].toString());
-        } catch (IOException e) {
-          throw new RuntimeException(e);
-        }
-      }
-    }
-    return output.toString();
   }
 
   // for future assignment brainstorming
