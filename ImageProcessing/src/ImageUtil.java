@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -61,6 +62,7 @@ public class ImageUtil {
         System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
       }
     }
+
   }
 
   //demo main
