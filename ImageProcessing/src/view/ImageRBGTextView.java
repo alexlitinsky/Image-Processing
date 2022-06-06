@@ -4,8 +4,16 @@ import java.io.IOException;
 
 import model.ImageModel;
 
+/**
+ * Class to represent an image text view which visualizes an image using its RGB components.
+ */
 public class ImageRBGTextView extends ImageTextView implements TextView{
 
+  /**
+   *
+   * @param model the model being viewed
+   * @param destination the place where the view is being sent
+   */
   public ImageRBGTextView(ImageModel model, Appendable destination) {
     super(model, destination);
   }
@@ -13,7 +21,7 @@ public class ImageRBGTextView extends ImageTextView implements TextView{
   /**
    * Method to create a string representing this image.
    *
-   * @return
+   * @return the string representing the image
    */
   public String toString() {
     Appendable output = new StringBuilder();
