@@ -4,12 +4,13 @@ import model.ImageModel;
 import model.Pixel;
 
 /**
- * An interface to modify an image.
+ * An interface representing different ways to modify an image. All modifiers should have the below
+ * methods.
  */
 public interface Modifier {
   /**
    * Applies a modifier to an image
    * @param img the original image
    */
-  public Pixel[][] apply(ImageModel img);
+  public void apply();
 }

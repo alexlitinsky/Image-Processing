@@ -51,7 +51,7 @@ public class ImageUtil {
     int maxValue = sc.nextInt();
     System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
-    ImageModel image = new ImageModel(width, height);
+    ImageModel image = new ImageModel(filename, width, height);
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {

@@ -8,7 +8,7 @@ public class ImageModelTest {
 
   @Test
   public void testConstructor1() {
-    ImageModel image = new ImageModel(1, 1);
+    ImageModel image = new ImageModel("test",1, 1);
   }
 
   @Test

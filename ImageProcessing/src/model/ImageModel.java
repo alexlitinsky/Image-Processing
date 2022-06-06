@@ -1,6 +1,11 @@
 package model;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import model.modifiers.Modifier;
 
 /**
@@ -10,20 +15,28 @@ public class ImageModel {
   private int width;
   private int height;
   protected Pixel[][] imagePixels;
+  protected String name;
+  protected Map versions;
 
   /**
-   * Constructor to create an image representing a 2D array of pixels.
-   *
-   * @param width
-   * @param height
+   * Constructor which makes a model for an image using a 2D array of pixels.
+   * @param name the name for this model of an image
+   * @param width the width of the image
+   * @param height the height of the image
+   * @throws IllegalArgumentException if
    */
-  public ImageModel(int width, int height) throws IllegalArgumentException {
+  public ImageModel(String name, int width, int height) throws IllegalArgumentException {
+    if (name.equals("")) {
+      throw new IllegalArgumentException("Name cannot be empty");
+    }
     if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException("Invalid width or height.");
     }
+    this.name = name;
     this.width = width;
     this.height = height;
     this.imagePixels = new Pixel[height][width];
+    this.versions = new HashMap<String, ImageModel>();
   }
 
   /**
@@ -64,7 +77,24 @@ public class ImageModel {
 
   public void applyFilter(Modifier mod) throws IllegalArgumentException {
     if (mod == null) { throw new IllegalArgumentException("Null modifier"); }
-    this.imagePixels = mod.apply(this);
+
+  }
+
+  public void addVersion(ImageModel model) {
+    versions.put(model.name, model);
+  }
+
+  public ImageModel getVersion(String name) {
+    return (ImageModel) versions.get(name);
+  }
+
+  public String getVersionName(String name) {
+    ImageModel model = (ImageModel) versions.get(name);
+    return model.getName();
+  }
+
+  public String getName() {
+    return this.name;
   }
 
   public Pixel getPixel(int x, int y) {
@@ -79,7 +109,7 @@ public class ImageModel {
   }
 
   public int[] getDimensions() {
-    return new int[] {this.width, this.height};
+    return new int[] {this.height, this.width};
   }
 
 }
