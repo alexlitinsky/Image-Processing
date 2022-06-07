@@ -1,9 +1,7 @@
 package model;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import model.modifiers.Modifier;
@@ -20,8 +18,9 @@ public class ImageModel {
 
   /**
    * Constructor which makes a model for an image using a 2D array of pixels.
-   * @param name the name for this model of an image
-   * @param width the width of the image
+   *
+   * @param name   the name for this model of an image
+   * @param width  the width of the image
    * @param height the height of the image
    * @throws IllegalArgumentException if
    */
@@ -40,7 +39,6 @@ public class ImageModel {
   }
 
   /**
-   *
    * @param x the x coordinate
    * @param y the y coordinate
    * @param r the red color value
@@ -76,8 +74,10 @@ public class ImageModel {
   // might need to change canvas size in the future
 
   public void applyFilter(Modifier mod) throws IllegalArgumentException {
-    if (mod == null) { throw new IllegalArgumentException("Null modifier"); }
-
+    if (mod == null) {
+      throw new IllegalArgumentException("Null modifier");
+    }
+    mod.apply();
   }
 
   public void addVersion(ImageModel model) {
@@ -102,14 +102,14 @@ public class ImageModel {
   }
 
   public Pixel[][] getAllPixels() {
-    Pixel [][] copy = new Pixel[imagePixels.length][];
-    for(int i = 0; i < imagePixels.length; i++)
+    Pixel[][] copy = new Pixel[imagePixels.length][];
+    for (int i = 0; i < imagePixels.length; i++)
       copy[i] = imagePixels[i].clone();
     return copy;
   }
 
   public int[] getDimensions() {
-    return new int[] {this.height, this.width};
+    return new int[]{this.height, this.width};
   }
 
 }

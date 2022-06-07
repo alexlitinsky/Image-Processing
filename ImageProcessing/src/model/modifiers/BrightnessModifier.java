@@ -21,7 +21,7 @@ public class BrightnessModifier implements Modifier{
    * Applies a modifier to an image and returns the new modified image.
    */
   @Override
-  public void apply() {
+  public ImageModel apply() {
     ImageModel build = new ImageModel(destination, model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
@@ -34,6 +34,6 @@ public class BrightnessModifier implements Modifier{
         build.assignPixels(i, j, red, green, blue);
       }
     }
-    model.addVersion(build);
+    return build;
   }
 }

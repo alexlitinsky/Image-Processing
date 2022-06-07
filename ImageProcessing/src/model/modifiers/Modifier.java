@@ -12,5 +12,5 @@ public interface Modifier {
    * Applies a modifier to an image
    * @param img the original image
    */
-  public void apply();
+  public ImageModel apply();
 }

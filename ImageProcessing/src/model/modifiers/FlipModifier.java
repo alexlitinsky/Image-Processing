@@ -24,9 +24,11 @@ public class FlipModifier implements Modifier{
 
   /**
    * Applies a modifier to an image
+   *
+   * @return
    */
   @Override
-  public void apply() {
+  public ImageModel apply() {
     int width = model.getDimensions()[0];
     int height = model.getDimensions()[1];
     ImageModel build = new ImageModel(destination, width, height);
@@ -43,5 +45,6 @@ public class FlipModifier implements Modifier{
       }
     }
     model.addVersion(build);
+    return build;
   }
 }
