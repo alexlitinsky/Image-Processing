@@ -37,7 +37,7 @@ public class ImageControllerImpl {
   public void playGame() throws IllegalStateException {
     Scanner scanner = new Scanner(input);
 
-    
+
 
     // when a filter is applied
     // make filter object

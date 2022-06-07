@@ -11,6 +11,10 @@ import model.ImageModel;
  */
 public class ImageUtil {
 
+  public ImageUtil() {
+    
+  }
+
   /**
    * Read an image file in the PPM format and print the colors.
    *
