@@ -14,9 +14,9 @@ import model.modifiers.Modifier;
 public class ImageModel {
   private int width;
   private int height;
-  protected Pixel[][] imagePixels;
-  protected String name;
-  protected Map versions;
+  private Pixel[][] imagePixels;
+  private String name;
+  private Map versions;
 
   /**
    * Constructor which makes a model for an image using a 2D array of pixels.

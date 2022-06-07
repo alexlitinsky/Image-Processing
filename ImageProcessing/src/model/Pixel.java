@@ -4,9 +4,9 @@ package model;
  * A Representation of a single Pixel of a particular o image.
  */
 public class Pixel {
-  protected int red;
-  protected int green;
-  protected int blue;
+  private int red;
+  private int green;
+  private int blue;
 
   public Pixel(int red, int green, int blue) throws IllegalArgumentException {
     if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
