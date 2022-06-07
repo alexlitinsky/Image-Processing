@@ -1,3 +1,5 @@
+package utilities;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -10,9 +12,10 @@ import model.ImageModel;
  * Feel free to change this method as required.
  */
 public class ImageUtil {
+  String field;
 
   public ImageUtil() {
-    
+    this.field = " ";
   }
 
   /**
@@ -63,7 +66,7 @@ public class ImageUtil {
         int g = sc.nextInt();
         int b = sc.nextInt();
         image.assignPixels(j, i, r, g, b);
-        System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
+        //System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
       }
     }
 
@@ -79,7 +82,8 @@ public class ImageUtil {
 //      filename = "sample.ppm";
 //    }
 //
-//    ImageUtil.readPPM(filename);
+//    utilities.ImageUtil.readPPM(filename);
+//  }
 //  }
   }
 }
