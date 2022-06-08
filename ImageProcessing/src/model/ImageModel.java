@@ -10,28 +10,28 @@ import model.modifiers.Modifier;
  * Class to represent an image.
  */
 public class ImageModel {
-  private int width;
-  private int height;
-  private Pixel[][] imagePixels;
+  private final int width;
+  private final int height;
+  private final Pixel[][] imagePixels;
   private String name;
-  private Map versions;
+  private Map<String, ImageModel> versions;
 
   /**
    * Constructor which makes a model for an image using a 2D array of pixels.
    *
-   * @param name   the name for this model of an image
+   * //@param name   the name for this model of an image
    * @param width  the width of the image
    * @param height the height of the image
    * @throws IllegalArgumentException if
    */
-  public ImageModel(String name, int width, int height) throws IllegalArgumentException {
-    if (name.equals("")) {
-      throw new IllegalArgumentException("Name cannot be empty");
-    }
+  public ImageModel(int width, int height) throws IllegalArgumentException {
+//    if (name.equals("")) {
+//      throw new IllegalArgumentException("Name cannot be empty");
+//    }
     if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException("Invalid width or height.");
     }
-    this.name = name;
+    //this.name = name;
     this.width = width;
     this.height = height;
     this.imagePixels = new Pixel[height][width];
@@ -73,11 +73,12 @@ public class ImageModel {
 
   // might need to change canvas size in the future
 
-  public void applyFilter(Modifier mod) throws IllegalArgumentException {
+  public ImageModel applyFilter(Modifier mod) throws IllegalArgumentException {
     if (mod == null) {
       throw new IllegalArgumentException("Null modifier");
     }
-    mod.apply();
+    // we have to return version to put it in the hashmap
+    return mod.apply(this);
   }
 
   public void addVersion(ImageModel model) {
@@ -85,7 +86,7 @@ public class ImageModel {
   }
 
   public ImageModel getVersion(String name) {
-    return (ImageModel) versions.get(name);
+    return versions.get(name);
   }
 
   public String getVersionName(String name) {

@@ -25,7 +25,7 @@ import view.TextView;
  */
 public class ImageControllerImpl {
   private final Readable input;
-  private Map versions;
+  private Map<String, ImageModel> versions;
 
   private final Map<String, Function<Scanner, Command>> allCommands;
 
@@ -44,16 +44,16 @@ public class ImageControllerImpl {
     this.versions = new HashMap<String, ImageModel>();
     allCommands = new HashMap<>();
     allCommands.put("load", s -> new Load(s.next(), s.next(), this));
-//    allCommands.put("save", new Save());
-//    allCommands.put("brighten", s -> new Brighten(s.nextInt()));
-//    allCommands.put("flip-vertical", new FlipVertical());
-//    allCommands.put("flip-horizontal", new FlipHorizontal());
-//    allCommands.put("value-component", new ValueComp());
-//    allCommands.put("red-component", new RedComp());
-//    allCommands.put("green-component", new GreenComp());
-//    allCommands.put("blue-component", new BlueComp());
-//    allCommands.put("luma-component", new LumaComp());
-//    allCommands.put("intensity-component", new IntensityComp());
+    allCommands.put("save", s -> new Save(this, s.next(), s.next()));
+    allCommands.put("brighten", s -> new Brighten(this, s.nextInt(), s.next(), s.next()));
+    allCommands.put("flip-vertical", s-> new FlipVertical(this, s.next(), s.next()));
+    allCommands.put("flip-horizontal", s-> new FlipHorizontal(this, s.next(), s.next()));
+    allCommands.put("value-component", s-> new ValueComp(this, s.next(), s.next()));
+    allCommands.put("red-component", s-> new RedComp(this, s.next(), s.next()));
+    allCommands.put("green-component", s-> new GreenComp(this, s.next(), s.next()));
+    allCommands.put("blue-component", s-> new BlueComp(this, s.next(), s.next()));
+    allCommands.put("luma-component", s-> new LumaComp(this, s.next(), s.next()));
+    allCommands.put("intensity-component", s-> new IntensityComp(this, s.next(), s.next()));
 
   }
 
@@ -72,7 +72,7 @@ public class ImageControllerImpl {
     }
   }
 
-  public Map getVersions() {
+  public Map<String, ImageModel> getVersions() {
     return this.versions;
   }
 

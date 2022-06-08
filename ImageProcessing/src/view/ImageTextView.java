@@ -31,9 +31,9 @@ public class ImageTextView implements TextView {
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
         try {
-          String red = String.valueOf(model.getPixel(j, i).getRBG()[0]);
-          String green = String.valueOf(model.getPixel(j, i).getRBG()[1]);
-          String blue = String.valueOf(model.getPixel(j, i).getRBG()[2]);
+          String red = String.valueOf(model.getPixel(j, i).getRGB()[0]);
+          String green = String.valueOf(model.getPixel(j, i).getRGB()[1]);
+          String blue = String.valueOf(model.getPixel(j, i).getRGB()[2]);
           String values = red + ", " + green + ", " + blue;
           build.append("(" + values + ") ");
         } catch (IOException e) {
