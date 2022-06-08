@@ -26,10 +26,12 @@ public class BrightnessModifier implements Modifier {
         int red = model.getPixel(i, j).getRGB()[0] + value;
         int green = model.getPixel(i, j).getRGB()[1] + value;
         int blue = model.getPixel(i, j).getRGB()[2] + value;
-        if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
-          throw new IllegalArgumentException("Brightness value is invalid");
-        }
-        build.assignPixels(i, j, red, green, blue);
+//        if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
+//          throw new IllegalArgumentException("Brightness value is invalid");
+//        }
+//        build.assignPixels(i, j, red, green, blue);
+        // alt-design choice
+        build.assignPixels(i, j, Math.min(255, red), Math.min(255, green), Math.min(255, blue));
       }
     }
     return build;

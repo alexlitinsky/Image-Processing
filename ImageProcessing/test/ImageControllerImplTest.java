@@ -1,8 +1,13 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.StringReader;
 
 import controller.ImageControllerImpl;
+import view.ImageTextView;
 
 import static org.junit.Assert.*;
 
@@ -45,12 +50,22 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testBlueComponent() {
-    this.input = new StringReader("load Images/Koala.ppm koala");
+//    this.input = new StringReader("load Images/Koala.ppm koala \n" +
+//            "blue-component koala koala-blue");
+    // no clue how to test this...
+    this.input = new StringReader("load Images/koala-blue-greyscale.png koala-blue \n" +
+            "load Images/Koala.ppm koala \n blue-component koala testBlue");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    this.input = new StringReader("blue-component koala koala-blue");
-    controller.playGame();
-    fail();
+    ImageTextView view1 = new ImageTextView(controller.getVersions().get("testBlue"),
+            new StringBuilder());
+    ImageTextView view2 = new ImageTextView(controller.getVersions().get("koala-blue"),
+            new StringBuilder());
+    //assertEquals(view2, view1);
+    //System.out.println(controller.getVersions().get("koala-blue"));
+    //this.input = new StringReader("blue-component koala koala-blue");
+    //controller.playGame();
+    //fail();
   }
 
   /**
@@ -66,6 +81,21 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testGetVersions() {
+
+  }
+
+
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
+
+  @Test
+  public void testSave() {
+    this.input = new StringReader("load Images/Koala.ppm koala " +
+            "\n brighten 50 koala testBlue \n" +
+            "save Images/koalaBlue.ppm testBlue");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+
 
   }
 }

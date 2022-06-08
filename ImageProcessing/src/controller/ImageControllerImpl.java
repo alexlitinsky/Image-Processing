@@ -43,9 +43,9 @@ public class ImageControllerImpl {
     allCommands = new HashMap<>();
     allCommands.put("load", s -> new Load(s.next(), s.next(), this));
     allCommands.put("save", s -> new Save(this, s.next(), s.next()));
-    allCommands.put("brighten", s -> new Brighten(this, s.nextInt(), s.next(), s.next()));
-    allCommands.put("flip-vertical", s -> new FlipVertical(this, s.next(), s.next()));
-    allCommands.put("flip-horizontal", s -> new FlipHorizontal(this, s.next(), s.next()));
+    allCommands.put("brighten", s -> new Brighten(this, s.next(), s.next(), s.next()));
+    allCommands.put("vertical-flip", s -> new FlipVertical(this, s.next(), s.next()));
+    allCommands.put("horizontal-flip", s -> new FlipHorizontal(this, s.next(), s.next()));
     allCommands.put("value-component", s -> new ValueComp(this, s.next(), s.next()));
     allCommands.put("red-component", s -> new RedComp(this, s.next(), s.next()));
     allCommands.put("green-component", s -> new GreenComp(this, s.next(), s.next()));

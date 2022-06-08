@@ -88,7 +88,7 @@ public class ImageModel {
   }
 
   public int[] getDimensions() {
-    return new int[]{this.height, this.width};
+    return new int[]{this.width, this.height};
   }
 
 }

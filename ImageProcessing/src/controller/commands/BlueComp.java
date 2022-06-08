@@ -2,6 +2,7 @@ package controller.commands;
 
 import controller.ImageControllerImpl;
 import model.modifiers.BlueCompModifier;
+import view.ImageTextView;
 
 /**
  * Class to represent the command for apply a blue compononent modifier. This sets all the RGB
@@ -27,6 +28,6 @@ public class BlueComp extends ACommand {
   @Override
   public void go() {
     c.getVersions().put(newName, model.newModdedImage(new BlueCompModifier()));
-
+    ImageTextView view = new ImageTextView(c.getVersions().get(newName), new StringBuilder());
   }
 }

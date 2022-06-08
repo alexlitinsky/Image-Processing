@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import controller.ImageControllerImpl;
+import model.ImageModel;
+import model.Pixel;
 import view.ImageTextView;
 
 /**
@@ -15,6 +17,7 @@ public class Save implements Command {
 
   private final String filename;
   private final ImageTextView view;
+  private final ImageModel model;
 
 
   /**
@@ -27,8 +30,8 @@ public class Save implements Command {
   public Save(ImageControllerImpl c, String filename, String name) {
     this.filename = filename;
     Appendable app = new StringBuilder();
-    this.view = new ImageTextView(c.getVersions().get(name), app);
-
+    this.model = c.getVersions().get(name);
+    this.view = new ImageTextView(this.model, app);
   }
 
   /**
@@ -47,8 +50,18 @@ public class Save implements Command {
     }
     try {
       File ppm = new File(filename);
-      FileWriter ppmWriter = new FileWriter(justName);
-      ppmWriter.write(this.view.toString());
+      FileWriter ppmWriter = new FileWriter(filename);
+      StringBuilder writtenFile = new StringBuilder("P3\n" + this.model.getDimensions()[0] + "\n"
+              + this.model.getDimensions()[1] + "\n255\n");
+      for (int i = 0; i < this.model.getDimensions()[1]; i++) {
+        for (int j = 0; j < this.model.getDimensions()[0]; j++) {
+          Pixel cur = this.model.getPixel(j, i);
+          writtenFile.append(cur.getRGB()[0]).append(" ")
+                  .append(cur.getRGB()[1]).append(" ").append(cur.getRGB()[2]).append(" ");
+        }
+        writtenFile.append("\n");
+      }
+      ppmWriter.write(writtenFile.toString());
       ppmWriter.close();
     } catch (IOException e) {
       throw new RuntimeException(e);

@@ -2,6 +2,7 @@ package controller.commands;
 
 import controller.ImageControllerImpl;
 import utilities.ImageUtil;
+import view.ImageTextView;
 
 /**
  * Class to represent the command to load an image from a given file. This command instantiates an ImageUtil
@@ -26,6 +27,8 @@ public class Load implements Command {
   @Override
   public void go() {
     c.getVersions().put(newName, ImageUtil.readPPM(source));
+    ImageTextView view = new ImageTextView(ImageUtil.readPPM(source), new StringBuilder());
+    //System.out.println(view);
   }
 
 }
