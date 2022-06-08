@@ -9,6 +9,9 @@ public class BrightnessModifier implements Modifier {
   private int value;
 
   public BrightnessModifier(int value) {
+    if (value < -255 || value > 255) {
+      throw new IllegalArgumentException("Value cannot be less than -255 or greater than 255");
+    }
     this.value = value;
   }
 

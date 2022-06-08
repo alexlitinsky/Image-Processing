@@ -14,6 +14,7 @@ import view.ImageTextView;
 import view.TextView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Class to represent testing for all of our modifiers. The following modifiers are tested:
@@ -73,16 +74,66 @@ public class ModifierTest {
   public void testBrightnessModifier() {
     initModel1x1();
     // check the brightness of the pixel in the model before applying the filter
-    assertEquals(1, img.getPixel(0, 0).getRGB()[0]);
-    assertEquals(1, img.getPixel(0, 0).getRGB()[1]);
-    assertEquals(1, img.getPixel(0, 0).getRGB()[2]);
+    for (int i : this.img.getPixel(0, 0).getRGB()) {
+      assertEquals(1, i);
+    }
 
     // instantiate & apply modifier
     Modifier mod = new BrightnessModifier(10);
     this.img = this.img.newModdedImage(mod);
-    assertEquals(11, this.img.getPixel(0, 0).getRGB()[0]);
-    assertEquals(11, this.img.getPixel(0, 0).getRGB()[1]);
-    assertEquals(11, this.img.getPixel(0, 0).getRGB()[2]);
+    for (int i : this.img.getPixel(0, 0).getRGB()) {
+      assertEquals(11, i);
+    }
+
+    // test the limits - set to 255
+    Modifier mod2 = new BrightnessModifier(244);
+    this.img = this.img.newModdedImage(mod2);
+    for (int i : this.img.getPixel(0, 0).getRGB()) {
+      assertEquals(255, i);
+    }
+
+    // test the limits - set to 0
+    Modifier mod3 = new BrightnessModifier(-255);
+    this.img = this.img.newModdedImage(mod3);
+    for (int i : this.img.getPixel(0, 0).getRGB()) {
+      assertEquals(0, i);
+    }
+
+    // absolutely invalid brightness value checks - invalid no matter the current RGB values
+    try {
+      Modifier failmod = new BrightnessModifier(256);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Value cannot be less than -255 or greater than 255", e.getMessage());
+    }
+    try {
+      Modifier failmod = new BrightnessModifier(-256);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Value cannot be less than -255 or greater than 255", e.getMessage());
+    }
+
+    // locally invalid brightness value checks - could be valid modifier, but invalid in this case
+    try {
+      // RGB is currently 0
+      Modifier failmod = new BrightnessModifier(-1);
+      this.img = this.img.newModdedImage(failmod);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Brightness value is invalid", e.getMessage());
+    }
+    try {
+      // RGB is currently 0
+      Modifier mod4 = new BrightnessModifier(255);
+      // RGB is now 255
+      this.img = this.img.newModdedImage(mod4);
+      // try to set to 256
+      Modifier mod5 = new BrightnessModifier(1);
+      this.img = this.img.newModdedImage(mod5);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Brightness value is invalid", e.getMessage());
+    }
   }
 
   /**
