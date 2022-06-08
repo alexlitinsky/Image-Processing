@@ -31,7 +31,7 @@ public class ImageControllerImpl {
    * Constructor for this implementation of an image controller.
    *
    * @param input the input being given to the controller
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException if one of the parameters passed to it is null
    */
   public ImageControllerImpl(Readable input)
           throws IllegalArgumentException {
@@ -55,6 +55,11 @@ public class ImageControllerImpl {
 
   }
 
+  /**
+   * The method to start the game. Scans the user's inputs for commands to control the game,
+   * as well as stores each new version of the image created from running commands.
+   * @throws IllegalStateException
+   */
   public void playGame() throws IllegalStateException {
     Scanner scanner = new Scanner(input);
     while (scanner.hasNext()) {

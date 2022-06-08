@@ -18,6 +18,10 @@ public class Load implements Command {
     this.c = c;
   }
 
+  /**
+   * Method to apply this command. Gets the map of versions from the controller, reads the source
+   * file generating an image, and puts it in the map of versions under the new name.
+   */
   @Override
   public void go() {
     c.getVersions().put(newName, ImageUtil.readPPM(source));
