@@ -4,7 +4,8 @@ import model.ImageModel;
 
 public class ValueCompModifier implements Modifier {
 
-  public ValueCompModifier() {}
+  public ValueCompModifier() {
+  }
 
   @Override
   public ImageModel apply(ImageModel model) {

@@ -11,7 +11,7 @@ public class BlueComp extends ACommand {
 
   @Override
   public void go() {
-    c.getVersions().put(newName, model.applyFilter(new BlueCompModifier()));
+    c.getVersions().put(newName, model.newModdedImage(new BlueCompModifier()));
 
   }
 }

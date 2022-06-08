@@ -1,7 +1,5 @@
 package controller.commands;
 
-import model.ImageModel;
-
 /**
  * An interface to represent a command.
  */

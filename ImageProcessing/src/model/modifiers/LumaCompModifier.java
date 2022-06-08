@@ -4,7 +4,8 @@ import model.ImageModel;
 
 public class LumaCompModifier implements Modifier {
 
-  public LumaCompModifier() {}
+  public LumaCompModifier() {
+  }
 
   @Override
   public ImageModel apply(ImageModel model) {

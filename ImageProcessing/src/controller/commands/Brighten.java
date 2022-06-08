@@ -10,8 +10,9 @@ public class Brighten extends ACommand {
     super(c, name, newName);
     this.value = value;
   }
+
   @Override
   public void go() {
-    this.c.getVersions().put(this.newName, this.model.applyFilter(new BrightnessModifier(value)));
+    this.c.getVersions().put(this.newName, this.model.newModdedImage(new BrightnessModifier(value)));
   }
 }

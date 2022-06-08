@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import controller.ImageControllerImpl;
-import model.ImageModel;
 import view.ImageTextView;
 
 public class Save implements Command {
@@ -20,11 +19,12 @@ public class Save implements Command {
     this.view = new ImageTextView(c.getVersions().get(name), app);
 
   }
+
   @Override
   public void go() {
     String justName = "";
     for (int i = 0; i < filename.length(); i++) {
-      if(Character.compare(filename.charAt(i), '/') == 0) {
+      if (Character.compare(filename.charAt(i), '/') == 0) {
         justName = filename.substring(i + 1);
       }
     }

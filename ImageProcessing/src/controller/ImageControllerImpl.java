@@ -18,16 +18,14 @@ import controller.commands.RedComp;
 import controller.commands.Save;
 import controller.commands.ValueComp;
 import model.ImageModel;
-import view.TextView;
 
 /**
  * Class to represent the controller for an image.
  */
 public class ImageControllerImpl {
   private final Readable input;
-  private Map<String, ImageModel> versions;
-
   private final Map<String, Function<Scanner, Command>> allCommands;
+  private Map<String, ImageModel> versions;
 
   /**
    * Constructor for this implementation of an image controller.
@@ -41,19 +39,19 @@ public class ImageControllerImpl {
       throw new IllegalArgumentException("Parameters cannot be null");
     }
     this.input = input;
-    this.versions = new HashMap<String, ImageModel>();
+    this.versions = new HashMap<>();
     allCommands = new HashMap<>();
     allCommands.put("load", s -> new Load(s.next(), s.next(), this));
     allCommands.put("save", s -> new Save(this, s.next(), s.next()));
     allCommands.put("brighten", s -> new Brighten(this, s.nextInt(), s.next(), s.next()));
-    allCommands.put("flip-vertical", s-> new FlipVertical(this, s.next(), s.next()));
-    allCommands.put("flip-horizontal", s-> new FlipHorizontal(this, s.next(), s.next()));
-    allCommands.put("value-component", s-> new ValueComp(this, s.next(), s.next()));
-    allCommands.put("red-component", s-> new RedComp(this, s.next(), s.next()));
-    allCommands.put("green-component", s-> new GreenComp(this, s.next(), s.next()));
-    allCommands.put("blue-component", s-> new BlueComp(this, s.next(), s.next()));
-    allCommands.put("luma-component", s-> new LumaComp(this, s.next(), s.next()));
-    allCommands.put("intensity-component", s-> new IntensityComp(this, s.next(), s.next()));
+    allCommands.put("flip-vertical", s -> new FlipVertical(this, s.next(), s.next()));
+    allCommands.put("flip-horizontal", s -> new FlipHorizontal(this, s.next(), s.next()));
+    allCommands.put("value-component", s -> new ValueComp(this, s.next(), s.next()));
+    allCommands.put("red-component", s -> new RedComp(this, s.next(), s.next()));
+    allCommands.put("green-component", s -> new GreenComp(this, s.next(), s.next()));
+    allCommands.put("blue-component", s -> new BlueComp(this, s.next(), s.next()));
+    allCommands.put("luma-component", s -> new LumaComp(this, s.next(), s.next()));
+    allCommands.put("intensity-component", s -> new IntensityComp(this, s.next(), s.next()));
 
   }
 

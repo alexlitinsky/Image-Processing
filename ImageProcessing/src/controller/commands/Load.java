@@ -1,9 +1,7 @@
 package controller.commands;
 
 import controller.ImageControllerImpl;
-import model.ImageModel;
 import utilities.ImageUtil;
-import view.ImageTextView;
 
 /**
  * filler
@@ -21,7 +19,7 @@ public class Load implements Command {
   }
 
   @Override
-  public void go()  {
+  public void go() {
     c.getVersions().put(newName, ImageUtil.readPPM(source));
   }
 

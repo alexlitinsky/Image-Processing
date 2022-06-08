@@ -5,7 +5,7 @@ import model.ImageModel;
 /**
  * Class tor represent modifiers for a horizontal or vertical flip.
  */
-public class FlipModifier implements Modifier{
+public class FlipModifier implements Modifier {
 
   private boolean isVertical;
 
@@ -13,6 +13,7 @@ public class FlipModifier implements Modifier{
    * Constructor for this flip modifier.
    * //@param destination the name of the file the new, modified model should be sent to
    * //@param model the model being modified
+   *
    * @param isVertical true if the modifier is for a vertical flip
    */
   public FlipModifier(boolean isVertical) {

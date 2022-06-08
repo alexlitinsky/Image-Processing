@@ -3,9 +3,6 @@ import org.junit.Test;
 import java.io.StringReader;
 
 import controller.ImageControllerImpl;
-import view.ImageTextView;
-
-import static org.junit.Assert.*;
 
 public class LoadTest {
 

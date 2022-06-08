@@ -1,12 +1,10 @@
 import org.junit.Test;
 
 import model.ImageModel;
-import model.modifiers.BrightnessModifier;
-import model.modifiers.Modifier;
 import view.ImageTextView;
 import view.TextView;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ImageTextViewTest {
 
@@ -16,7 +14,7 @@ public class ImageTextViewTest {
    */
   @Test
   public void testToString() {
-    ImageModel img = new ImageModel("test", 2, 2);
+    ImageModel img = new ImageModel(2, 2);
     img.assignPixels(0, 0, 2, 3, 4);
     img.assignPixels(1, 0, 23, 255, 4);
     img.assignPixels(0, 1, 100, 3, 6);

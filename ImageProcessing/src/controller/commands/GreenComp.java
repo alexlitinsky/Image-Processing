@@ -8,8 +8,9 @@ public class GreenComp extends ACommand {
   public GreenComp(ImageControllerImpl c, String name, String newName) {
     super(c, name, newName);
   }
+
   @Override
   public void go() {
-    c.getVersions().put(newName, model.applyFilter(new GreenCompModifier()));
+    c.getVersions().put(newName, model.newModdedImage(new GreenCompModifier()));
   }
 }

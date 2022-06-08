@@ -5,8 +5,8 @@ package model;
  */
 public class Pixel {
   private int red;
-  private int blue;
   private int green;
+  private int blue;
 
   public Pixel(int red, int green, int blue) throws IllegalArgumentException {
     if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
@@ -19,6 +19,6 @@ public class Pixel {
   }
 
   public int[] getRGB() {
-    return new int[] {this.red, this.green, this.blue};
+    return new int[]{this.red, this.green, this.blue};
   }
 }

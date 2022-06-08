@@ -11,6 +11,6 @@ public class FlipHorizontal extends ACommand {
 
   @Override
   public void go() {
-    c.getVersions().put(newName, model.applyFilter(new FlipModifier(false)));
+    c.getVersions().put(newName, model.newModdedImage(new FlipModifier(false)));
   }
 }

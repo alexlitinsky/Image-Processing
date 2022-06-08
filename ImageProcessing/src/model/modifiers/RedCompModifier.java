@@ -4,7 +4,8 @@ import model.ImageModel;
 
 public class RedCompModifier implements Modifier {
 
-  public RedCompModifier() {}
+  public RedCompModifier() {
+  }
 
   @Override
   public ImageModel apply(ImageModel model) {

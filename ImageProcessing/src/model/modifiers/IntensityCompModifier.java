@@ -4,7 +4,8 @@ import model.ImageModel;
 
 public class IntensityCompModifier implements Modifier {
 
-  public IntensityCompModifier() {}
+  public IntensityCompModifier() {
+  }
 
   @Override
   public ImageModel apply(ImageModel model) {

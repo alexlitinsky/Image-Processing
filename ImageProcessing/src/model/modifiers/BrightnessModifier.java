@@ -1,12 +1,11 @@
 package model.modifiers;
 
 import model.ImageModel;
-import model.Pixel;
 
 /**
  *
  */
-public class BrightnessModifier implements Modifier{
+public class BrightnessModifier implements Modifier {
   private int value;
 
   public BrightnessModifier(int value) {

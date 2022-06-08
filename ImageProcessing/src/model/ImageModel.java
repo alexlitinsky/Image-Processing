@@ -1,9 +1,6 @@
 package model;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import model.modifiers.Modifier;
 
 /**
@@ -13,13 +10,12 @@ public class ImageModel {
   private final int width;
   private final int height;
   private final Pixel[][] imagePixels;
-  private String name;
-  private Map<String, ImageModel> versions;
 
   /**
    * Constructor which makes a model for an image using a 2D array of pixels.
-   *
+   * <p>
    * //@param name   the name for this model of an image
+   *
    * @param width  the width of the image
    * @param height the height of the image
    * @throws IllegalArgumentException if
@@ -35,7 +31,6 @@ public class ImageModel {
     this.width = width;
     this.height = height;
     this.imagePixels = new Pixel[height][width];
-    this.versions = new HashMap<String, ImageModel>();
   }
 
   /**
@@ -73,29 +68,12 @@ public class ImageModel {
 
   // might need to change canvas size in the future
 
-  public ImageModel applyFilter(Modifier mod) throws IllegalArgumentException {
+  public ImageModel newModdedImage(Modifier mod) throws IllegalArgumentException {
     if (mod == null) {
       throw new IllegalArgumentException("Null modifier");
     }
     // we have to return version to put it in the hashmap
     return mod.apply(this);
-  }
-
-  public void addVersion(ImageModel model) {
-    versions.put(model.name, model);
-  }
-
-  public ImageModel getVersion(String name) {
-    return versions.get(name);
-  }
-
-  public String getVersionName(String name) {
-    ImageModel model = (ImageModel) versions.get(name);
-    return model.getName();
-  }
-
-  public String getName() {
-    return this.name;
   }
 
   public Pixel getPixel(int x, int y) {

@@ -11,6 +11,6 @@ public class FlipVertical extends ACommand {
 
   @Override
   public void go() {
-    c.getVersions().put(newName, model.applyFilter(new FlipModifier(true)));
+    c.getVersions().put(newName, model.newModdedImage(new FlipModifier(true)));
   }
 }
