@@ -4,14 +4,15 @@ import controller.ImageControllerImpl;
 import utilities.ImageUtil;
 
 /**
- * filler
+ * Class to represent the command to load an image from a given file. This command instantiates an ImageUtil
+ * and calls readPPM() to read the specified PPM file, which returns a new Image object representing that PPM file.
  */
 public class Load implements Command {
   String newName;
   String source;
   ImageControllerImpl c;
 
-  // should throw an exception if path name isn't available
+  // Constructor for the load command. Consumes
   public Load(String source, String newName, ImageControllerImpl c) {
     this.newName = newName;
     this.source = source;

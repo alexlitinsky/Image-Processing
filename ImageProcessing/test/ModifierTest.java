@@ -58,13 +58,26 @@ public class ModifierTest {
    */
   @Test
   public void testBlueComponent() {
-    initModel1x1();
+    initModel2x2();
     this.img.assignPixels(0, 0, 1, 1, 2);
+    this.img.assignPixels(1, 0, 1, 1, 3);
+    this.img.assignPixels(0, 1, 1, 1, 4);
+    this.img.assignPixels(1, 1, 1, 1, 5);
     Modifier mod = new BlueCompModifier();
     this.img = this.img.newModdedImage(mod);
     for (int i : this.img.getPixel(0, 0).getRGB()) {
       assertEquals(2, i);
     }
+    for (int i : this.img.getPixel(1, 0).getRGB()) {
+      assertEquals(3, i);
+    }
+    for (int i : this.img.getPixel(0, 1).getRGB()) {
+      assertEquals(4, i);
+    }
+    for (int i : this.img.getPixel(1, 1).getRGB()) {
+      assertEquals(5, i);
+    }
+
   }
 
   /**

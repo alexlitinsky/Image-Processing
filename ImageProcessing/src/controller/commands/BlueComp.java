@@ -5,7 +5,7 @@ import model.modifiers.BlueCompModifier;
 
 /**
  * Class to represent the command for apply a blue compononent modifier. This sets all the RGB
- * components to the current blue value.
+ * components to the current blue value by calling the go method.
  */
 public class BlueComp extends ACommand {
 
