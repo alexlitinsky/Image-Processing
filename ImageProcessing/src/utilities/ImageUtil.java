@@ -18,11 +18,6 @@ import model.ImageModel;
  * Feel free to change this method as required.
  */
 public class ImageUtil {
-  String field;
-
-  public ImageUtil() {
-    this.field = " ";
-  }
 
   /**
    * Read an image file in the PPM format and print the colors.
@@ -34,16 +29,10 @@ public class ImageUtil {
   public static ImageModel readPPM(String filename) {
 
     String fileType = "";
-    String justName = "";
+
     for (int i = 0; i < filename.length(); i++) {
-      if (filename.charAt(i) == '/') {
-        justName = filename.substring(i + 1);
-      }
-    }
-    if (justName.equals("")) { throw new IllegalArgumentException("Invalid file."); }
-    for (int i = 0; i < justName.length(); i++) {
-      if (justName.charAt(i) == '.') {
-        fileType = justName.substring(i + 1);
+      if (filename.charAt(i) == '.') {
+        fileType = filename.substring(i + 1);
       }
     }
     if (fileType.equals("")) { throw new IllegalArgumentException("Invalid file."); }
