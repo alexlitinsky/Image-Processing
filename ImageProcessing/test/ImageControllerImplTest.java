@@ -349,9 +349,32 @@ public class ImageControllerImplTest {
     assertEquals(0, controller.getVersions().size());
 
     // invalid command case
-    this.input = new StringReader("load Images/koala-value-grescale.png");
-    this.controller = new ImageControllerImpl(input);
-    controller.playGame();
-    assertEquals(0, controller.getVersions().size());
+    try {
+      this.input = new StringReader("asdf");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+      assertEquals(0, controller.getVersions().size());
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid command.", e.getMessage());
+    }
+    try {
+      this.input = new StringReader("asdf asdf");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+      assertEquals(0, controller.getVersions().size());
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid command.", e.getMessage());
+    }
+    try {
+      this.input = new StringReader("asdf asdf asdf");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+      assertEquals(0, controller.getVersions().size());
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid command.", e.getMessage());
+    }
   }
 }

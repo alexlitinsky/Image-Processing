@@ -169,5 +169,13 @@ public class ImageModelTest {
     ImageModel test = img.newModdedImage(mod);
     TextView view2 = new ImageTextView(test, new StringBuilder());
     assertEquals("(2, 2, 2) ", view2.toString());
+
+    try {
+      Modifier failMod = null;
+      this.img = img.newModdedImage(failMod);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Null modifier", e.getMessage());
+    }
   }
 }
