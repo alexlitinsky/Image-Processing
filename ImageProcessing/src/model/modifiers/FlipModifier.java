@@ -3,30 +3,25 @@ package model.modifiers;
 import model.ImageModel;
 
 /**
- * Class tor represent modifiers for a horizontal or vertical flip.
+ * Class tor represent modifiers for a horizontal or vertical flip. Takes in a isVertical boolean
+ * variable. If true, we change the position of the height of an image. Else, we change the position
+ * of the width of an image.
  */
 public class FlipModifier implements Modifier {
 
-  private boolean isVertical;
+  private final boolean isVertical;
 
   /**
    * Constructor for this flip modifier.
-   * //@param destination the name of the file the new, modified model should be sent to
-   * //@param model the model being modified
-   *
    * @param isVertical true if the modifier is for a vertical flip
    */
   public FlipModifier(boolean isVertical) {
     this.isVertical = isVertical;
   }
 
-  /**
-   * Applies a modifier to an image
-   *
-   * @return
-   */
   @Override
-  public ImageModel apply(ImageModel model) {
+  public ImageModel apply(ImageModel model) throws IllegalArgumentException {
+    if (model == null) { throw new IllegalArgumentException("invalid model"); }
     ImageModel build = new ImageModel(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {

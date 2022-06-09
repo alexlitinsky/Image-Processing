@@ -20,7 +20,8 @@ import controller.commands.ValueComp;
 import model.ImageModel;
 
 /**
- * Class to represent the controller for an image.
+ * Class to represent the controller for an image. Takes in a readable input. Has a set list of
+ * commands to occupy the controller. Uses a hashmap to keep track all the versions of the models.
  */
 public class ImageControllerImpl {
   private final Readable input;
@@ -75,14 +76,14 @@ public class ImageControllerImpl {
     }
   }
 
+  /**
+   * Retrieves the versions of the current models.
+   * @return the versions of the models
+   */
   public Map<String, ImageModel> getVersions() {
     return this.versions;
   }
 
 
-  // when a filter is applied
-  // make filter object
-  // apply it, and add the returned model to versions:
-  // versions.put(new name, new model)
 }
 

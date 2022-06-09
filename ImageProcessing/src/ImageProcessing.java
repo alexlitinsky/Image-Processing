@@ -3,7 +3,14 @@ import java.util.Arrays;
 
 import controller.ImageControllerImpl;
 
+/**
+ * Represents the main Image Processing class
+ */
 public class ImageProcessing {
+  /**
+   * Initializes the program to start initializing images.
+   * @param args the input and their associated commands.
+   */
   public static void main(String[] args) {
 
     String commands = Arrays.toString(args);

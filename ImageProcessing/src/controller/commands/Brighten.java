@@ -20,7 +20,8 @@ public class Brighten extends ACommand {
    * @param name the name of the image to modify
    * @param newName the name of the new image created by this command
    */
-  public Brighten(ImageControllerImpl c, String value, String name, String newName) {
+  public Brighten(ImageControllerImpl c, String value, String name, String newName)
+          throws IllegalArgumentException  {
     super(c, name, newName);
     this.value = Integer.parseInt(value);
   }

@@ -27,7 +27,10 @@ public class Save implements Command {
    * @param filename the path and name to save the file to
    * @param name the name of the PPM file being saved
    */
-  public Save(ImageControllerImpl c, String filename, String name) {
+  public Save(ImageControllerImpl c, String filename, String name) throws IllegalArgumentException {
+    if (c == null || filename == null || name == null) {
+      throw new IllegalArgumentException("Invalid parameters.");
+    }
     this.filename = filename;
     Appendable app = new StringBuilder();
     this.model = c.getVersions().get(name);
@@ -42,12 +45,6 @@ public class Save implements Command {
    */
   @Override
   public void go() {
-    String justName = "";
-    for (int i = 0; i < filename.length(); i++) {
-      if (Character.compare(filename.charAt(i), '/') == 0) {
-        justName = filename.substring(i + 1);
-      }
-    }
     try {
       File ppm = new File(filename);
       FileWriter ppmWriter = new FileWriter(filename);

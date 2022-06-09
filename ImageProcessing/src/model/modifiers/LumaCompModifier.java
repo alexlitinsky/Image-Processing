@@ -2,13 +2,21 @@ package model.modifiers;
 
 import model.ImageModel;
 
+/**
+ * Represents a luma component modifier. Changes the new models' rgb values to
+ * their respective luma. When representing a luma, the integer is cast down.
+ */
 public class LumaCompModifier implements Modifier {
 
+  /**
+   * Constructs a luma modifier object.
+   */
   public LumaCompModifier() {
   }
 
   @Override
-  public ImageModel apply(ImageModel model) {
+  public ImageModel apply(ImageModel model) throws IllegalArgumentException {
+    if (model == null) { throw new IllegalArgumentException("invalid model"); }
     ImageModel build = new ImageModel(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {

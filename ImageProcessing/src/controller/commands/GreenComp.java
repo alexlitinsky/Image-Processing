@@ -16,7 +16,8 @@ public class GreenComp extends ACommand {
    * @param name the name of the model being modified
    * @param newName the name of the new model created from the modifications
    */
-  public GreenComp(ImageControllerImpl c, String name, String newName) {
+  public GreenComp(ImageControllerImpl c, String name, String newName)
+          throws IllegalArgumentException {
     super(c, name, newName);
   }
 

@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import model.ImageModel;
 
+/**
+ * Represents an ImageTextView. prints out the pixels of a specific model and destination.
+ */
 public class ImageTextView implements TextView {
   protected ImageModel model;
   protected Appendable destination;
