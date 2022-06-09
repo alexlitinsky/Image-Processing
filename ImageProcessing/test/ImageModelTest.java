@@ -40,6 +40,43 @@ public class ImageModelTest {
     ImageModel image = new ImageModel(1, 1);
     assertEquals(1, image.getDimensions()[0]);
     assertEquals(1, image.getDimensions()[1]);
+    // EXCEPTIONS
+    try {
+      ImageModel img = new ImageModel(0, 1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid width or height.", e.getMessage());
+    }
+    try {
+      ImageModel img = new ImageModel(1, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid width or height.", e.getMessage());
+    }
+    try {
+      ImageModel img = new ImageModel(0, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid width or height.", e.getMessage());
+    }
+    try {
+      ImageModel img = new ImageModel(-1, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid width or height.", e.getMessage());
+    }
+    try {
+      ImageModel img = new ImageModel(-1, -1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid width or height.", e.getMessage());
+    }
+    try {
+      ImageModel img = new ImageModel(0, -1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid width or height.", e.getMessage());
+    }
   }
 
   @Test
