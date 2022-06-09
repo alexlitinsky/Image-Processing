@@ -20,11 +20,12 @@ import model.ImageModel;
 public class ImageUtil {
 
   /**
-   *
-   * @param filename
-   * @return
-   * @throws FileNotFoundException
-   * @throws IllegalArgumentException
+   * This method reads a ppm file, checking that the file exists and is of the right type, and
+   * returns an ImageModel representation of the ppm file.
+   * @param filename the name and path of the file to be read
+   * @return the image model representation of the ppm file
+   * @throws FileNotFoundException if the file is of the correct format but cannot be found
+   * @throws IllegalArgumentException if the file is of the incorrect format or is an invalid file
    */
   public static ImageModel readPPM(String filename) throws FileNotFoundException,
           IllegalArgumentException {

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -60,8 +61,9 @@ public class ImageControllerImpl {
    * as well as stores each new version of the image created from running commands.
    * @throws IllegalStateException
    */
-  public void playGame() throws IllegalStateException {
+  public void playGame() throws IllegalStateException, FileNotFoundException {
     Scanner scanner = new Scanner(input);
+    int argCount = 0;
     while (scanner.hasNext()) {
       Command c;
       String in = scanner.next();
@@ -82,7 +84,6 @@ public class ImageControllerImpl {
   public Map<String, ImageModel> getVersions() {
     return this.versions;
   }
-
 
 }
 

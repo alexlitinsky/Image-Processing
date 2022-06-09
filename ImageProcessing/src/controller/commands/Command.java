@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.io.FileNotFoundException;
+
 /**
  * An interface to represent a command and methods that a command must have.
  * Each command must have the go() method to actually run the command.
@@ -10,5 +12,5 @@ public interface Command {
   /**
    * Executes a command.
    */
-  void go();
+  void go() throws FileNotFoundException;
 }

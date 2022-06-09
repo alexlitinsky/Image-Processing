@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.util.Arrays;
 
@@ -11,7 +12,7 @@ public class ImageProcessing {
    * Initializes the program to start initializing images.
    * @param args the input and their associated commands.
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws FileNotFoundException {
 
     String commands = Arrays.toString(args);
     Readable input = new StringReader(commands);
