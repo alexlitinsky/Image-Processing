@@ -26,11 +26,13 @@ import static org.junit.Assert.assertTrue;
  * value component
  */
 public class ImageControllerImplTest {
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
   Readable input;
   ImageControllerImpl controller;
 
   /**
-   * Class to represent testing for the load command. Should read a ppm file and create a new Image
+   * Method to represent testing for the load command. Should read a ppm file and create a new Image
    * from the data in that PPM file and add it to the versions map in the controller.
    * Compared our command's output to the image given in the starter code.
    */
@@ -39,10 +41,35 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/Koala.ppm koala");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
+    assertTrue(controller.getVersions().containsKey("koala"));
     assertEquals(1024, controller.getVersions().get("koala").getDimensions()[0]);
     assertEquals(768, controller.getVersions().get("koala").getDimensions()[1]);
     assertEquals(1, controller.getVersions().size());
-    assertTrue(controller.getVersions().containsKey("koala"));
+  }
+
+  /**
+   * Method to test the save command. Should take the specified ImageModel and convert it to a PPM
+   * file, and save that PPM under a specified name.
+   * Tested by verifying the creation of a new PPM file and then loading it to make sure that
+   * no values are changed in the save/load process.
+   */
+  @Test
+  public void testSave() {
+    this.input = new StringReader("load Images/Koala.ppm koala " +
+            "\n brighten 10 koala saveTest \n"
+            + "save Images/saveTest.ppm saveTest\n"
+            + "load Images/saveTest.ppm loadedSaveTest");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    ImageTextView testView = new ImageTextView(controller.getVersions().get("saveTest"),
+            new StringBuilder());
+    this.input = new StringReader("");
+    ImageTextView saved = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
+            new StringBuilder());
+    assertEquals(testView.toString(), saved.toString());
+    assertNotEquals(koalaView.toString(), testView.toString());
   }
 
   /**
@@ -193,6 +220,49 @@ public class ImageControllerImplTest {
   }
 
   /**
+   * Method to test the red component command.
+   * Should set all the RGB values to the red component of each pixel's RGB values.
+   * Compared our command's output to the image given in the starter code.
+   */
+  @Test
+  public void testRedComponent() {
+    this.input = new StringReader("load Images/koala-red-greyscale.png koala-red \n"
+            + "load Images/Koala.ppm koala \n red-component koala test");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+            new StringBuilder());
+    ImageTextView red =
+            new ImageTextView(controller.getVersions().get("koala-red"), new StringBuilder());
+    assertNotEquals(koalaView.toString(), testView.toString());
+    assertEquals(testView.toString(), red.toString());
+  }
+
+  /**
+   * Method to test the value component command.
+   * Should set all the RGB values to the highest component value of each pixel's RGB values.
+   * (i.e. a pixel of (1, 2, 3) will become (3, 3, 3))
+   * Compared our command's output to the image given in the starter code.
+   */
+  @Test
+  public void testValueComponent() {
+    this.input = new StringReader("load Images/koala-value-greyscale.png koala-value \n"
+            + "load Images/Koala.ppm koala \n value-component koala test");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+            new StringBuilder());
+    ImageTextView value =
+            new ImageTextView(controller.getVersions().get("koala-value"), new StringBuilder());
+    assertNotEquals(koalaView.toString(), testView.toString());
+    assertEquals(testView.toString(), value.toString());
+  }
+
+  /**
    * Method to test that playGame() works as expected and correctly runs the game.
    */
   @Test
@@ -205,21 +275,6 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testGetVersions() {
-
-  }
-
-
-  @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
-
-  @Test
-  public void testSave() {
-    this.input = new StringReader("load Images/Koala.ppm koala " +
-            "\n brighten 50 koala testBlue \n" +
-            "save Images/koalaBlue.ppm testBlue");
-    this.controller = new ImageControllerImpl(input);
-    controller.playGame();
-
 
   }
 }
