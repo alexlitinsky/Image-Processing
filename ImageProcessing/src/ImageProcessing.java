@@ -1,6 +1,8 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import controller.ImageControllerImpl;
 
@@ -14,11 +16,29 @@ public class ImageProcessing {
    * @param args the input and their associated commands.
    */
   public static void main(String[] args) throws FileNotFoundException {
-    StringBuilder commands = new StringBuilder();
-    for (String arg : args) {
-      commands.append(arg ).append(" ");
+    Scanner sc;
+    String fileType = "";
+    for (int i = 0; i < args[0].length(); i++) {
+      if (args[0].charAt(i) == '.') { fileType = args[0].substring(i + 1); }
     }
-    Readable input = new StringReader(commands.toString());
+    if (!fileType.equals("txt")) { throw new IllegalArgumentException(); }
+
+
+    try {
+      sc = new Scanner(new FileInputStream(args[0]));
+    } catch (FileNotFoundException e) {
+      throw new FileNotFoundException("Filename " + args[0] + " not found!");
+    }
+    StringBuilder builder = new StringBuilder();
+    while (sc.hasNextLine()) {
+      String s = sc.nextLine();
+      if (!s.equals("") && s.charAt(0) != '#') {
+        builder.append(s + System.lineSeparator());
+      }
+    }
+    String commands = builder.toString();
+
+    Readable input = new StringReader(commands);
     ImageControllerImpl controller = new ImageControllerImpl(input);
     controller.playGame();
   }
