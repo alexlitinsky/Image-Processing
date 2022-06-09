@@ -84,8 +84,8 @@ public class ImageControllerImplTest {
   public void testSave() {
     this.input = new StringReader("load Images/Koala.ppm koala " +
             "\n brighten 10 koala saveTest \n"
-            + "save Images/saveTest.ppm saveTest\n"
-            + "load Images/saveTest.ppm loadedSaveTest");
+            + "save res/saveTest.ppm saveTest\n"
+            + "load res/saveTest.ppm loadedSaveTest");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),

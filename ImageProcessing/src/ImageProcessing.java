@@ -14,7 +14,6 @@ public class ImageProcessing {
    * @param args the input and their associated commands.
    */
   public static void main(String[] args) throws FileNotFoundException {
-
     String commands = Arrays.toString(args);
     Readable input = new StringReader(commands);
     ImageControllerImpl controller = new ImageControllerImpl(input);
