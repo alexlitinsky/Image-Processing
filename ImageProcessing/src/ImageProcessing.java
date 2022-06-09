@@ -14,8 +14,11 @@ public class ImageProcessing {
    * @param args the input and their associated commands.
    */
   public static void main(String[] args) throws FileNotFoundException {
-    String commands = Arrays.toString(args);
-    Readable input = new StringReader(commands);
+    StringBuilder commands = new StringBuilder();
+    for (String arg : args) {
+      commands.append(arg ).append(" ");
+    }
+    Readable input = new StringReader(commands.toString());
     ImageControllerImpl controller = new ImageControllerImpl(input);
     controller.playGame();
   }
