@@ -36,7 +36,7 @@ public class Load implements Command {
       c.getVersions().put(newName, ImageUtil.readPPM(source));
       ImageTextView view = new ImageTextView(ImageUtil.readPPM(source), new StringBuilder());
     } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+      throw new IllegalArgumentException(e);
     }
   }
 }

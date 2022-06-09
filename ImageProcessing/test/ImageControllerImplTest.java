@@ -2,6 +2,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import java.io.FileNotFoundException;
 import java.io.StringReader;
 
 import controller.ImageControllerImpl;
@@ -53,7 +54,8 @@ public class ImageControllerImplTest {
       this.controller = new ImageControllerImpl(input);
       controller.playGame();
     } catch (IllegalArgumentException e) {
-      assertEquals("Filename Images/Koal.ppm not found!", e.getMessage());
+      assertEquals("java.io.FileNotFoundException: Filename Images/Koal.ppm not found!",
+              e.getMessage());
     }
     // wrong file type
     try {
