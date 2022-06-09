@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -59,9 +60,10 @@ public class ImageControllerImpl {
   /**
    * The method to start the game. Scans the user's inputs for commands to control the game,
    * as well as stores each new version of the image created from running commands.
+   *
    * @throws IllegalStateException
    */
-  public void playGame() throws IllegalStateException, FileNotFoundException {
+  public void playGame() throws IllegalStateException {
     Scanner scanner = new Scanner(input);
     int argCount = 0;
     while (scanner.hasNext()) {
@@ -72,13 +74,18 @@ public class ImageControllerImpl {
         throw new IllegalArgumentException("Invalid command.");
       } else {
         c = cmd.apply(scanner);
-        c.go();
+        try {
+          c.go();
+        } catch (FileNotFoundException e) {
+          throw new RuntimeException(e);
+        }
       }
     }
   }
 
   /**
    * Retrieves the versions of the current models.
+   *
    * @return the versions of the models
    */
   public Map<String, ImageModel> getVersions() {
