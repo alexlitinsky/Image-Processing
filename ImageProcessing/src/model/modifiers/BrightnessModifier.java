@@ -18,7 +18,8 @@ public class BrightnessModifier implements Modifier {
 
   /**
    * Applies a modifier to an image and returns the new modified image. If red, green, blue value
-   * is greater than 255, we set that value to the maximum rgb value.
+   * is greater than 255, we set that value to the maximum rgb value. If any of the resulting
+   * values are less than 0, then set the red, green, blue to 0.
    */
   @Override
   public ImageModel apply(ImageModel model) throws IllegalArgumentException {
@@ -26,10 +27,11 @@ public class BrightnessModifier implements Modifier {
     ImageModel build = new ImageModel(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
-        int red = model.getPixel(i, j).getRGB()[0] + value;
-        int green = model.getPixel(i, j).getRGB()[1] + value;
-        int blue = model.getPixel(i, j).getRGB()[2] + value;
-        build.assignPixels(i, j, Math.min(255, red), Math.min(255, green), Math.min(255, blue));
+        int red = Math.min(model.getPixel(i, j).getRGB()[0] + value, 255);
+        int green = Math.min(model.getPixel(i, j).getRGB()[1] + value, 255);
+        int blue = Math.min(model.getPixel(i, j).getRGB()[2] + value, 255);
+        build.assignPixels(i, j, Math.max(0, red), Math.max(0, green), Math.max(0, blue));
+
       }
     }
     return build;
