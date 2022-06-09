@@ -31,7 +31,7 @@ public class Load implements Command {
    * file generating an image, and puts it in the map of versions under the new name.
    */
   @Override
-  public void go()  {
+  public void go() {
     try {
       c.getVersions().put(newName, ImageUtil.readPPM(source));
       ImageTextView view = new ImageTextView(ImageUtil.readPPM(source), new StringBuilder());

@@ -2,7 +2,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.io.FileNotFoundException;
 import java.io.StringReader;
 
 import controller.ImageControllerImpl;

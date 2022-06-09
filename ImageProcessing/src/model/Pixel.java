@@ -11,9 +11,10 @@ public class Pixel {
 
   /**
    * Creates a pixel object with three rgb values.
-   * @param red the red value of a pixel
+   *
+   * @param red   the red value of a pixel
    * @param green the green value of a pixel
-   * @param blue the vlue value of a pixel
+   * @param blue  the vlue value of a pixel
    * @throws IllegalArgumentException if any of the values are greater than 255 or less than 0
    */
   public Pixel(int red, int green, int blue) throws IllegalArgumentException {
@@ -28,6 +29,7 @@ public class Pixel {
 
   /**
    * Gets all the rgb values of a single pixel.
+   *
    * @return an array of the rgb values
    */
   public int[] getRGB() {

@@ -23,9 +23,10 @@ public class Save implements Command {
   /**
    * Constructor for the save command. Consumes a controller to access its list of versions, the
    * name of the file to save, and the name and path of the new file created by saving.
-   * @param c the controller controlling the command
+   *
+   * @param c        the controller controlling the command
    * @param filename the path and name to save the file to
-   * @param name the name of the PPM file being saved
+   * @param name     the name of the PPM file being saved
    */
   public Save(ImageControllerImpl c, String filename, String name) throws IllegalArgumentException {
     if (c == null || filename == null || name == null || c.getVersions().get(name) == null) {
@@ -33,7 +34,7 @@ public class Save implements Command {
     }
     this.filename = filename;
     Appendable app = new StringBuilder();
-      this.model = c.getVersions().get(name);
+    this.model = c.getVersions().get(name);
     if (this.model == null) {
       throw new IllegalArgumentException("This name is not in the list of image versions");
     }

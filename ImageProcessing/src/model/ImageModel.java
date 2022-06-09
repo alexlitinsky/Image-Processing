@@ -46,18 +46,22 @@ public class ImageModel {
 
   /**
    * Creates a new image given a modifier
+   *
    * @param mod the modifier being used
    * @return the new image
    * @throws IllegalArgumentException if the modifier is null
    */
   public ImageModel newModdedImage(Modifier mod) throws IllegalArgumentException {
-    if (mod == null) { throw new IllegalArgumentException("Null modifier"); }
+    if (mod == null) {
+      throw new IllegalArgumentException("Null modifier");
+    }
     // we have to return version to put it in the hashmap
     return mod.apply(this);
   }
 
   /**
    * Gets an individual pixel.
+   *
    * @param x the x coordinate
    * @param y the y coordinate
    * @return the specific pixel
@@ -71,6 +75,7 @@ public class ImageModel {
 
   /**
    * Gets the dimensions of an image.
+   *
    * @return an array of the width and height of the image
    */
   public int[] getDimensions() {

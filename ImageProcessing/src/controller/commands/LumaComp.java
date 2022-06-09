@@ -13,8 +13,9 @@ public class LumaComp extends ACommand {
   /**
    * Constructor for the luma component command. Consumes the current controller to access its
    * versions, the name of the model to be modified, and the name of the new modified model.
-   * @param c the controller passed to this command
-   * @param name the name of the model being modified
+   *
+   * @param c       the controller passed to this command
+   * @param name    the name of the model being modified
    * @param newName the name of the new model created from the modifications
    */
   public LumaComp(ImageControllerImpl c, String name, String newName)

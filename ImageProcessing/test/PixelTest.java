@@ -27,7 +27,7 @@ public class PixelTest {
   }
 
   @Test
-  public void  testGetRGB() {
+  public void testGetRGB() {
     Pixel p = new Pixel(0, 1, 2);
     assertEquals(0, p.getRGB()[0]);
     assertEquals(1, p.getRGB()[1]);

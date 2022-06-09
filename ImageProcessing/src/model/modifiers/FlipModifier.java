@@ -13,6 +13,7 @@ public class FlipModifier implements Modifier {
 
   /**
    * Constructor for this flip modifier.
+   *
    * @param isVertical true if the modifier is for a vertical flip
    */
   public FlipModifier(boolean isVertical) {
@@ -21,7 +22,9 @@ public class FlipModifier implements Modifier {
 
   @Override
   public ImageModel apply(ImageModel model) throws IllegalArgumentException {
-    if (model == null) { throw new IllegalArgumentException("invalid model"); }
+    if (model == null) {
+      throw new IllegalArgumentException("invalid model");
+    }
     ImageModel build = new ImageModel(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {

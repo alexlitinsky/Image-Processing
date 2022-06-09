@@ -7,6 +7,7 @@ package view;
 public interface TextView {
   /**
    * Prints an image's rgb values.
+   *
    * @return the image's rgb values
    */
   String toString();

@@ -15,13 +15,14 @@ public class Brighten extends ACommand {
    * modified, the name of the new image created from modification, the value to change the
    * brightness by (restricted to between -255 and 255, and must not make the model have RGB
    * values less than 0 or greater than 255.
-   * @param c the controller controlling the command
-   * @param value the value to change the brigthness by
-   * @param name the name of the image to modify
+   *
+   * @param c       the controller controlling the command
+   * @param value   the value to change the brigthness by
+   * @param name    the name of the image to modify
    * @param newName the name of the new image created by this command
    */
   public Brighten(ImageControllerImpl c, String value, String name, String newName)
-          throws IllegalArgumentException  {
+          throws IllegalArgumentException {
     super(c, name, newName);
     this.value = Integer.parseInt(value);
   }
