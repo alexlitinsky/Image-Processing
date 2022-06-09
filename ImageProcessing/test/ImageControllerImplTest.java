@@ -2,15 +2,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.io.StringReader;
 
 import controller.ImageControllerImpl;
 import view.ImageTextView;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Class to represent testing for all controller methods and commands. The following commands are tested:
@@ -33,6 +32,7 @@ public class ImageControllerImplTest {
   /**
    * Class to represent testing for the load command. Should read a ppm file and create a new Image
    * from the data in that PPM file and add it to the versions map in the controller.
+   * Compared our command's output to the image given in the starter code.
    */
   @Test
   public void testLoad() {
@@ -48,6 +48,7 @@ public class ImageControllerImplTest {
   /**
    * Method to test the blue component command.
    * Should set all the RGB values of the image to the blue component value of each pixel.
+   * Compared our command's output to the image given in the starter code.
    */
   @Test
   public void testBlueComponent() {
@@ -68,6 +69,7 @@ public class ImageControllerImplTest {
   /**
    * Method to test the brighten command.
    * Should set all the RGB values of the image to the sum of the current value and the given value.
+   * Compared our command's output to the image given in the starter code.
    */
   @Test
   public void testBrighten() {
@@ -88,6 +90,7 @@ public class ImageControllerImplTest {
   /**
    * Method to test the flip horizontal command.
    * Should move all the pixels on the left half of the picture to the right & vice versa.
+   * Compared our command's output to the image given in the starter code.
    */
   @Test
   public void testFlipHorizontal() {
@@ -103,6 +106,90 @@ public class ImageControllerImplTest {
             new StringBuilder());
     assertNotEquals(koalaView.toString(), testHorizontal.toString());
     assertEquals(testHorizontal.toString(), horizontal.toString());
+  }
+
+  /**
+   * Method to test the vertical flip command.
+   * Should move all the pixels on the bottom half of the picture to the top & vice versa.
+   * Compared our command's output to the image given in the starter code.
+   */
+  @Test
+  public void testFlipVertical() {
+    this.input = new StringReader("load Images/koala-vertical.png koala-vertical \n" +
+            "load Images/Koala.ppm koala \n vertical-flip koala testVertical");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    ImageTextView testVertical = new ImageTextView(controller.getVersions().get("testVertical"),
+            new StringBuilder());
+    ImageTextView vertical = new ImageTextView(controller.getVersions().get("koala-vertical"),
+            new StringBuilder());
+    assertNotEquals(koalaView.toString(), testVertical.toString());
+    assertEquals(testVertical.toString(), vertical.toString());
+  }
+
+  /**
+   * Method to test the green component command.
+   * Should set all the RGB values of the image to the green component value of each pixel.
+   * Compared our command's output to the image given in the starter code.
+   */
+  @Test
+  public void testGreenComponent() {
+    this.input = new StringReader("load Images/koala-green-greyscale.png koala-green \n" +
+            "load Images/Koala.ppm koala \n green-component koala testGreen");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    ImageTextView testView = new ImageTextView(controller.getVersions().get("testGreen"),
+            new StringBuilder());
+    ImageTextView koalaGreenView = new ImageTextView(controller.getVersions().get("koala-green"),
+            new StringBuilder());
+    assertNotEquals(koalaView.toString(), testView.toString());
+    assertEquals(testView.toString(), koalaGreenView.toString());
+  }
+
+  /**
+   * Method to test the intensity component command.
+   * Should set all the RGB values to the average of the three RGB values of each pixel.
+   * Compared our command's output to the image given in the starter code.
+   */
+  @Test
+  public void testIntensityComponent() {
+    this.input = new StringReader("load Images/koala-intensity-greyscale.png koala-intensity \n"
+            + "load Images/Koala.ppm koala \n intensity-component koala test");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+            new StringBuilder());
+    ImageTextView intensityView =
+            new ImageTextView(controller.getVersions().get("koala-intensity"), new StringBuilder());
+    assertNotEquals(koalaView.toString(), testView.toString());
+    assertEquals(testView.toString(), intensityView.toString());
+  }
+
+  /**
+   * Method to test the luma component command.
+   * Should set all the RGB values to the weighted luma sum of each pixel's RGB values.
+   * Compared our command's output to the image given in the starter code.
+   */
+  @Test
+  public void testLumaComponent() {
+    this.input = new StringReader("load Images/koala-luma-greyscale.png koala-luma \n"
+            + "load Images/Koala.ppm koala \n luma-component koala test");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+            new StringBuilder());
+    ImageTextView luma =
+            new ImageTextView(controller.getVersions().get("koala-luma"), new StringBuilder());
+    assertNotEquals(koalaView.toString(), testView.toString());
+    assertEquals(testView.toString(), luma.toString());
   }
 
   /**
