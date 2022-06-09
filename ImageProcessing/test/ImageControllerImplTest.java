@@ -1,4 +1,6 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import java.io.FileNotFoundException;
 import java.io.StringReader;
@@ -9,7 +11,6 @@ import view.ImageTextView;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 /**
  * Class to represent testing for all controller methods and commands.
@@ -27,6 +28,8 @@ import static org.junit.Assert.fail;
  * value component
  */
 public class ImageControllerImplTest {
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
   Readable input;
   ImageControllerImpl controller;
 
@@ -36,7 +39,7 @@ public class ImageControllerImplTest {
    * Compared our command's output to the image given in the starter code.
    */
   @Test
-  public void testLoad() throws FileNotFoundException {
+  public void testLoad() {
     this.input = new StringReader("load Images/Koala.ppm koala");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
@@ -45,39 +48,28 @@ public class ImageControllerImplTest {
     assertEquals(768, controller.getVersions().get("koala").getDimensions()[1]);
     assertEquals(1, controller.getVersions().size());
     // EXCEPTIONS
-    // file is the right type but cannot be found
+    // file does not exist
     try {
       this.input = new StringReader("load Images/Koal.ppm koala");
       this.controller = new ImageControllerImpl(input);
       controller.playGame();
-      fail();
-    } catch (FileNotFoundException e) {
-      assertEquals("Filename Images/Koal.ppm not found!", e.getMessage());
+    } catch (IllegalArgumentException e) {
+      assertEquals("java.io.FileNotFoundException: Filename Images/Koal.ppm not found!",
+              e.getMessage());
     }
     // wrong file type
     try {
       this.input = new StringReader("load Images/Koala.pp koala");
       this.controller = new ImageControllerImpl(input);
       controller.playGame();
-      fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Wrong file type", e.getMessage());
-    }
-    // blank path (too few arguments)
-    try {
-      this.input = new StringReader("load koala");
-      this.controller = new ImageControllerImpl(input);
-      controller.playGame();
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertEquals("Must give at least three arguments", e.getMessage());
     }
     // invalid command
     try {
       this.input = new StringReader("loa Images/Koala.ppm koala");
       this.controller = new ImageControllerImpl(input);
       controller.playGame();
-      fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid command.", e.getMessage());
     }
@@ -90,17 +82,13 @@ public class ImageControllerImplTest {
    * no values are changed in the save/load process.
    */
   @Test
-  public void testSave() throws FileNotFoundException {
+  public void testSave() {
     this.input = new StringReader("load Images/Koala.ppm koala " +
             "\n brighten 10 koala saveTest \n"
             + "save Images/saveTest.ppm saveTest\n"
             + "load Images/saveTest.ppm loadedSaveTest");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testView = new ImageTextView(controller.getVersions().get("saveTest"),
@@ -110,19 +98,6 @@ public class ImageControllerImplTest {
             new StringBuilder());
     assertEquals(testView.toString(), saved.toString());
     assertNotEquals(koalaView.toString(), testView.toString());
-
-    // EXCEPTIONS
-    // case where the file path to save is valid, but the version cannot be found
-    try {
-      this.input = new StringReader("load Images/Koala.ppm koala " +
-              "\n brighten 10 koala saveTest \n"
-              + "save Images/saveTest.ppm svt");
-      this.controller = new ImageControllerImpl(input);
-      controller.playGame();
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertEquals("This name is not in the list of image versions", e.getMessage());
-    }
   }
 
   /**
@@ -135,11 +110,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-blue-greyscale.png koala-blue \n" +
             "load Images/Koala.ppm koala \n blue-component koala testBlue");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testBlueView = new ImageTextView(controller.getVersions().get("testBlue"),
@@ -160,11 +131,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
             "load Images/Koala.ppm koala \n brighten 50 koala testBrighter");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testBrightenView = new ImageTextView(controller.getVersions().get("testBrighter"),
@@ -185,11 +152,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-horizontal.png koala-horizontal \n" +
             "load Images/Koala.ppm koala \n horizontal-flip koala testHorizontal");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testHorizontal = new ImageTextView(controller.getVersions().get("testHorizontal"),
@@ -210,11 +173,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-vertical.png koala-vertical \n" +
             "load Images/Koala.ppm koala \n vertical-flip koala testVertical");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testVertical = new ImageTextView(controller.getVersions().get("testVertical"),
@@ -235,11 +194,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-green-greyscale.png koala-green \n" +
             "load Images/Koala.ppm koala \n green-component koala testGreen");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testView = new ImageTextView(controller.getVersions().get("testGreen"),
@@ -260,11 +215,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-intensity-greyscale.png koala-intensity \n"
             + "load Images/Koala.ppm koala \n intensity-component koala test");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
@@ -285,11 +236,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-luma-greyscale.png koala-luma \n"
             + "load Images/Koala.ppm koala \n luma-component koala test");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
@@ -310,11 +257,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-red-greyscale.png koala-red \n"
             + "load Images/Koala.ppm koala \n red-component koala test");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
@@ -336,11 +279,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/koala-value-greyscale.png koala-value \n"
             + "load Images/Koala.ppm koala \n value-component koala test");
     this.controller = new ImageControllerImpl(input);
-    try {
-      controller.playGame();
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+    controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
     ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),

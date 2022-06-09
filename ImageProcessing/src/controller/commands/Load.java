@@ -31,9 +31,12 @@ public class Load implements Command {
    * file generating an image, and puts it in the map of versions under the new name.
    */
   @Override
-  public void go() throws FileNotFoundException {
-    c.getVersions().put(newName, ImageUtil.readPPM(source));
-    ImageTextView view = new ImageTextView(ImageUtil.readPPM(source), new StringBuilder());
+  public void go()  {
+    try {
+      c.getVersions().put(newName, ImageUtil.readPPM(source));
+      ImageTextView view = new ImageTextView(ImageUtil.readPPM(source), new StringBuilder());
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException(e);
+    }
   }
-
 }
