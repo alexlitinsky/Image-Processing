@@ -20,13 +20,14 @@ import model.ImageModel;
 public class ImageUtil {
 
   /**
-   * Read an image file in the PPM format and print the colors.
    *
-   * @param filename the name of the file being read
-   * @return the image read from the PPM file
-   * @throws IllegalArgumentException if no file with the given name can be found
+   * @param filename
+   * @return
+   * @throws FileNotFoundException
+   * @throws IllegalArgumentException
    */
-  public static ImageModel readPPM(String filename) {
+  public static ImageModel readPPM(String filename) throws FileNotFoundException,
+          IllegalArgumentException {
 
     String fileType = "";
 
@@ -43,7 +44,7 @@ public class ImageUtil {
         try {
           sc = new Scanner(new FileInputStream(filename));
         } catch (FileNotFoundException e) {
-          throw new IllegalArgumentException("Filename " + filename + "not found!");
+          throw new FileNotFoundException("Filename " + filename + " not found!");
         }
         StringBuilder builder = new StringBuilder();
         //read the file line by line, and populate a string. This will throw away any comment lines

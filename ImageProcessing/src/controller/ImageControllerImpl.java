@@ -53,7 +53,6 @@ public class ImageControllerImpl {
     allCommands.put("blue-component", s -> new BlueComp(this, s.next(), s.next()));
     allCommands.put("luma-component", s -> new LumaComp(this, s.next(), s.next()));
     allCommands.put("intensity-component", s -> new IntensityComp(this, s.next(), s.next()));
-
   }
 
   /**

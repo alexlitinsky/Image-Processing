@@ -12,7 +12,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Class to represent testing for all controller methods and commands. The following commands are tested:
+ * Class to represent testing for all controller methods and commands.
+ * The following commands and their exceptions are tested:
  * blue component
  * brighten
  * flip horizontal
@@ -45,6 +46,31 @@ public class ImageControllerImplTest {
     assertEquals(1024, controller.getVersions().get("koala").getDimensions()[0]);
     assertEquals(768, controller.getVersions().get("koala").getDimensions()[1]);
     assertEquals(1, controller.getVersions().size());
+    // EXCEPTIONS
+    // file does not exist
+    try {
+      this.input = new StringReader("load Images/Koal.ppm koala");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Filename Images/Koal.ppm not found!", e.getMessage());
+    }
+    // wrong file type
+    try {
+      this.input = new StringReader("load Images/Koala.pp koala");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Wrong file type", e.getMessage());
+    }
+    // invalid command
+    try {
+      this.input = new StringReader("loa Images/Koala.ppm koala");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid command.", e.getMessage());
+    }
   }
 
   /**
