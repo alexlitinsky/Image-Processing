@@ -23,7 +23,7 @@ public abstract class ACommand implements Command {
    */
   public ACommand(ImageControllerImpl c, String name, String newName)
           throws IllegalArgumentException {
-    if (c == null || name == null || newName == null) {
+    if (c == null || name == null || newName == null || c.getVersions().get(name) == null) {
       throw new IllegalArgumentException("Invalid parameters for command.");
     }
     this.c = c;
