@@ -39,6 +39,9 @@ public class ImageModel {
    * @param b the blue color value
    */
   public void assignPixels(int x, int y, int r, int g, int b) {
+    if (x > this.getDimensions()[0] - 1 || y > this.getDimensions()[1] - 1 || x < 0 || y < 0) {
+      throw new IllegalArgumentException("Pixel to be assigned must be in the image");
+    }
     imagePixels[y][x] = new Pixel(r, g, b);
   }
 

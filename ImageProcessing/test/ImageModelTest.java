@@ -7,6 +7,8 @@ import view.ImageTextView;
 import view.TextView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 public class ImageModelTest {
   private ImageModel img;
@@ -34,13 +36,76 @@ public class ImageModelTest {
   }
 
   @Test
-  public void testConstructor1() {
+  public void testConstructor() {
     ImageModel image = new ImageModel(1, 1);
+    assertEquals(1, image.getDimensions()[0]);
+    assertEquals(1, image.getDimensions()[1]);
   }
 
   @Test
   public void testAssignPixels() {
-
+    initModel1x1();
+    // pre-assign check
+    assertEquals(1, img.getPixel(0,0).getRGB()[0]);
+    assertEquals(1, img.getPixel(0,0).getRGB()[1]);
+    assertEquals(1, img.getPixel(0,0).getRGB()[2]);
+    img.assignPixels(0, 0, 2, 3, 4);
+    assertEquals(2, img.getPixel(0,0).getRGB()[0]);
+    assertEquals(3, img.getPixel(0,0).getRGB()[1]);
+    assertEquals(4, img.getPixel(0,0).getRGB()[2]);
+    // EXCEPTIONS
+    // all neg
+    try {
+      img.assignPixels(0, 0, -1, -1, -1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid rgbs", e.getMessage());
+    }
+    // each one negative
+    try {
+      img.assignPixels(0, 0, -1, 0, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid rgbs", e.getMessage());
+    }
+    try {
+      img.assignPixels(0, 0, 0, -1, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid rgbs", e.getMessage());
+    }
+    try {
+      img.assignPixels(0, 0, 0, 0, -1);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid rgbs", e.getMessage());
+    }
+    // bigger than 255
+    try {
+      img.assignPixels(0, 0, 256, 0, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid rgbs", e.getMessage());
+    }
+    // invalid position
+    try {
+      img.assignPixels(1, 0, 0, 0, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Pixel to be assigned must be in the image", e.getMessage());
+    }
+    try {
+      img.assignPixels(-1, 0, 0, 0, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Pixel to be assigned must be in the image", e.getMessage());
+    }
+    try {
+      img.assignPixels(0, 1, 0, 0, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Pixel to be assigned must be in the image", e.getMessage());
+    }
   }
 
   @Test

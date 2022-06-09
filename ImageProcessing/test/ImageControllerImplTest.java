@@ -1,6 +1,4 @@
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 
 import java.io.StringReader;
 
@@ -10,6 +8,7 @@ import view.ImageTextView;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * Class to represent testing for all controller methods and commands.
@@ -27,8 +26,6 @@ import static org.junit.Assert.assertTrue;
  * value component
  */
 public class ImageControllerImplTest {
-  @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
   Readable input;
   ImageControllerImpl controller;
 
@@ -52,6 +49,7 @@ public class ImageControllerImplTest {
       this.input = new StringReader("load Images/Koal.ppm koala");
       this.controller = new ImageControllerImpl(input);
       controller.playGame();
+      fail();
     } catch (IllegalArgumentException e) {
       assertEquals("java.io.FileNotFoundException: Filename Images/Koal.ppm not found!",
               e.getMessage());
@@ -61,6 +59,7 @@ public class ImageControllerImplTest {
       this.input = new StringReader("load Images/Koala.pp koala");
       this.controller = new ImageControllerImpl(input);
       controller.playGame();
+      fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Wrong file type", e.getMessage());
     }
@@ -69,6 +68,7 @@ public class ImageControllerImplTest {
       this.input = new StringReader("loa Images/Koala.ppm koala");
       this.controller = new ImageControllerImpl(input);
       controller.playGame();
+      fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid command.", e.getMessage());
     }
