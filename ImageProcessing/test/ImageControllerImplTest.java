@@ -336,6 +336,22 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testGetVersions() {
+    this.input = new StringReader("load Images/koala-value-greyscale.png koala-value");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertEquals(1, controller.getVersions().size());
+    assertTrue(controller.getVersions().containsKey("koala-value"));
 
+    // empty command case
+    this.input = new StringReader("");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertEquals(0, controller.getVersions().size());
+
+    // invalid command case
+    this.input = new StringReader("load Images/koala-value-grescale.png");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertEquals(0, controller.getVersions().size());
   }
 }
