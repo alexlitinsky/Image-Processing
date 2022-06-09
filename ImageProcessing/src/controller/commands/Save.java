@@ -28,7 +28,7 @@ public class Save implements Command {
    * @param name the name of the PPM file being saved
    */
   public Save(ImageControllerImpl c, String filename, String name) throws IllegalArgumentException {
-    if (c == null || filename == null || name == null) {
+    if (c == null || filename == null || name == null || c.getVersions().get(name) == null) {
       throw new IllegalArgumentException("Invalid parameters.");
     }
     this.filename = filename;
