@@ -139,6 +139,40 @@ public class ImageControllerImplTest {
             new StringBuilder());
     assertNotEquals(koalaView.toString(), testBrightenView.toString());
     assertEquals(testBrightenView.toString(), brightView.toString());
+
+    // maxed-out brightness
+    this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
+            "load Images/Koala.ppm koala \n brighten 256 koala testBrighter");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    for (int i = 0; i < controller.getVersions().get("testBrighter").getDimensions()[0] - 1; i++) {
+      for (int j = 0; j <
+              controller.getVersions().get("testBrighter").getDimensions()[1] - 1; j++) {
+        assertEquals(255,
+                controller.getVersions().get("testBrighter").getPixel(i, j).getRGB()[0]);
+        assertEquals(255,
+                controller.getVersions().get("testBrighter").getPixel(i, j).getRGB()[1]);
+        assertEquals(255,
+                controller.getVersions().get("testBrighter").getPixel(i, j).getRGB()[2]);
+      }
+    }
+
+    // min brightness
+    this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
+            "load Images/Koala.ppm koala \n brighten -256 koala testBrighter");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    for (int i = 0; i < controller.getVersions().get("testBrighter").getDimensions()[0] - 1; i++) {
+      for (int j = 0; j <
+              controller.getVersions().get("testBrighter").getDimensions()[1] - 1; j++) {
+        assertEquals(0,
+                controller.getVersions().get("testBrighter").getPixel(i, j).getRGB()[0]);
+        assertEquals(0,
+                controller.getVersions().get("testBrighter").getPixel(i, j).getRGB()[1]);
+        assertEquals(0,
+                controller.getVersions().get("testBrighter").getPixel(i, j).getRGB()[2]);
+      }
+    }
   }
 
   /**
