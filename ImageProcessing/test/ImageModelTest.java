@@ -7,9 +7,12 @@ import view.ImageTextView;
 import view.TextView;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
+/**
+ * Class to contain testing methods for the image model class. Tests the constructor and its
+ * exceptions, as well as the assignPixels() and newModdedImage() method.
+ */
 public class ImageModelTest {
   private ImageModel img;
   private Appendable out;
@@ -35,6 +38,10 @@ public class ImageModelTest {
     out = new StringBuilder();
   }
 
+  /**
+   * Method to test that the constructor initializes an image of the right size. Also checks that
+   * it throws the right exception in a variety of invalid argument cases.
+   */
   @Test
   public void testConstructor() {
     ImageModel image = new ImageModel(1, 1);
@@ -79,17 +86,21 @@ public class ImageModelTest {
     }
   }
 
+  /**
+   * Method to test the assignPixels() method in the model. Should assign the pixel at the given
+   * position the given RGB components, as well as throw exceptions for illegal arguments.
+   */
   @Test
   public void testAssignPixels() {
     initModel1x1();
     // pre-assign check
-    assertEquals(1, img.getPixel(0,0).getRGB()[0]);
-    assertEquals(1, img.getPixel(0,0).getRGB()[1]);
-    assertEquals(1, img.getPixel(0,0).getRGB()[2]);
+    assertEquals(1, img.getPixel(0, 0).getRGB()[0]);
+    assertEquals(1, img.getPixel(0, 0).getRGB()[1]);
+    assertEquals(1, img.getPixel(0, 0).getRGB()[2]);
     img.assignPixels(0, 0, 2, 3, 4);
-    assertEquals(2, img.getPixel(0,0).getRGB()[0]);
-    assertEquals(3, img.getPixel(0,0).getRGB()[1]);
-    assertEquals(4, img.getPixel(0,0).getRGB()[2]);
+    assertEquals(2, img.getPixel(0, 0).getRGB()[0]);
+    assertEquals(3, img.getPixel(0, 0).getRGB()[1]);
+    assertEquals(4, img.getPixel(0, 0).getRGB()[2]);
     // EXCEPTIONS
     // all neg
     try {
@@ -145,6 +156,10 @@ public class ImageModelTest {
     }
   }
 
+  /**
+   * Test the newModdedImage() method, which applies a modifier to a model and returns the new,
+   * modified model. Should alter the model in the expected way.
+   */
   @Test
   public void testNewModdedImage() {
     initModel1x1();
