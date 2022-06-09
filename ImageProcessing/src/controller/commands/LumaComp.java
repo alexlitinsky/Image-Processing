@@ -17,7 +17,8 @@ public class LumaComp extends ACommand {
    * @param name the name of the model being modified
    * @param newName the name of the new model created from the modifications
    */
-  public LumaComp(ImageControllerImpl c, String name, String newName) {
+  public LumaComp(ImageControllerImpl c, String name, String newName)
+          throws IllegalArgumentException {
     super(c, name, newName);
   }
 

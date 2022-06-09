@@ -21,7 +21,11 @@ public abstract class ACommand implements Command {
    * @param name the name of the model being modified
    * @param newName the name of the new model created from running the command
    */
-  public ACommand(ImageControllerImpl c, String name, String newName) {
+  public ACommand(ImageControllerImpl c, String name, String newName)
+          throws IllegalArgumentException {
+    if (c == null || name == null || newName == null) {
+      throw new IllegalArgumentException("Invalid parameters for command.");
+    }
     this.c = c;
     this.newName = newName;
     this.model = this.c.getVersions().get(name);

@@ -78,7 +78,6 @@ public class ImageUtil {
             int g = sc.nextInt();
             int b = sc.nextInt();
             image.assignPixels(j, i, r, g, b);
-            //System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
           }
         }
 
@@ -102,17 +101,3 @@ public class ImageUtil {
     }
   }
 }
-
-//  //demo main
-//  public static void main(String[] args) {
-//    String filename;
-//
-//    if (args.length > 0) {
-//      filename = args[0];
-//    } else {
-//      filename = "sample.ppm";
-//    }
-//
-//    utilities.ImageUtil.readPPM(filename);
-//  }
-//  }

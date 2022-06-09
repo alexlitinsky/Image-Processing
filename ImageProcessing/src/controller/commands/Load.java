@@ -14,7 +14,11 @@ public class Load implements Command {
   ImageControllerImpl c;
 
   // Constructor for the load command. Consumes
-  public Load(String source, String newName, ImageControllerImpl c) {
+  public Load(String source, String newName, ImageControllerImpl c)
+          throws IllegalArgumentException {
+    if (source == null || newName == null || c == null) {
+      throw new IllegalArgumentException("Invalid parameters");
+    }
     this.newName = newName;
     this.source = source;
     this.c = c;

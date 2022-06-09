@@ -9,7 +9,7 @@ import model.ImageModel;
 public interface Modifier {
   /**
    * Applies a modifier to an image
-   * //@param img the original image
+   * @param model the original image
    */
-  public ImageModel apply(ImageModel model);
+   ImageModel apply(ImageModel model) throws IllegalArgumentException;
 }
