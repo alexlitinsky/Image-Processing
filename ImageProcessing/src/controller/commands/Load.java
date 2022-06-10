@@ -33,6 +33,9 @@ public class Load implements Command {
   @Override
   public void go() {
     try {
+      if (c.getVersions().containsKey(newName)) {
+        c.getVersions().replace(newName, ImageUtil.readPPM(source));
+      }
       c.getVersions().put(newName, ImageUtil.readPPM(source));
       ImageTextView view = new ImageTextView(ImageUtil.readPPM(source), new StringBuilder());
     } catch (FileNotFoundException e) {
