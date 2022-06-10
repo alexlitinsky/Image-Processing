@@ -2,7 +2,7 @@ package controller.commands;
 
 import java.io.FileNotFoundException;
 
-import controller.ImageControllerImpl;
+import controller.ImageController;
 import utilities.ImageUtil;
 import view.ImageTextView;
 
@@ -15,7 +15,7 @@ import view.ImageTextView;
 public class Load implements Command {
   String newName;
   String source;
-  ImageControllerImpl c;
+  ImageController c;
 
   /**
    * Constructor for the load command. Consumes a source, new name and controller.
@@ -25,7 +25,7 @@ public class Load implements Command {
    * @param c the current controller
    * @throws IllegalArgumentException if any of the arguments are null
    */
-  public Load(String source, String newName, ImageControllerImpl c)
+  public Load(String source, String newName, ImageController c)
           throws IllegalArgumentException {
     if (source == null || newName == null || c == null) {
       throw new IllegalArgumentException("Invalid parameters");

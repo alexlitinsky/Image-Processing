@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import model.ImageModel;
 import model.ImageModelImpl;
 import model.modifiers.BlueCompModifier;
 import model.modifiers.BrightnessModifier;
@@ -28,7 +29,7 @@ import static org.junit.Assert.fail;
  * value component
  */
 public class ModifierTest {
-  private ImageModelImpl img;
+  private ImageModel img;
   private Appendable out;
 
   /**

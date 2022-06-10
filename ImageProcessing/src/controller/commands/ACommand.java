@@ -1,7 +1,9 @@
 package controller.commands;
 
-import controller.ImageControllerImpl;
-import model.ImageModelImpl;
+import controller.ImageController;
+
+import model.ImageModel;
+
 
 /**
  * Class to represent abstracted command data. Contains the controller accessing and controlling the
@@ -9,8 +11,8 @@ import model.ImageModelImpl;
  * image model created by running the command.
  */
 public abstract class ACommand implements Command {
-  protected final ImageControllerImpl c;
-  protected final ImageModelImpl model;
+  protected final ImageController c;
+  protected final ImageModel model;
   protected final String newName;
 
   /**
@@ -24,7 +26,7 @@ public abstract class ACommand implements Command {
    * @throws IllegalArgumentException if any of the parameters are null or if the provided name is
    *                                  not in the controller's list of versions
    */
-  public ACommand(ImageControllerImpl c, String name, String newName)
+  public ACommand(ImageController c, String name, String newName)
           throws IllegalArgumentException {
     if (c == null || name == null || newName == null || c.getVersions().get(name) == null) {
       throw new IllegalArgumentException("Invalid parameters for command.");
@@ -32,9 +34,9 @@ public abstract class ACommand implements Command {
     this.c = c;
     this.newName = newName;
     this.model = this.c.getVersions().get(name);
-    if (model == null) {
-      throw new IllegalArgumentException("This name is not in the list of image versions");
-    }
+//    if (model == null) {
+//      throw new IllegalArgumentException("This name is not in the list of image versions");
+//    }
   }
 
   /**

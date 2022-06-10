@@ -5,8 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import controller.ImageControllerImpl;
-import model.ImageModelImpl;
+import model.ImageModel;
 import model.Pixel;
+
 
 /**
  * Class to represent the save command. Running the command takes the current view and writes
@@ -15,7 +16,7 @@ import model.Pixel;
 public class Save implements Command {
 
   private final String filename;
-  private final ImageModelImpl model;
+  private final ImageModel model;
 
 
   /**

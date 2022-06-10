@@ -8,7 +8,7 @@ import model.modifiers.Modifier;
  * an image given a valid width and a height. Has a method to assign all the pixels to their valid
  * values. Can retrieve each individual pixel. Can retrieve dimensions of an image.
  */
-public class ImageModelImpl {
+public class ImageModelImpl implements ImageModel {
   private final int width;
   private final int height;
   private final Pixel[][] imagePixels;
@@ -26,7 +26,7 @@ public class ImageModelImpl {
     }
     this.width = width;
     this.height = height;
-    this.imagePixels = new Pixel[height][width];
+    this.imagePixels = new PixelImpl[height][width];
   }
 
   /**
@@ -38,11 +38,12 @@ public class ImageModelImpl {
    * @param g the green color value
    * @param b the blue color value
    */
+  @Override
   public void assignPixels(int x, int y, int r, int g, int b) {
     if (x > this.getDimensions()[0] - 1 || y > this.getDimensions()[1] - 1 || x < 0 || y < 0) {
       throw new IllegalArgumentException("Pixel to be assigned must be in the image");
     }
-    imagePixels[y][x] = new Pixel(r, g, b);
+    imagePixels[y][x] = new PixelImpl(r, g, b);
   }
 
   // might need to change canvas size in the future
@@ -54,7 +55,8 @@ public class ImageModelImpl {
    * @return the new image
    * @throws IllegalArgumentException if the modifier is null
    */
-  public ImageModelImpl newModdedImage(Modifier mod) throws IllegalArgumentException {
+  @Override
+  public ImageModel newModdedImage(Modifier mod) throws IllegalArgumentException {
     if (mod == null) {
       throw new IllegalArgumentException("Null modifier");
     }
@@ -69,6 +71,7 @@ public class ImageModelImpl {
    * @param y the y coordinate
    * @return the specific pixel
    */
+  @Override
   public Pixel getPixel(int x, int y) throws IllegalArgumentException {
     if (x < 0 || y < 0 || x > this.getDimensions()[0] || y > this.getDimensions()[1]) {
       throw new IllegalArgumentException("Invalid parameters");
@@ -81,6 +84,7 @@ public class ImageModelImpl {
    *
    * @return an array of the width and height of the image
    */
+  @Override
   public int[] getDimensions() {
     return new int[]{this.width, this.height};
   }

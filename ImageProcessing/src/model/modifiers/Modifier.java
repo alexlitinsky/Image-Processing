@@ -1,6 +1,6 @@
 package model.modifiers;
 
-import model.ImageModelImpl;
+import model.ImageModel;
 
 /**
  * An interface representing different ways to modify an image. All modifiers should have the below
@@ -12,5 +12,5 @@ public interface Modifier {
    *
    * @param model the original image
    */
-  ImageModelImpl apply(ImageModelImpl model) throws IllegalArgumentException;
+  ImageModel apply(ImageModel model) throws IllegalArgumentException;
 }

@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.ImageControllerImpl;
+import controller.ImageController;
 import model.modifiers.RedCompModifier;
 
 /**
@@ -17,7 +17,7 @@ public class RedComp extends ACommand {
    * @param name    the name of the model being modified
    * @param newName the name of the new model created from the modifications
    */
-  public RedComp(ImageControllerImpl c, String name, String newName)
+  public RedComp(ImageController c, String name, String newName)
           throws IllegalArgumentException {
     super(c, name, newName);
   }

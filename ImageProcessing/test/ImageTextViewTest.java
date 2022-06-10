@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import model.ImageModel;
 import model.ImageModelImpl;
 import model.modifiers.BrightnessModifier;
 import model.modifiers.Modifier;
@@ -47,7 +48,7 @@ public class ImageTextViewTest {
    */
   @Test
   public void testViewChanges() {
-    ImageModelImpl img = new ImageModelImpl(2, 2);
+    ImageModel img = new ImageModelImpl(2, 2);
     img.assignPixels(0, 0, 2, 3, 4);
     img.assignPixels(1, 0, 23, 255, 4);
     img.assignPixels(0, 1, 100, 3, 6);

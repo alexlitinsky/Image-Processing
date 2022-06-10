@@ -18,16 +18,17 @@ import controller.commands.LumaComp;
 import controller.commands.RedComp;
 import controller.commands.Save;
 import controller.commands.ValueComp;
+import model.ImageModel;
 import model.ImageModelImpl;
 
 /**
  * Class to represent the controller for an image. Takes in a readable input. Has a set list of
  * commands to occupy the controller. Uses a hashmap to keep track all the versions of the models.
  */
-public class ImageControllerImpl {
+public class ImageControllerImpl implements ImageController {
   private final Readable input;
   private final Map<String, Function<Scanner, Command>> allCommands;
-  private Map<String, ImageModelImpl> versions;
+  private Map<String, ImageModel> versions;
 
   /**
    * Constructor for this implementation of an image controller.
@@ -62,6 +63,7 @@ public class ImageControllerImpl {
    *
    * @throws IllegalStateException if the game cannot be played properly
    */
+  @Override
   public void playGame() throws IllegalStateException {
     Scanner scanner = new Scanner(input);
     int argCount = 0;
@@ -87,7 +89,8 @@ public class ImageControllerImpl {
    *
    * @return the versions of the models
    */
-  public Map<String, ImageModelImpl> getVersions() {
+  @Override
+  public Map<String, ImageModel> getVersions() {
     return this.versions;
   }
 

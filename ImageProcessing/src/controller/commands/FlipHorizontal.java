@@ -1,6 +1,7 @@
 package controller.commands;
 
-import controller.ImageControllerImpl;
+import controller.ImageController;
+
 import model.modifiers.FlipModifier;
 
 /**
@@ -17,7 +18,7 @@ public class FlipHorizontal extends ACommand {
    * @param name    the name of the model being modified
    * @param newName the name of the new model created from the modifications
    */
-  public FlipHorizontal(ImageControllerImpl c, String name, String newName)
+  public FlipHorizontal(ImageController c, String name, String newName)
           throws IllegalArgumentException {
     super(c, name, newName);
   }
