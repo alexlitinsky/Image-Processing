@@ -13,5 +13,5 @@ In our controller directory, we used the command design pattern to make executin
 To run the script demonstrating the program's functionality, edit the main method's run configuration and enter the following as the single argument:
 src/ImageProcessingScript.txt
 
-The sample image used in our script was pulled from unsplash.com, a website offering free images downloadable for any use. See link:
+The sample image used in our script was pulled from unsplash.com, a website offering free images downloadable for any use. Click link and click "Unsplash License" in image details to see use license:
 https://unsplash.com/photos/zAlxWHx0vNc
