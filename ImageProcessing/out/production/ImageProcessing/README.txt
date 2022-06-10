@@ -10,3 +10,7 @@ Our view is quite simple - we simply display a 2d array of all the image's conte
 
 In our controller directory, we used the command design pattern to make executing commands in the controller easier. Each command links up back to a a versions hash map in our controller class where we manage all versions of the images. In our commands interface, we made an abstract ACommand class since it would be much easier to implement each command class. 
 
+To run the script demonstrating the program's functionality, edit the main method's run configuration and enter the following as the single argument:
+src/ImageProcessingScript.txt
+
+The sample image used in our script was pulled from unsplash.com, a website offering free images downloadable for any use.
