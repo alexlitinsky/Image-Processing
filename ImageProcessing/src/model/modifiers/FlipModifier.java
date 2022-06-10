@@ -32,9 +32,9 @@ public class FlipModifier implements Modifier {
         int green = model.getPixel(i, j).getRGB()[1];
         int blue = model.getPixel(i, j).getRGB()[2];
         if (this.isVertical) {
-          build.assignPixels(i, (model.getDimensions()[0] - 1) - j, red, green, blue);
+          build.assignPixels(i, (model.getDimensions()[1] - 1) - j, red, green, blue);
         } else {
-          build.assignPixels((model.getDimensions()[1] - 1) - i, j, red, green, blue);
+          build.assignPixels((model.getDimensions()[0] - 1) - i, j, red, green, blue);
         }
       }
     }
