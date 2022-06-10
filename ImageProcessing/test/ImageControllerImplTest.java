@@ -129,21 +129,16 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testSave() {
-    this.input = new StringReader("load Images/Koala.ppm koala " +
-            "\n brighten 10 koala saveTest \n"
-            + "save res/saveTest.ppm saveTest\n"
+    this.input = new StringReader("load res/Sheep.ppm sheep \n"
+            + "save res/saveTest.ppm sheep\n"
             + "load res/saveTest.ppm loadedSaveTest");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    ImageTextView sheepView = new ImageTextView(controller.getVersions().get("sheep"),
             new StringBuilder());
-    ImageTextView testView = new ImageTextView(controller.getVersions().get("saveTest"),
-            new StringBuilder());
-    this.input = new StringReader("");
     ImageTextView saved = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
             new StringBuilder());
-    assertEquals(testView.toString(), saved.toString());
-    assertNotEquals(koalaView.toString(), saved.toString());
+    assertEquals(sheepView.toString(), saved.toString());
     // EXCEPTIONS
     // invalid command
     try {
