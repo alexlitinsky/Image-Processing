@@ -60,7 +60,7 @@ public class ImageControllerImpl {
    * The method to start the game. Scans the user's inputs for commands to control the game,
    * as well as stores each new version of the image created from running commands.
    *
-   * @throws IllegalStateException
+   * @throws IllegalStateException if the game cannot be played properly
    */
   public void playGame() throws IllegalStateException {
     Scanner scanner = new Scanner(input);
