@@ -17,7 +17,14 @@ public class Load implements Command {
   String source;
   ImageControllerImpl c;
 
-  // Constructor for the load command. Consumes a source, new name and controller.
+  /**
+   * Constructor for the load command. Consumes a source, new name and controller.
+   *
+   * @param source the filepath for the source file
+   * @param newName the new name for the version
+   * @param c the current controller
+   * @throws IllegalArgumentException if any of the arguments are null
+   */
   public Load(String source, String newName, ImageControllerImpl c)
           throws IllegalArgumentException {
     if (source == null || newName == null || c == null) {
