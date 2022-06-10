@@ -85,7 +85,8 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/Koala.ppm koala " +
             "\n brighten 10 koala saveTest \n"
             + "save res/saveTest.ppm saveTest\n"
-            + "load res/saveTest.ppm loadedSaveTest");
+            + "load res/saveTest.ppm loadedSaveTest "
+            + "load res/saveTest.ppm koala");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
@@ -96,7 +97,9 @@ public class ImageControllerImplTest {
     ImageTextView saved = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
             new StringBuilder());
     assertEquals(testView.toString(), saved.toString());
-    assertNotEquals(koalaView.toString(), testView.toString());
+    ImageTextView newKoalaView = new ImageTextView(controller.getVersions().get("koala"),
+            new StringBuilder());
+    assertNotEquals(koalaView.toString(), newKoalaView.toString());
   }
 
   /**

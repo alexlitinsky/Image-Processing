@@ -170,6 +170,7 @@ public class ImageModelTest {
     TextView view2 = new ImageTextView(test, new StringBuilder());
     assertEquals("(2, 2, 2) ", view2.toString());
 
+    // null modifier case
     try {
       Modifier failMod = null;
       this.img = img.newModdedImage(failMod);
