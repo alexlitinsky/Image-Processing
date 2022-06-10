@@ -94,12 +94,19 @@ public class ImageControllerImpl implements ImageController {
     return this.versions;
   }
 
+  /**
+   * Mock controller implementation. Exists to verify parsing of inputs passed to the controller.
+   * Contains a log to record what the controller parses in the playGame() method, does not do
+   * anything for getVersions() class as there will be no versions to get/be created since
+   * playgame() only records parsed inputs for this controller implementation.
+   */
   public static class VerifyControllerParsing implements ImageController {
     private final Appendable log;
     private Readable input;
 
     /**
      * Constructor for this mock controller class. Verifies the parsing of inputs by the controller.
+     *
      * @param log the appendable recording what the controller parses
      */
     public VerifyControllerParsing(Readable input, Appendable log) {
