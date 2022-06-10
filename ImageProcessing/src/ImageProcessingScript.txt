@@ -1,21 +1,33 @@
-#load koala.ppm and call it 'koala'
-load images/koala.ppm koala
+#load Sheep.ppm and call it 'sheep'
+load res/Sheep.ppm sheep
 
-#brighten koala by adding 10  
-brighten 10 koala koala-brighter 
+#brighten sheep by adding 10 to each RGB component
+brighten 10 sheep sheep-brighter
 
-#flip koala vertically
-vertical-flip koala koala-vertical
+#brighten sheep by removing 10 from each RGB component
+brighten -10 sheep sheep-darker
 
-#flip the vertically flipped koala horizontally
-horizontal-flip koala-vertical koala-vertical-horizontal
+#flip sheep image vertically
+vertical-flip sheep sheep-vertical
 
-#create a greyscale using only the value component, as an image koala-greyscale
-value-component koala koala-greyscale
+#flip sheep image horizontally
+horizontal-flip sheep sheep-horizontal
 
-#save koala-brighter
-save images/koala-brighter.ppm koala-brighter
+#create a greyscale using only the value component, as the image sheep-greyscale
+value-component sheep sheep-greyscale
 
-#save koala-greyscale
-save images/koala-gs.ppm koala-greyscale
+#save sheep-brighter to a ppm file
+save res/sheep-brighter.ppm sheep-brighter
+
+#save sheep-darker to a ppm file
+save res/sheep-darker.ppm sheep-darker
+
+#save sheep-vertical to a ppm file
+save res/sheep-vertical.ppm sheep-vertical
+
+#save sheep-horizontal to a ppm file
+save res/sheep-horizontal.ppm sheep-horizontal
+
+#save koala-greyscale to a ppm file
+save res/sheep-gs.ppm sheep-greyscale
 
