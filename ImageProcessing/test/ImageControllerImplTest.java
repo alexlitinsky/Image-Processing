@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.io.StringReader;
 import java.util.NoSuchElementException;
 
+import controller.ImageController;
 import controller.ImageControllerImpl;
 import view.ImageTextView;
 
@@ -28,7 +29,43 @@ import static org.junit.Assert.fail;
  */
 public class ImageControllerImplTest {
   Readable input;
-  ImageControllerImpl controller;
+  ImageController controller;
+
+  /**
+   * Method to test the constructor for an image controller. Should be initialized with an empty
+   * map of versions.
+   */
+  @Test
+  public void testConstructor() {
+    // no user input
+    this.input = new StringReader("");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertEquals(0, controller.getVersions().size());
+    // EXCEPTIONS
+    try {
+      this.controller = new ImageControllerImpl(null);
+      controller.playGame();
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Parameters cannot be null", e.getMessage());
+    }
+  }
+
+  /**
+   * Method to test the controller's parsing of inputs. Tested using a mock implementation of the
+   * controller class which adds parsed arguments to the log a log as it reads inputs.
+   */
+  @Test
+  public void testParsing() {
+    this.input = new StringReader("load Images/Koala.ppm koala "
+            + "brighten 10 koala koala-brighter-10");
+    Appendable log = new StringBuilder();
+    this.controller = new ImageControllerImpl.VerifyControllerParsing(input, log);
+    controller.playGame();
+    assertEquals("loadImages/Koala.ppmkoalabrighten10koalakoala-brighter-10",
+            log.toString());
+  }
 
   /**
    * Method to represent testing for the load command. Should read a ppm file and create a new Image
@@ -37,12 +74,6 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testLoad() {
-    // no user input
-    this.input = new StringReader("");
-    this.controller = new ImageControllerImpl(input);
-    controller.playGame();
-    assertEquals(0, controller.getVersions().size());
-
     // valid input
     this.input = new StringReader("load Images/Koala.ppm koala");
     this.controller = new ImageControllerImpl(input);

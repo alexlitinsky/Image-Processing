@@ -1,8 +1,10 @@
 package controller;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Function;
 
@@ -65,7 +67,6 @@ public class ImageControllerImpl implements ImageController {
   @Override
   public void playGame() throws IllegalStateException {
     Scanner scanner = new Scanner(input);
-    int argCount = 0;
     while (scanner.hasNext()) {
       Command c;
       String in = scanner.next();
@@ -91,6 +92,49 @@ public class ImageControllerImpl implements ImageController {
   @Override
   public Map<String, ImageModel> getVersions() {
     return this.versions;
+  }
+
+  public static class VerifyControllerParsing implements ImageController {
+    private final Appendable log;
+    private Readable input;
+
+    /**
+     * Constructor for this mock controller class. Verifies the parsing of inputs by the controller.
+     * @param log the appendable recording what the controller parses
+     */
+    public VerifyControllerParsing(Readable input, Appendable log) {
+      this.input = input;
+      this.log = Objects.requireNonNull(log);
+    }
+
+    /**
+     * Parses the input passed to the controller and adds them to the log.
+     *
+     * @throws IllegalStateException if the controller breaks down
+     */
+    @Override
+    public void playGame() throws IllegalStateException {
+      Scanner scanner = new Scanner(input);
+      while (scanner.hasNext()) {
+        String in = scanner.next();
+        try {
+          log.append(in);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+
+    /**
+     * Gets the versions of images of a specific controller. We don't care about this for parsing
+     * checks.
+     *
+     * @return null as we don't care about the versions of this controller type
+     */
+    @Override
+    public Map<String, ImageModel> getVersions() {
+      return null;
+    }
   }
 
 }
