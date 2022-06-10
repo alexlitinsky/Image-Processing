@@ -1,7 +1,6 @@
 package controller.commands;
 
 import controller.ImageController;
-import controller.ImageControllerImpl;
 import model.modifiers.BlueCompModifier;
 import view.ImageTextView;
 

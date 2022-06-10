@@ -34,9 +34,6 @@ public abstract class ACommand implements Command {
     this.c = c;
     this.newName = newName;
     this.model = this.c.getVersions().get(name);
-//    if (model == null) {
-//      throw new IllegalArgumentException("This name is not in the list of image versions");
-//    }
   }
 
   /**

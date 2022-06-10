@@ -26,16 +26,7 @@ public class ImageTextViewTest {
     img.assignPixels(1, 0, 23, 255, 4);
     img.assignPixels(0, 1, 100, 3, 6);
     img.assignPixels(1, 1, 2, 1, 0);
-//    img.assignPixels(0, 0, 2, 3, 4);
-//    img.assignPixels(1, 0, 23, 255, 4);
-//    img.assignPixels(0, 1, 100, 3, 6);
-//    img.assignPixels(1, 1, 4, 3, 0);
     Appendable out = new StringBuilder();
-
-//    assertEquals(2, img.getPixel(0,0).getRGB()[0]);
-//    assertEquals(23, img.getPixel(1,0).getRGB()[0]);
-//    assertEquals(100, img.getPixel(0,1).getRGB()[0]);
-//    assertEquals(4, img.getPixel(1,1).getRGB()[0]);
 
     // testing string output of RGB view
     TextView view = new ImageTextView(img, out);

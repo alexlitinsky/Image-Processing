@@ -19,7 +19,6 @@ import controller.commands.RedComp;
 import controller.commands.Save;
 import controller.commands.ValueComp;
 import model.ImageModel;
-import model.ImageModelImpl;
 
 /**
  * Class to represent the controller for an image. Takes in a readable input. Has a set list of

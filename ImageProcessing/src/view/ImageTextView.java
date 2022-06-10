@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 
 import model.ImageModel;
-import model.ImageModelImpl;
+
 
 /**
  * Represents an ImageTextView. prints out the pixels of a specific model and destination.

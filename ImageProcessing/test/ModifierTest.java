@@ -13,9 +13,7 @@ import model.modifiers.RedCompModifier;
 import model.modifiers.ValueCompModifier;
 import view.ImageTextView;
 import view.TextView;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 /**
  * Class to represent testing for all of our modifiers. The following modifiers are tested:
