@@ -1,12 +1,14 @@
 import org.junit.Test;
 
 import java.io.StringReader;
+import java.util.NoSuchElementException;
 
 import controller.ImageControllerImpl;
 import view.ImageTextView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -36,6 +38,13 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testLoad() {
+    // no user input
+    this.input = new StringReader("");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertEquals(0, controller.getVersions().size());
+
+    // valid input
     this.input = new StringReader("load Images/Koala.ppm koala");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
@@ -104,6 +113,19 @@ public class ImageControllerImplTest {
             new StringBuilder());
     assertEquals(testView.toString(), saved.toString());
     assertNotEquals(koalaView.toString(), saved.toString());
+    // EXCEPTIONS
+    // invalid command
+    try {
+      this.input = new StringReader("load Images/Koala.ppm koala " +
+              "\n brighten 10 koala saveTest \n"
+              + "save res/saveTest.ppm \n"
+              + "load res/saveTest.ppm loadedSaveTest");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Invalid parameters.", e.getMessage());
+    }
   }
 
   /**
@@ -346,6 +368,7 @@ public class ImageControllerImplTest {
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
     assertEquals(0, controller.getVersions().size());
+    assertTrue(controller.getVersions().isEmpty());
 
     // invalid command case
     try {
@@ -374,6 +397,24 @@ public class ImageControllerImplTest {
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid command.", e.getMessage());
+    }
+    try {
+      this.input = new StringReader("load");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+      fail();
+    } catch (NoSuchElementException e) {
+      assertEquals(NoSuchElementException.class, e.getClass());
+      System.out.println(e.getMessage());
+    }
+    try {
+      this.input = new StringReader("load Images/Koala.ppm");
+      this.controller = new ImageControllerImpl(input);
+      controller.playGame();
+      fail();
+    } catch (NoSuchElementException e) {
+      assertEquals(NoSuchElementException.class, e.getClass());
+      System.out.println(e.getMessage());
     }
   }
 }
