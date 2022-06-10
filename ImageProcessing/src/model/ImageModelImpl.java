@@ -4,9 +4,9 @@ package model;
 import model.modifiers.Modifier;
 
 /**
- * Class to represent an image. An image has a width, height, and an array of pixels. Can construct
- * an image given a valid width and a height. Has a method to assign all the pixels to their valid
- * values. Can retrieve each individual pixel. Can retrieve dimensions of an image.
+ * Class to represent an image. An image has a width, height, and a 2D array of pixels.
+ * Can construct an image given a valid width and a height. Has a method to assign all the pixels
+ * to their valid values. Can retrieve each individual pixel. Can retrieve dimensions of an image.
  */
 public class ImageModelImpl implements ImageModel {
   private final int width;

@@ -24,7 +24,7 @@ public class ImageProcessing {
       }
     }
     if (!fileType.equals("txt")) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("If entering a script, it must be a .txt file");
     }
 
 
