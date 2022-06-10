@@ -17,9 +17,12 @@ public abstract class ACommand implements Command {
    * Constructor for the abstract command class. Consumes a controller to control the command,
    * a name for the model to get from the controller's list of versions, and the new name to give to
    * the model created by running the command.
-   * @param c the controller controlling the command
-   * @param name the name of the model being modified
+   *
+   * @param c       the controller controlling the command
+   * @param name    the name of the model being modified
    * @param newName the name of the new model created from running the command
+   * @throws IllegalArgumentException if any of the parameters are null or if the provided name is
+   *                                  not in the controller's list of versions
    */
   public ACommand(ImageControllerImpl c, String name, String newName)
           throws IllegalArgumentException {
@@ -29,6 +32,9 @@ public abstract class ACommand implements Command {
     this.c = c;
     this.newName = newName;
     this.model = this.c.getVersions().get(name);
+    if (model == null) {
+      throw new IllegalArgumentException("This name is not in the list of image versions");
+    }
   }
 
   /**

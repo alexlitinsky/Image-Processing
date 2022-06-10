@@ -33,7 +33,10 @@ public class Save implements Command {
     }
     this.filename = filename;
     Appendable app = new StringBuilder();
-    this.model = c.getVersions().get(name);
+      this.model = c.getVersions().get(name);
+    if (this.model == null) {
+      throw new IllegalArgumentException("This name is not in the list of image versions");
+    }
     this.view = new ImageTextView(this.model, app);
   }
 
