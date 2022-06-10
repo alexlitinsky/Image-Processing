@@ -12,6 +12,7 @@ public class ValueCompModifier implements Modifier {
    * A Constructor for a value-component object.
    */
   public ValueCompModifier() {
+    // no fields to initialize
   }
 
   @Override

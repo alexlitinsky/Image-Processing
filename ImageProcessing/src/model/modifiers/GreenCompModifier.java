@@ -11,6 +11,7 @@ public class GreenCompModifier implements Modifier {
    * Constructs a green modifier object.
    */
   public GreenCompModifier() {
+    // no fields to be initialized
   }
 
   @Override

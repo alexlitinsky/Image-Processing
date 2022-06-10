@@ -12,5 +12,5 @@ public interface Command {
   /**
    * Executes a command.
    */
-  void go() throws FileNotFoundException;
+  void commandApply() throws FileNotFoundException;
 }

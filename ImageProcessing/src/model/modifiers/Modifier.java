@@ -8,7 +8,7 @@ import model.ImageModel;
  */
 public interface Modifier {
   /**
-   * Applies a modifier to an image
+   * Applies a modifier to an image.
    *
    * @param model the original image
    */

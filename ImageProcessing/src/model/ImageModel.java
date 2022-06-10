@@ -15,12 +15,10 @@ public class ImageModel {
 
   /**
    * Constructor which makes a model for an image using a 2D array of pixels.
-   * <p>
-   * //@param name   the name for this model of an image
    *
    * @param width  the width of the image
    * @param height the height of the image
-   * @throws IllegalArgumentException if
+   * @throws IllegalArgumentException if the width or height is invalid
    */
   public ImageModel(int width, int height) throws IllegalArgumentException {
     if (width <= 0 || height <= 0) {
@@ -32,6 +30,8 @@ public class ImageModel {
   }
 
   /**
+   * Assigns the given RBG values to this pixel in this position.
+   *
    * @param x the x coordinate
    * @param y the y coordinate
    * @param r the red color value
@@ -48,7 +48,7 @@ public class ImageModel {
   // might need to change canvas size in the future
 
   /**
-   * Creates a new image given a modifier
+   * Creates a new image given a modifier.
    *
    * @param mod the modifier being used
    * @return the new image

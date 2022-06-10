@@ -28,7 +28,7 @@ public class BlueComp extends ACommand {
    * and puts the modified version in the map of versions under the new name.
    */
   @Override
-  public void go() {
+  public void commandApply() {
     c.getVersions().put(newName, model.newModdedImage(new BlueCompModifier()));
     ImageTextView view = new ImageTextView(c.getVersions().get(newName), new StringBuilder());
   }

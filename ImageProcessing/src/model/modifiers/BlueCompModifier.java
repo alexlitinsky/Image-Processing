@@ -11,6 +11,7 @@ public class BlueCompModifier implements Modifier {
    * Initializes a BlueComp Modifier.
    */
   public BlueCompModifier() {
+    // no arguments to be given
   }
 
   @Override

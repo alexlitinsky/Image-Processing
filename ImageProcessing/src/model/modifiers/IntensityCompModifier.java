@@ -11,6 +11,7 @@ public class IntensityCompModifier implements Modifier {
    * Constructs an intensity modifier object.
    */
   public IntensityCompModifier() {
+    // no fields to initialize
   }
 
   @Override
