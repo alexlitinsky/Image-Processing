@@ -1,5 +1,7 @@
 import org.junit.Test;
+
 import model.Pixel;
+
 import static org.junit.Assert.assertEquals;
 
 /**
