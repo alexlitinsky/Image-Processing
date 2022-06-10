@@ -18,7 +18,7 @@ import controller.commands.LumaComp;
 import controller.commands.RedComp;
 import controller.commands.Save;
 import controller.commands.ValueComp;
-import model.ImageModel;
+import model.ImageModelImpl;
 
 /**
  * Class to represent the controller for an image. Takes in a readable input. Has a set list of
@@ -27,7 +27,7 @@ import model.ImageModel;
 public class ImageControllerImpl {
   private final Readable input;
   private final Map<String, Function<Scanner, Command>> allCommands;
-  private Map<String, ImageModel> versions;
+  private Map<String, ImageModelImpl> versions;
 
   /**
    * Constructor for this implementation of an image controller.
@@ -87,7 +87,7 @@ public class ImageControllerImpl {
    *
    * @return the versions of the models
    */
-  public Map<String, ImageModel> getVersions() {
+  public Map<String, ImageModelImpl> getVersions() {
     return this.versions;
   }
 

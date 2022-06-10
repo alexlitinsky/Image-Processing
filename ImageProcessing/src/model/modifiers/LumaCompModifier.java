@@ -1,6 +1,6 @@
 package model.modifiers;
 
-import model.ImageModel;
+import model.ImageModelImpl;
 
 /**
  * Represents a luma component modifier. Changes the new models' rgb values to
@@ -16,11 +16,11 @@ public class LumaCompModifier implements Modifier {
   }
 
   @Override
-  public ImageModel apply(ImageModel model) throws IllegalArgumentException {
+  public ImageModelImpl apply(ImageModelImpl model) throws IllegalArgumentException {
     if (model == null) {
       throw new IllegalArgumentException("invalid model");
     }
-    ImageModel build = new ImageModel(model.getDimensions()[0], model.getDimensions()[1]);
+    ImageModelImpl build = new ImageModelImpl(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
         int luma = (int) (model.getPixel(i, j).getRGB()[0] * .2126

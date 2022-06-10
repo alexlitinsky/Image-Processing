@@ -90,7 +90,7 @@ public class ImageControllerImplTest {
   }
 
   /**
-   * Method to test the save command. Should take the specified ImageModel and convert it to a PPM
+   * Method to test the save command. Should take the specified ImageModelImpl and convert it to a PPM
    * file, and save that PPM under a specified name.
    * Tested by verifying the creation of a new PPM file and then loading it to make sure that
    * no values are changed in the save/load process.

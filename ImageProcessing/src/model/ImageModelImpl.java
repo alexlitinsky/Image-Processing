@@ -8,7 +8,7 @@ import model.modifiers.Modifier;
  * an image given a valid width and a height. Has a method to assign all the pixels to their valid
  * values. Can retrieve each individual pixel. Can retrieve dimensions of an image.
  */
-public class ImageModel {
+public class ImageModelImpl {
   private final int width;
   private final int height;
   private final Pixel[][] imagePixels;
@@ -20,7 +20,7 @@ public class ImageModel {
    * @param height the height of the image
    * @throws IllegalArgumentException if the width or height is invalid
    */
-  public ImageModel(int width, int height) throws IllegalArgumentException {
+  public ImageModelImpl(int width, int height) throws IllegalArgumentException {
     if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException("Invalid width or height.");
     }
@@ -54,7 +54,7 @@ public class ImageModel {
    * @return the new image
    * @throws IllegalArgumentException if the modifier is null
    */
-  public ImageModel newModdedImage(Modifier mod) throws IllegalArgumentException {
+  public ImageModelImpl newModdedImage(Modifier mod) throws IllegalArgumentException {
     if (mod == null) {
       throw new IllegalArgumentException("Null modifier");
     }

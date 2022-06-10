@@ -1,7 +1,7 @@
 package controller.commands;
 
 import controller.ImageControllerImpl;
-import model.ImageModel;
+import model.ImageModelImpl;
 
 /**
  * Class to represent abstracted command data. Contains the controller accessing and controlling the
@@ -10,7 +10,7 @@ import model.ImageModel;
  */
 public abstract class ACommand implements Command {
   protected final ImageControllerImpl c;
-  protected final ImageModel model;
+  protected final ImageModelImpl model;
   protected final String newName;
 
   /**
