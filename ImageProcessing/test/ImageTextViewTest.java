@@ -9,6 +9,9 @@ import view.TextView;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Contains testing for constructor and all methods in the text view class.
+ */
 public class ImageTextViewTest {
 
   /**

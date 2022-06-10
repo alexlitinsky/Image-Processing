@@ -32,7 +32,8 @@ public class Brighten extends ACommand {
    * and puts the modified version in the map of versions under the new name.
    */
   @Override
-  public void go() {
-    this.c.getVersions().put(this.newName, this.model.newModdedImage(new BrightnessModifier(value)));
+  public void commandApply() {
+    this.c.getVersions().put(this.newName,
+            this.model.newModdedImage(new BrightnessModifier(value)));
   }
 }

@@ -81,7 +81,8 @@ public class ModifierTest {
   }
 
   /**
-   * Method to test brightness modifiers. Should change the RGB values of every pixel by the given amount.
+   * Method to test brightness modifiers. Should change the RGB values of every pixel by the given
+   * amount.
    */
   @Test
   public void testBrightnessModifier() {
@@ -221,7 +222,8 @@ public class ModifierTest {
   }
 
   /**
-   * Method to test the luma comp modifier. Each value should be set to the rounded, weighted luma sum.
+   * Method to test the luma comp modifier. Each value should be set to the rounded, weighted luma
+   * sum.
    */
   @Test
   public void testLumaComponent() {
@@ -249,7 +251,8 @@ public class ModifierTest {
   }
 
   /**
-   * Method to test the value comp modifier. Each value should be set to the highest RGB value pre-modifier.
+   * Method to test the value comp modifier. Each value should be set to the highest RGB value
+   * pre-modifier.
    */
   @Test
   public void testValueComponent() {

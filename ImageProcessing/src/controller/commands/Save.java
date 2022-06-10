@@ -7,7 +7,6 @@ import java.io.IOException;
 import controller.ImageControllerImpl;
 import model.ImageModel;
 import model.Pixel;
-import view.ImageTextView;
 
 /**
  * Class to represent the save command. Running the command takes the current view and writes
@@ -16,7 +15,6 @@ import view.ImageTextView;
 public class Save implements Command {
 
   private final String filename;
-  private final ImageTextView view;
   private final ImageModel model;
 
 
@@ -38,17 +36,17 @@ public class Save implements Command {
     if (this.model == null) {
       throw new IllegalArgumentException("This name is not in the list of image versions");
     }
-    this.view = new ImageTextView(this.model, app);
   }
 
   /**
    * This method actually runs the command, and is required of all command objects.
-   * The method goes through the path string given to it, and searches for just the name of the file.
+   * The method goes through the path string given to it, and searches for just the name of
+   * the file.
    * It then takes this name and writes a new PPM file of the given image
    * with that name in the specified path.
    */
   @Override
-  public void go() {
+  public void commandApply() {
     try {
       File ppm = new File(filename);
       FileWriter ppmWriter = new FileWriter(filename);

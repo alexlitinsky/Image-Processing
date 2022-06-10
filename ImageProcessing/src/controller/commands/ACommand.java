@@ -40,5 +40,5 @@ public abstract class ACommand implements Command {
   /**
    * Method to run this command. All commands must have this method.
    */
-  public abstract void go();
+  public abstract void commandApply();
 }

@@ -74,7 +74,7 @@ public class ImageControllerImpl {
       } else {
         c = cmd.apply(scanner);
         try {
-          c.go();
+          c.commandApply();
         } catch (FileNotFoundException e) {
           throw new RuntimeException(e);
         }

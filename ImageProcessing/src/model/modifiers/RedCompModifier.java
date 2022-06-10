@@ -12,6 +12,7 @@ public class RedCompModifier implements Modifier {
    * A Constructor for a red-component object.
    */
   public RedCompModifier() {
+    // no fields to initialize
   }
 
   @Override

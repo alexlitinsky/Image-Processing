@@ -12,6 +12,7 @@ public class LumaCompModifier implements Modifier {
    * Constructs a luma modifier object.
    */
   public LumaCompModifier() {
+    // no fields to initialize
   }
 
   @Override

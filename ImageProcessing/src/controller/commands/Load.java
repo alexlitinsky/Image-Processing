@@ -7,15 +7,17 @@ import utilities.ImageUtil;
 import view.ImageTextView;
 
 /**
- * Class to represent the command to load an image from a given file. This command instantiates an ImageUtil
- * and calls readPPM() to read the specified PPM file, which returns a new Image object representing that PPM file.
+ * Class to represent the command to load an image from a given file.
+ * This command instantiates an ImageUtil
+ * and calls readPPM() to read the specified PPM file, which returns a new Image
+ * object representing that PPM file.
  */
 public class Load implements Command {
   String newName;
   String source;
   ImageControllerImpl c;
 
-  // Constructor for the load command. Consumes
+  // Constructor for the load command. Consumes a source, new name and controller.
   public Load(String source, String newName, ImageControllerImpl c)
           throws IllegalArgumentException {
     if (source == null || newName == null || c == null) {
@@ -31,7 +33,7 @@ public class Load implements Command {
    * file generating an image, and puts it in the map of versions under the new name.
    */
   @Override
-  public void go() {
+  public void commandApply() {
     try {
       if (c.getVersions().containsKey(newName)) {
         c.getVersions().replace(newName, ImageUtil.readPPM(source));
