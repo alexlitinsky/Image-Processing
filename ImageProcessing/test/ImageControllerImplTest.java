@@ -72,6 +72,13 @@ public class ImageControllerImplTest {
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid command.", e.getMessage());
     }
+    // test overriding the same key
+    this.input = new StringReader("load Images/Koala.ppm koala " +
+            "load Images/koala-brighter.ppm koala");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertEquals(1, controller.getVersions().size());
+    assertTrue(controller.getVersions().containsKey("koala"));
   }
 
   /**
@@ -85,8 +92,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/Koala.ppm koala " +
             "\n brighten 10 koala saveTest \n"
             + "save res/saveTest.ppm saveTest\n"
-            + "load res/saveTest.ppm loadedSaveTest "
-            + "load res/saveTest.ppm koala");
+            + "load res/saveTest.ppm loadedSaveTest");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
     ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
@@ -97,9 +103,7 @@ public class ImageControllerImplTest {
     ImageTextView saved = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
             new StringBuilder());
     assertEquals(testView.toString(), saved.toString());
-    ImageTextView newKoalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    assertNotEquals(koalaView.toString(), newKoalaView.toString());
+    assertNotEquals(koalaView.toString(), saved.toString());
   }
 
   /**
@@ -324,14 +328,6 @@ public class ImageControllerImplTest {
             new ImageTextView(controller.getVersions().get("koala-value"), new StringBuilder());
     assertNotEquals(koalaView.toString(), testView.toString());
     assertEquals(testView.toString(), value.toString());
-  }
-
-  /**
-   * Method to test that playGame() works as expected and correctly runs the game.
-   */
-  @Test
-  public void testPlayGame() {
-
   }
 
   /**
