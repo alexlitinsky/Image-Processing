@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import model.modifiers.Modifier;
 
 /**
@@ -40,4 +42,22 @@ public interface ImageModel {
    * @return an array of dimensions (ints)
    */
   int[] getDimensions();
+
+  /**
+   * Gets the image from a model.
+   * @return returns a 2d array of pixels (the image)
+   */
+  Pixel[][] getImage();
+
+  /**
+   * Finds a particular pixel in an image.
+   * @return the coordinates of the pixel
+   */
+  int[] findPixel(Pixel p);
+
+  /**
+   * Converts the image of pixels into a singular list.
+   * @return a list of pixels
+   */
+  List<Pixel> convertToList();
 }

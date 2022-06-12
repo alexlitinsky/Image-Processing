@@ -1,6 +1,10 @@
 package model;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import model.modifiers.Modifier;
 
 /**
@@ -88,5 +92,38 @@ public class ImageModelImpl implements ImageModel {
   public int[] getDimensions() {
     return new int[]{this.width, this.height};
   }
+
+  @Override
+  public Pixel[][] getImage() {
+    Pixel[][] deepCopy = new Pixel[imagePixels.length][];
+    for (int i = 0; i < imagePixels.length; i++) {
+      deepCopy[i] = Arrays.copyOf(imagePixels[i], imagePixels[i].length);
+    }
+    return deepCopy;
+  }
+
+  @Override
+  public int[] findPixel(Pixel p) {
+    for (int i = 0; i < imagePixels[0].length; i++) {
+      for (int j = 0; j < imagePixels.length; j++) {
+        if (imagePixels[i][j] == p) {
+          return new int[] {i, j};
+        }
+      }
+    }
+    throw new IllegalArgumentException("Couldn't find pixel.");
+  }
+
+  @Override
+  public List<Pixel> convertToList() {
+    List<Pixel> list = new ArrayList<Pixel>();
+    for (int i = 0; i < imagePixels[0].length; i++) {
+      for (int j = 0; j < imagePixels.length; j++) {
+        list.add(this.getPixel(i, j));
+      }
+    }
+    return list;
+  }
+
 
 }

@@ -9,4 +9,12 @@ public interface Pixel {
    * @return an array of ints including the rgb values
    */
   int[] getRGB();
+
+  double[] applyToAll(double val);
+
+  double applyToR(double val);
+
+  double applyToG(double val);
+
+  double applyToB(double val);
 }

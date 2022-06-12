@@ -35,4 +35,26 @@ public class PixelImpl implements Pixel {
   public int[] getRGB() {
     return new int[]{this.red, this.green, this.blue};
   }
+
+  @Override
+
+  public double[] applyToAll(double val) {
+    return new double[] {val * this.red, val * this.green, val * this.blue};
+  }
+
+  @Override
+  public double applyToR(double val) {
+    return this.red * val;
+  }
+
+  @Override
+  public double applyToG(double val) {
+    return this.green * val;
+  }
+
+  @Override
+  public double applyToB(double val) {
+    return this.blue * val;
+  }
+
 }
