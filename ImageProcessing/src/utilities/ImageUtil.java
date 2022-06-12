@@ -90,16 +90,19 @@ public class ImageUtil {
 
         return image;
       case "png":
+      case "jpeg":
+      case "jpg":
+      case "bmp":
         try {
           BufferedImage img = ImageIO.read(new File(filename));
-          ImageModel pngImage = new ImageModelImpl(img.getWidth(), img.getHeight());
+          ImageModel typeImage = new ImageModelImpl(img.getWidth(), img.getHeight());
           for (int i = 0; i < img.getWidth(); i++) {
             for (int j = 0; j < img.getHeight(); j++) {
               Color col = new Color(img.getRGB(i, j));
-              pngImage.assignPixels(i, j, col.getRed(), col.getGreen(), col.getBlue());
+              typeImage.assignPixels(i, j, col.getRed(), col.getGreen(), col.getBlue());
             }
           }
-          return pngImage;
+          return typeImage;
         } catch (IOException e) {
           throw new RuntimeException(e);
         }

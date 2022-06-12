@@ -446,8 +446,8 @@ public class ImageControllerImplTest {
 
   @Test
   public void testBlur() {
-    this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-filter" +
-            " save Images/nyc-filter.ppm nyc-filter");
+    this.input = new StringReader("load Images/nyc.png nyc \n blur nyc nyc-filter" +
+            " save res/nyc-filter4.bmp nyc-filter");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
 
