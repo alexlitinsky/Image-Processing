@@ -10,11 +10,31 @@ public interface Pixel {
    */
   int[] getRGB();
 
+  /**
+   * Applies a transformation to all channels of a pixel.
+   * @param val the value being applied
+   * @return an array of the new pixels
+   */
   double[] applyToAll(double val);
 
+  /**
+   * Applies a transformation to the red channel of a pixel.
+   * @param val the value being applied
+   * @return the new red pixel value
+   */
   double applyToR(double val);
 
+  /**
+   * Applies a transformation to the red channel of a pixel.
+   * @param val the value being applied
+   * @return the new red pixel value
+   */
   double applyToG(double val);
 
+  /**
+   * Applies a transformation to the red channel of a pixel.
+   * @param val the value being applied
+   * @return the new red pixel value
+   */
   double applyToB(double val);
 }

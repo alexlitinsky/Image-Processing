@@ -44,12 +44,6 @@ public interface ImageModel {
   int[] getDimensions();
 
   /**
-   * Gets the image from a model.
-   * @return returns a 2d array of pixels (the image)
-   */
-  Pixel[][] getImage();
-
-  /**
    * Finds a particular pixel in an image.
    * @return the coordinates of the pixel
    */
