@@ -6,7 +6,7 @@ package model.modifiers;
 public class BlurModifier extends AFilter {
 
   /**
-   * A constructor for blurring an image.
+   * Constructor for a blue modifier object.
    * @throws IllegalArgumentException if any of the entries of the kernel are odd
    */
   public BlurModifier() throws IllegalArgumentException {

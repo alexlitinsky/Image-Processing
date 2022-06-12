@@ -3,20 +3,26 @@ import org.junit.Test;
 import model.ImageModel;
 import model.ImageModelImpl;
 import model.modifiers.BlueCompModifier;
+import model.modifiers.BlurModifier;
 import model.modifiers.BrightnessModifier;
 import model.modifiers.FlipModifier;
 import model.modifiers.GreenCompModifier;
+import model.modifiers.GreyscaleModifier;
 import model.modifiers.IntensityCompModifier;
 import model.modifiers.LumaCompModifier;
 import model.modifiers.Modifier;
 import model.modifiers.RedCompModifier;
+import model.modifiers.SepiaModifier;
+import model.modifiers.SharpenModifier;
 import model.modifiers.ValueCompModifier;
 import view.ImageTextView;
 import view.TextView;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Class to represent testing for all of our modifiers. The following modifiers are tested:
+ * COMPONENT MODIFIERS
  * blue component
  * brightness
  * flip (vertical & horizontal)
@@ -25,6 +31,14 @@ import static org.junit.Assert.assertEquals;
  * luma component
  * red component
  * value component
+ *
+ * FILTER MODIFIERS
+ * blur
+ * sharpen
+ *
+ * TRANSFORM MODIFIERS
+ * greyscale modifier
+ * sepia modifier
  */
 public class ModifierTest {
   private ImageModel img;
@@ -111,11 +125,6 @@ public class ModifierTest {
     for (int i : this.img.getPixel(0, 0).getRGB()) {
       assertEquals(0, i);
     }
-
-    // absolutely invalid brightness value checks - invalid no matter the current RGB values
-
-    // locally invalid brightness value checks - could be valid modifier, but invalid in this case
-
   }
 
   /**
@@ -231,5 +240,98 @@ public class ModifierTest {
     for (int i : this.img.getPixel(0, 0).getRGB()) {
       assertEquals(3, i);
     }
+  }
+
+  /**
+   * Method to test the blur filter modifier. Each pixel's RGB values should be changed according
+   * to the blur filter modifier's formula.
+   */
+  @Test
+  public void testBlur() {
+    initModel2x2();
+    // pre-modifier check
+    ImageTextView view = new ImageTextView(this.img, out);
+    assertEquals("(0, 0, 0) (1, 1, 1) \n"
+            + "(2, 2, 2) (3, 3, 3) ", view.toString());
+    Modifier mod = new BlurModifier();
+    this.img = mod.apply(this.img);
+    // post-modifier check
+    ImageTextView view2 = new ImageTextView(this.img, out);
+    assertEquals("(0, 0, 0) (0, 0, 0) \n"
+            + "(0, 0, 0) (1, 1, 1) ", view2.toString());
+  }
+
+  /**
+   * Method to test the sharpen filter modifier. Each pixel's RGB values should be changed according
+   * to the sharpen modifier's formula.
+   */
+  @Test
+  public void testSharpen() {
+    initModel2x2();
+    // pre-modifier check
+    ImageTextView view = new ImageTextView(this.img, out);
+    assertEquals("(0, 0, 0) (1, 1, 1) \n"
+            + "(2, 2, 2) (3, 3, 3) ", view.toString());
+    Modifier mod = new SharpenModifier();
+    this.img = mod.apply(this.img);
+    // post-modifier check
+    ImageTextView view2 = new ImageTextView(this.img, out);
+    assertEquals("(1, 1, 1) (2, 2, 2) \n"
+            + "(3, 3, 3) (3, 3, 3) ", view2.toString());
+  }
+
+  /**
+   * Method to test the greyscale transform modifier. Each pixel's RGB values should be changed
+   * according to the greyscale modifier's formula.
+   */
+  @Test
+  public void testGreyscale() {
+    // Case 1: all pixels are already grey
+    initModel2x2();
+    // pre-modifier check
+    ImageTextView view = new ImageTextView(this.img, out);
+    assertEquals("(0, 0, 0) (1, 1, 1) \n"
+            + "(2, 2, 2) (3, 3, 3) ", view.toString());
+    Modifier mod = new GreyscaleModifier();
+    this.img = mod.apply(this.img);
+    // post-modifier check - should be no change as all pixels started as shades of grey
+    ImageTextView view2 = new ImageTextView(this.img, out);
+    assertEquals(view.toString(), view2.toString());
+
+    // Case 2: pixels are not already grey
+    this.img = new ImageModelImpl(2, 2);
+    this.img.assignPixels(0, 0, 1, 2, 3);
+    this.img.assignPixels(1, 0, 4, 5, 6);
+    this.img.assignPixels(0, 1, 7, 8, 9);
+    this.img.assignPixels(1, 1, 10, 11, 12);
+    // pre-modifier check
+    ImageTextView view3 = new ImageTextView(this.img, out);
+    assertEquals("(1, 2, 3) (4, 5, 6) \n"
+            + "(7, 8, 9) (10, 11, 12) ", view3.toString());
+    this.img = mod.apply(this.img);
+    // post-modifier check
+    ImageTextView view4 = new ImageTextView(this.img, out);
+    assertNotEquals(view3.toString(), view4.toString());
+    assertEquals("(1, 1, 1) (4, 4, 4) \n"
+            + "(7, 7, 7) (10, 10, 10) ", view4.toString());
+  }
+
+  /**
+   * Method to test the sepia transform modifier. Each pixel's RGB values should be changed
+   * according to the sepia modifier's formula.
+   */
+  @Test
+  public void testSepia() {
+    initModel2x2();
+    // pre-modifier check
+    ImageTextView view = new ImageTextView(this.img, out);
+    assertEquals("(0, 0, 0) (1, 1, 1) \n"
+            + "(2, 2, 2) (3, 3, 3) ", view.toString());
+    Modifier mod = new SepiaModifier();
+    this.img = mod.apply(this.img);
+    // post-modifier check
+    ImageTextView view2 = new ImageTextView(this.img, out);
+    assertEquals("(0, 0, 0) (1, 1, 0) \n"
+            + "(2, 2, 1) (4, 3, 2) ", view2.toString());
   }
 }

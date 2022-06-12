@@ -6,7 +6,7 @@ package model.modifiers;
 public class GreyscaleModifier extends ATransform {
 
   /**
-   * A constructor for greyscale.
+   * A constructor for a grayscale modifier object. Default kernel is the luma of an image.
    * @throws IllegalArgumentException if any of the entries of the kernel are odd
    */
   public GreyscaleModifier() throws IllegalArgumentException {

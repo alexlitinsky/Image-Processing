@@ -7,6 +7,9 @@ import model.ImageModel;
 import model.ImageModelImpl;
 import model.Pixel;
 
+/**
+ * Class to represent abstracted form modifiers.
+ */
 public abstract class AForm implements Modifier {
 
   protected ImageModel build;
