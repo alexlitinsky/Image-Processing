@@ -11,19 +11,17 @@ public abstract class AFilter extends AForm {
     super(kernel);
   }
 
-  protected double[] genNewRGBs(ImageModel mod, Pixel p) {
+  protected double[] genNewRGBs(ImageModel mod, Pixel p, int[] coords) {
     double[] applyRGB = {0.0, 0.0, 0.0};
     int key = (kernel.length - 1) / 2;
-    int x = mod.findPixel(p)[0];
-    int y = mod.findPixel(p)[1];
-    List<Pixel> convList = mod.convertToList();
+    int x = coords[0];
+    int y = coords[1];
     int kInd = 0;
     for (int i = -1 * key; i <= key; i++) {
       for (int j = -1 * key; j <= key; j++) {
-        int ind = ((y + i) * mod.getDimensions()[0]) + (x + j);
-        if (!(ind < 0 || ind >= convList.size() || (x + j < 0) || (y + i < 0)
-        || (x + j) > mod.getDimensions()[0] || (y + i) > mod.getDimensions()[1] -1)) {
-          double[] cur = convList.get(ind).applyToAll(linearKernel.get(kInd));
+        int[] ind = new int[]{x + j, y + i};
+        if (!(ind[0] < 0 || ind[1] < 0 || ind[0] >= mod.getDimensions()[0] || ind[1] >= mod.getDimensions()[1])) {
+          double[] cur = mod.getPixel(ind[0], ind[1]).applyToAll(linearKernel.get(kInd));
           for (int k = 0; k < applyRGB.length; k++) {
             applyRGB[k] += cur[k];
           }
@@ -31,12 +29,17 @@ public abstract class AFilter extends AForm {
         kInd++;
       }
     }
-    return applyRGB;
+    return new double[]{
+            Math.max(Math.min(applyRGB[0], 255), 0),
+            Math.max(Math.min(applyRGB[1], 255), 0), Math.max(Math.min(applyRGB[2], 255), 0)
+    };
+
+
   }
 
   @Override
-  protected double[] applyToEachPixel(Pixel p) {
-    return this.genNewRGBs(build, p);
+  protected double[] applyToEachPixel(Pixel p, int[] coords) {
+    return this.genNewRGBs(oldModel, p, coords);
   }
 
 

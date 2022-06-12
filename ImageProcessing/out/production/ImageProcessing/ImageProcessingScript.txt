@@ -16,6 +16,21 @@ horizontal-flip sheep sheep-horizontal
 #create a greyscale using only the value component, as the image sheep-greyscale
 value-component sheep sheep-greyscale
 
+#create a greyscale using only the red component, as the image sheep-greyscale-red
+red-component sheep sheep-greyscale-red
+
+#create a greyscale using only the green component, as the image sheep-greyscale-green
+green-component sheep sheep-greyscale-green
+
+#create a greyscale using only the blue component, as the image sheep-greyscale-blue
+blue-component sheep sheep-greyscale-blue
+
+#create a greyscale using only the luma component, as the image sheep-greyscale-luma
+luma-component sheep sheep-greyscale-luma
+
+#create a greyscale using only the intensity component, as the image sheep-greyscale-intensity
+intensity-component sheep sheep-greyscale-intensity
+
 #save sheep-brighter to a ppm file
 save res/sheep-brighter.ppm sheep-brighter
 

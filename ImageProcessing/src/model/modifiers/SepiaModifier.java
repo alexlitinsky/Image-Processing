@@ -3,13 +3,13 @@ package model.modifiers;
 /**
  * Represents an image transformation with a sepia filter.
  */
-public class Sepia extends ATransform {
+public class SepiaModifier extends ATransform {
 
   /**
    * A constructor for sepia.
    * @throws IllegalArgumentException if the kernel array entries are odd
    */
-  public Sepia() throws IllegalArgumentException {
+  public SepiaModifier() throws IllegalArgumentException {
     super(new double[][]{
             {0.393, 0.769, 0.189},
             {0.349, 0.686, 0.168},
@@ -21,7 +21,7 @@ public class Sepia extends ATransform {
    * @param kernel the kernel (filter) of seipa being appled
    * @throws IllegalArgumentException if the kernel array entries are odd
    */
-  public Sepia(double[][] kernel) throws IllegalArgumentException {
+  public SepiaModifier(double[][] kernel) throws IllegalArgumentException {
     super(kernel);
   }
 }

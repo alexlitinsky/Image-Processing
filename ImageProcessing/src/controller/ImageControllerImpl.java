@@ -9,16 +9,20 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import controller.commands.BlueComp;
+import controller.commands.Blur;
 import controller.commands.Brighten;
 import controller.commands.Command;
 import controller.commands.FlipHorizontal;
 import controller.commands.FlipVertical;
 import controller.commands.GreenComp;
+import controller.commands.Greyscale;
 import controller.commands.IntensityComp;
 import controller.commands.Load;
 import controller.commands.LumaComp;
 import controller.commands.RedComp;
 import controller.commands.Save;
+import controller.commands.Sepia;
+import controller.commands.Sharpen;
 import controller.commands.ValueComp;
 import model.ImageModel;
 
@@ -56,6 +60,11 @@ public class ImageControllerImpl implements ImageController {
     allCommands.put("blue-component", s -> new BlueComp(this, s.next(), s.next()));
     allCommands.put("luma-component", s -> new LumaComp(this, s.next(), s.next()));
     allCommands.put("intensity-component", s -> new IntensityComp(this, s.next(), s.next()));
+    allCommands.put("greyscale", s -> new Greyscale(this, s.next(), s.next()));
+    allCommands.put("sepia", s -> new Sepia(this, s.next(), s.next()));
+    allCommands.put("sharpen", s -> new Sharpen(this, s.next(), s.next()));
+    allCommands.put("blur", s -> new Blur(this, s.next(), s.next()));
+
   }
 
   /**

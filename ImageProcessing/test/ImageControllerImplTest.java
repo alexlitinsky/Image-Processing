@@ -443,4 +443,15 @@ public class ImageControllerImplTest {
       System.out.println(e.getMessage());
     }
   }
+
+  @Test
+  public void testBlur() {
+    this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-filter" +
+            " save Images/nyc-filter.ppm nyc-filter");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+
+  }
+
+
 }

@@ -19,10 +19,13 @@ public abstract class ATransform extends AForm {
     applyRGB[2] = p.applyToR(linearKernel.get(6)) + p.applyToG(linearKernel.get(7))
             + p.applyToB(linearKernel.get(8));
 
-    return applyRGB;
+    return new double[]{
+            Math.max(Math.min(applyRGB[0], 255), 0),
+            Math.max(Math.min(applyRGB[1], 255), 0), Math.max(Math.min(applyRGB[2], 255), 0)
+    };
   }
 
-  public double[] applyToEachPixel(Pixel p) {
+  public double[] applyToEachPixel(Pixel p, int[] coords) {
     return this.genNewRGBs(p);
 
   }

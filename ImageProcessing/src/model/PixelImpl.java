@@ -38,22 +38,17 @@ public class PixelImpl implements Pixel {
 
   @Override
   public double[] applyToAll(double val) {
-    return new double[] {val * this.red, val * this.green, val * this.blue};
+    return new double[] { this.red * val, this.green * val, this.blue * val};
   }
 
   @Override
-  public double applyToR(double val) {
-    return this.red * val;
+  public double applyToR(double val) { return Math.max(Math.min(this.red * val, 255), 0); }
+
+  @Override
+  public double applyToG(double val) { return Math.max(Math.min(this.green * val, 255), 0);
   }
 
   @Override
-  public double applyToG(double val) {
-    return this.green * val;
-  }
-
-  @Override
-  public double applyToB(double val) {
-    return this.blue * val;
-  }
+  public double applyToB(double val) { return Math.max(Math.min(this.red * val, 255), 0); }
 
 }

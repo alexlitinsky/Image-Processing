@@ -10,11 +10,12 @@ import model.Pixel;
 public abstract class AForm implements Modifier {
 
   protected ImageModel build;
+  protected ImageModel oldModel;
   protected double[][] kernel;
   protected List<Double> linearKernel;
 
   public AForm(double[][] kernel) throws IllegalArgumentException {
-    if (this.isOddKernel(kernel)) { throw new IllegalArgumentException("Invalid kernel."); }
+    if (!this.isOddKernel(kernel)) { throw new IllegalArgumentException("Invalid kernel."); }
     this.kernel = kernel;
     this.linearKernel = this.linearize(kernel);
   }
@@ -31,10 +32,11 @@ public abstract class AForm implements Modifier {
   }
 
   public ImageModel apply(ImageModel model) throws IllegalArgumentException {
+    this.oldModel = model;
     this.build = new ImageModelImpl(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
-        double[] pixels = applyToEachPixel(model.getPixel(i, j));
+        double[] pixels = this.applyToEachPixel(model.getPixel(i, j), new int[] {i, j});
         build.assignPixels(i, j, (int) pixels[0], (int) pixels[1], (int) pixels[2]);
       }
     }
@@ -46,7 +48,7 @@ public abstract class AForm implements Modifier {
     return kernel.length % 2 != 0 && kernel[0].length % 2 != 0;
   }
 
-  protected abstract double[] applyToEachPixel(Pixel p);
+  protected abstract double[] applyToEachPixel(Pixel p, int[] coords);
 
 
 }
