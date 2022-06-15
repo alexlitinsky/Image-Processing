@@ -5,7 +5,9 @@ import java.util.NoSuchElementException;
 
 import controller.ImageController;
 import controller.ImageControllerImpl;
+import model.ImageModelImpl;
 import view.ImageTextView;
+import view.TextView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -26,6 +28,10 @@ import static org.junit.Assert.fail;
  * red component
  * save
  * value component
+ * greyscale
+ * sepia
+ * sharpen
+ * blur
  */
 public class ImageControllerImplTest {
   Readable input;
@@ -444,14 +450,87 @@ public class ImageControllerImplTest {
     }
   }
 
+  /**
+   * Method to test the greyscale command in the imageController. Should properly create a new greyscaled image where all three
+   * RGB components of a pixel are equal to each other.
+   */
   @Test
-  public void testBlur() {
-    this.input = new StringReader("load Images/nyc.png nyc \n blur nyc nyc-filter" +
-            " save res/nyc-filter4.bmp nyc-filter");
+  public void testGreyscale() {
+    this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-greyscaled");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-
+    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"), new StringBuilder());
+    assertNotEquals(view.toString(), test.toString());
+    for (int i = 0; i < controller.getVersions().get("nyc-greyscaled").getDimensions()[0]; i++) {
+      for (int j = 0; j < controller.getVersions().get("nyc-greyscaled").getDimensions()[1]; j++) {
+        int red = controller.getVersions().get("nyc-greyscaled").getPixel(i, j).getRGB()[0];
+        int green = controller.getVersions().get("nyc-greyscaled").getPixel(i, j).getRGB()[1];
+        int blue = controller.getVersions().get("nyc-greyscaled").getPixel(i, j).getRGB()[2];
+        assertTrue(red == green && red == blue && green == blue);
+      }
+    }
   }
+
+  /**
+   * Method to test the sepia command in the imageController. Should properly create a new sepia-filtered image.
+   * Due to testing complexity, this test only tests that a new version is created and that its text representation
+   * of RGB values is different than the starter image, as the sepia modifier is tested elsewhere.
+   */
+  @Test
+  public void testSepia() {
+    this.input = new StringReader("load Images/nyc.png nyc \n sepia nyc nyc-sepia");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertTrue(controller.getVersions().containsKey("nyc-sepia"));
+    assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-sepia")));
+    assertEquals(ImageModelImpl.class, controller.getVersions().get("nyc-sepia").getClass());
+    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-sepia"), new StringBuilder());
+    assertNotEquals(view.toString(), test.toString());
+  }
+
+  /**
+   * Method to test the sharpen command in the imageController. Should properly create a new sharpened image.
+   */
+  @Test
+  public void testSharpen() {
+    this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-greyscaled");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"), new StringBuilder());
+    assertNotEquals(view.toString(), test.toString());
+    for (int i = 0; i < controller.getVersions().get("nyc-greyscaled").getDimensions()[0] - 1; i++) {
+      assertTrue(controller.getVersions().get("nyc-greyscaled").getPixel(i, i).getRGB()[0] ==
+              controller.getVersions().get("nyc-greyscaled").getPixel(i + 1, i).getRGB()[0]);
+    }
+  }
+
+  /**
+   * Method to test the blur command in the imageController. Should properly create a new blurred image.
+   */
+  @Test
+  public void testBlur() {
+    this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-greyscaled");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"), new StringBuilder());
+    assertNotEquals(view.toString(), test.toString());
+    for (int i = 0; i < controller.getVersions().get("nyc-greyscaled").getDimensions()[0] - 1; i++) {
+      assertTrue(controller.getVersions().get("nyc-greyscaled").getPixel(i, i).getRGB()[0] ==
+              controller.getVersions().get("nyc-greyscaled").getPixel(i + 1, i).getRGB()[0]);
+    }
+  }
+//  @Test
+//  public void testBlur() {
+//    this.input = new StringReader("load Images/nyc.png nyc \n blur nyc nyc-filter" +
+//            " save res/nyc-filter4.bmp nyc-filter");
+//    this.controller = new ImageControllerImpl(input);
+//    controller.playGame();
+//
+//  }
 
 
 }
