@@ -5,6 +5,10 @@ import java.util.List;
 import model.ImageModel;
 import model.Pixel;
 
+/**
+ * Class to represent filter modifiers. These modifiers apply a filter to a kernal, changing the look of an image by
+ * manipulating its RGB values. Contains method implementations common to all filters.
+ */
 public abstract class AFilter extends AForm {
 
   public AFilter(double[][] kernel) throws IllegalArgumentException {
