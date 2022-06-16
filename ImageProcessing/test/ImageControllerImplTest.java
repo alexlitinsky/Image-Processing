@@ -451,8 +451,8 @@ public class ImageControllerImplTest {
   }
 
   /**
-   * Method to test the greyscale command in the imageController. Should properly create a new greyscaled image where all three
-   * RGB components of a pixel are equal to each other.
+   * Method to test the greyscale command in the imageController. Should properly create a new
+   * greyscaled image where all three RGB components of a pixel are equal to each other.
    */
   @Test
   public void testGreyscale() {
@@ -460,7 +460,8 @@ public class ImageControllerImplTest {
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
     TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"),
+            new StringBuilder());
     assertNotEquals(view.toString(), test.toString());
     for (int i = 0; i < controller.getVersions().get("nyc-greyscaled").getDimensions()[0]; i++) {
       for (int j = 0; j < controller.getVersions().get("nyc-greyscaled").getDimensions()[1]; j++) {
@@ -473,9 +474,10 @@ public class ImageControllerImplTest {
   }
 
   /**
-   * Method to test the sepia command in the imageController. Should properly create a new sepia-filtered image.
-   * Due to testing complexity, this test only tests that a new version is created and that its text representation
-   * of RGB values is different than the starter image, as the sepia modifier is tested elsewhere.
+   * Method to test the sepia command in the imageController. Should properly create a new
+   * sepia-filtered image. Due to testing complexity, this test only tests that a new version is
+   * created and that its text representation of RGB values is different than the starter image,
+   * as the sepia modifier is tested elsewhere.
    */
   @Test
   public void testSepia() {
@@ -486,51 +488,48 @@ public class ImageControllerImplTest {
     assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-sepia")));
     assertEquals(ImageModelImpl.class, controller.getVersions().get("nyc-sepia").getClass());
     TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-sepia"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-sepia"),
+            new StringBuilder());
     assertNotEquals(view.toString(), test.toString());
   }
 
   /**
-   * Method to test the sharpen command in the imageController. Should properly create a new sharpened image.
+   * Method to test the sharpen command in the imageController. Should properly create a new
+   * sharpened image. Due to testing complexity, this test only tests that a new version is
+   * created and that its text representation of RGB values is different than the starter image,
+   * as the sharpen modifier is tested in the modifier tests.
    */
   @Test
   public void testSharpen() {
-    this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-greyscaled");
+    this.input = new StringReader("load Images/nyc.png nyc \n sharpen nyc nyc-sharpened");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
+    assertTrue(controller.getVersions().containsKey("nyc-sharpened"));
+    assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-sharpened")));
+    assertEquals(ImageModelImpl.class, controller.getVersions().get("nyc-sharpened").getClass());
     TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-sharpened"),
+            new StringBuilder());
     assertNotEquals(view.toString(), test.toString());
-    for (int i = 0; i < controller.getVersions().get("nyc-greyscaled").getDimensions()[0] - 1; i++) {
-      assertTrue(controller.getVersions().get("nyc-greyscaled").getPixel(i, i).getRGB()[0] ==
-              controller.getVersions().get("nyc-greyscaled").getPixel(i + 1, i).getRGB()[0]);
-    }
   }
 
   /**
-   * Method to test the blur command in the imageController. Should properly create a new blurred image.
+   * Method to test the blur command in the imageController. Should properly create a new
+   * blurred image. Due to testing complexity, this test only tests that a new version is
+   * created and that its text representation of RGB values is different than the starter image,
+   * as the blur modifier is tested in the modifier tests.
    */
   @Test
   public void testBlur() {
-    this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-greyscaled");
+    this.input = new StringReader("load Images/nyc.png nyc \n blur nyc nyc-blurred");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
+    assertTrue(controller.getVersions().containsKey("nyc-blurred"));
+    assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-blurred")));
+    assertEquals(ImageModelImpl.class, controller.getVersions().get("nyc-blurred").getClass());
     TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"), new StringBuilder());
+    TextView test = new ImageTextView(controller.getVersions().get("nyc-blurred"),
+            new StringBuilder());
     assertNotEquals(view.toString(), test.toString());
-    for (int i = 0; i < controller.getVersions().get("nyc-greyscaled").getDimensions()[0] - 1; i++) {
-      assertTrue(controller.getVersions().get("nyc-greyscaled").getPixel(i, i).getRGB()[0] ==
-              controller.getVersions().get("nyc-greyscaled").getPixel(i + 1, i).getRGB()[0]);
-    }
   }
-//  @Test
-//  public void testBlur() {
-//    this.input = new StringReader("load Images/nyc.png nyc \n blur nyc nyc-filter" +
-//            " save res/nyc-filter4.bmp nyc-filter");
-//    this.controller = new ImageControllerImpl(input);
-//    controller.playGame();
-//
-//  }
-
-
 }

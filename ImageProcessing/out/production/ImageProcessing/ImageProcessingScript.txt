@@ -13,7 +13,7 @@ vertical-flip sheep sheep-vertical
 #flip sheep image horizontally
 horizontal-flip sheep sheep-horizontal
 
-#create a greyscale using only the value component, as the image sheep-greyscale
+#create a greyscale using only the value component, as the image sheep-greyscale-value
 value-component sheep sheep-greyscale
 
 #create a greyscale using only the red component, as the image sheep-greyscale-red
@@ -31,6 +31,18 @@ luma-component sheep sheep-greyscale-luma
 #create a greyscale using only the intensity component, as the image sheep-greyscale-intensity
 intensity-component sheep sheep-greyscale-intensity
 
+#create a blurred image from a starter image, name it sheep-blurred
+blur sheep sheep-blurred
+
+#create a greyscaled image from a starter image, name it sheep-greyscale
+greyscale sheep sheep-greyscale
+
+#create a sepia-filtered image from a starter image, name it sheep-sepia
+sepia sheep sheep-sepia
+
+#create a sharpened image from a starter image, name it sheep-sharpened
+sharpen sheep sheep-sharpened
+
 #save sheep-brighter to a ppm file
 save res/sheep-brighter.ppm sheep-brighter
 
@@ -43,6 +55,17 @@ save res/sheep-vertical.ppm sheep-vertical
 #save sheep-horizontal to a ppm file
 save res/sheep-horizontal.ppm sheep-horizontal
 
-#save koala-greyscale to a ppm file
+#save sheep-greyscale to a ppm file
 save res/sheep-gs.ppm sheep-greyscale
 
+#save sheep-blurred to a png file
+save res/sheep-blurred.png sheep-blurred
+
+#save sheep-greyscale to a jpeg file
+save res/sheep-greyscale.jpeg sheep-greyscale
+
+#save sheep-sepia to a jpg file
+save res/sheep-sepia.jpg sheep-sepia
+
+#save sheep-sharpened to a bmp file
+save res/sheep-sharpened.bmp sheep-sharpened
