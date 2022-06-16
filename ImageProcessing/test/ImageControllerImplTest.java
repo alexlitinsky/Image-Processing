@@ -135,16 +135,66 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testSave() {
+    // PPM format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.ppm sheep\n"
             + "load res/saveTest.ppm loadedSaveTest");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView sheepView = new ImageTextView(controller.getVersions().get("sheep"),
+    TextView sheepView = new ImageTextView(controller.getVersions().get("sheep"),
             new StringBuilder());
-    ImageTextView saved = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
+    TextView saved = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
             new StringBuilder());
     assertEquals(sheepView.toString(), saved.toString());
+
+    // PNG format
+    this.input = new StringReader("load res/Sheep.ppm sheep \n"
+            + "save res/saveTest.png sheep \n"
+            + "load res/saveTest.png loadedSaveTest");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    TextView sheepView2 = new ImageTextView(controller.getVersions().get("sheep"),
+            new StringBuilder());
+    TextView saved2 = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
+            new StringBuilder());
+    assertEquals(sheepView2.toString(), saved2.toString());
+
+    // JPEG format
+    this.input = new StringReader("load res/Sheep.ppm sheep \n"
+            + "save res/saveTest.jpeg sheep \n"
+            + "load res/saveTest.jpeg test");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    TextView sheepView3 = new ImageTextView(controller.getVersions().get("sheep"),
+            new StringBuilder());
+    TextView saved3 = new ImageTextView(controller.getVersions().get("test"),
+            new StringBuilder());
+    assertEquals(sheepView3.toString(), saved3.toString());
+
+    // JPG format
+    this.input = new StringReader("load res/Sheep.ppm sheep \n"
+            + "save res/saveTest.jpg sheep\n"
+            + "load res/saveTest.jpg loadedSaveTest");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    TextView sheepView4 = new ImageTextView(controller.getVersions().get("sheep"),
+            new StringBuilder());
+    TextView saved4 = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
+            new StringBuilder());
+    assertEquals(sheepView4.toString(), saved4.toString());
+
+    // BMP format
+    this.input = new StringReader("load res/Sheep.ppm sheep \n"
+            + "save res/saveTest.bmp sheep\n"
+            + "load res/saveTest.bmp loadedSaveTest");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    TextView sheepView5 = new ImageTextView(controller.getVersions().get("sheep"),
+            new StringBuilder());
+    TextView saved5 = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
+            new StringBuilder());
+    assertEquals(sheepView5.toString(), saved5.toString());
+
     // EXCEPTIONS
     // invalid command
     try {
@@ -171,11 +221,11 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n blue-component koala testBlue");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testBlueView = new ImageTextView(controller.getVersions().get("testBlue"),
+    TextView testBlueView = new ImageTextView(controller.getVersions().get("testBlue"),
             new StringBuilder());
-    ImageTextView koalaBlueView = new ImageTextView(controller.getVersions().get("koala-blue"),
+    TextView koalaBlueView = new ImageTextView(controller.getVersions().get("koala-blue"),
             new StringBuilder());
     assertNotEquals(koalaView.toString(), testBlueView.toString());
     assertEquals(testBlueView.toString(), koalaBlueView.toString());
@@ -192,11 +242,11 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n brighten 50 koala testBrighter");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testBrightenView = new ImageTextView(controller.getVersions().get("testBrighter"),
+    TextView testBrightenView = new ImageTextView(controller.getVersions().get("testBrighter"),
             new StringBuilder());
-    ImageTextView brightView = new ImageTextView(controller.getVersions().get("koala-brighter"),
+    TextView brightView = new ImageTextView(controller.getVersions().get("koala-brighter"),
             new StringBuilder());
     assertNotEquals(koalaView.toString(), testBrightenView.toString());
     assertEquals(testBrightenView.toString(), brightView.toString());
@@ -247,11 +297,11 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n horizontal-flip koala testHorizontal");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testHorizontal = new ImageTextView(controller.getVersions().get("testHorizontal"),
+    TextView testHorizontal = new ImageTextView(controller.getVersions().get("testHorizontal"),
             new StringBuilder());
-    ImageTextView horizontal = new ImageTextView(controller.getVersions().get("koala-horizontal"),
+    TextView horizontal = new ImageTextView(controller.getVersions().get("koala-horizontal"),
             new StringBuilder());
     assertNotEquals(koalaView.toString(), testHorizontal.toString());
     assertEquals(testHorizontal.toString(), horizontal.toString());
@@ -268,11 +318,11 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n vertical-flip koala testVertical");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testVertical = new ImageTextView(controller.getVersions().get("testVertical"),
+    TextView testVertical = new ImageTextView(controller.getVersions().get("testVertical"),
             new StringBuilder());
-    ImageTextView vertical = new ImageTextView(controller.getVersions().get("koala-vertical"),
+    TextView vertical = new ImageTextView(controller.getVersions().get("koala-vertical"),
             new StringBuilder());
     assertNotEquals(koalaView.toString(), testVertical.toString());
     assertEquals(testVertical.toString(), vertical.toString());
@@ -289,11 +339,11 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n green-component koala testGreen");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testView = new ImageTextView(controller.getVersions().get("testGreen"),
+    TextView testView = new ImageTextView(controller.getVersions().get("testGreen"),
             new StringBuilder());
-    ImageTextView koalaGreenView = new ImageTextView(controller.getVersions().get("koala-green"),
+    TextView koalaGreenView = new ImageTextView(controller.getVersions().get("koala-green"),
             new StringBuilder());
     assertNotEquals(koalaView.toString(), testView.toString());
     assertEquals(testView.toString(), koalaGreenView.toString());
@@ -310,11 +360,11 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n intensity-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+    TextView testView = new ImageTextView(controller.getVersions().get("test"),
             new StringBuilder());
-    ImageTextView intensityView =
+    TextView intensityView =
             new ImageTextView(controller.getVersions().get("koala-intensity"), new StringBuilder());
     assertNotEquals(koalaView.toString(), testView.toString());
     assertEquals(testView.toString(), intensityView.toString());
@@ -331,11 +381,11 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n luma-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+    TextView testView = new ImageTextView(controller.getVersions().get("test"),
             new StringBuilder());
-    ImageTextView luma =
+    TextView luma =
             new ImageTextView(controller.getVersions().get("koala-luma"), new StringBuilder());
     assertNotEquals(koalaView.toString(), testView.toString());
     assertEquals(testView.toString(), luma.toString());
@@ -352,11 +402,11 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n red-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+    TextView testView = new ImageTextView(controller.getVersions().get("test"),
             new StringBuilder());
-    ImageTextView red =
+    TextView red =
             new ImageTextView(controller.getVersions().get("koala-red"), new StringBuilder());
     assertNotEquals(koalaView.toString(), testView.toString());
     assertEquals(testView.toString(), red.toString());
@@ -374,11 +424,11 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n value-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    ImageTextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
+    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
             new StringBuilder());
-    ImageTextView testView = new ImageTextView(controller.getVersions().get("test"),
+    TextView testView = new ImageTextView(controller.getVersions().get("test"),
             new StringBuilder());
-    ImageTextView value =
+    TextView value =
             new ImageTextView(controller.getVersions().get("koala-value"), new StringBuilder());
     assertNotEquals(koalaView.toString(), testView.toString());
     assertEquals(testView.toString(), value.toString());
