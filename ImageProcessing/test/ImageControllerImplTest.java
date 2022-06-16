@@ -80,7 +80,7 @@ public class ImageControllerImplTest {
    */
   @Test
   public void testLoad() {
-    // valid input
+    // valid PPM input
     this.input = new StringReader("load Images/Koala.ppm koala");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
@@ -88,6 +88,19 @@ public class ImageControllerImplTest {
     assertEquals(1024, controller.getVersions().get("koala").getDimensions()[0]);
     assertEquals(768, controller.getVersions().get("koala").getDimensions()[1]);
     assertEquals(1, controller.getVersions().size());
+
+    // valid PNG input
+    this.input = new StringReader("load Images/nyc.png nyc");
+    this.controller = new ImageControllerImpl(input);
+    controller.playGame();
+    assertTrue(controller.getVersions().containsKey("nyc"));
+    assertEquals(500, controller.getVersions().get("nyc").getDimensions()[0]);
+    assertEquals(200, controller.getVersions().get("nyc").getDimensions()[1]);
+    assertEquals(1, controller.getVersions().size());
+    // valid JPEG input
+    // valid JPG input
+    // valid BMP input
+
     // EXCEPTIONS
     // file does not exist
     try {
@@ -160,16 +173,19 @@ public class ImageControllerImplTest {
     assertEquals(sheepView2.toString(), saved2.toString());
 
     // JPEG format
-    this.input = new StringReader("load res/Sheep.ppm sheep \n"
-            + "save res/saveTest.jpeg sheep \n"
+    this.input = new StringReader("load Images/nyc.png nyc \n"
+            + "save res/saveTest.jpeg nyc \n"
             + "load res/saveTest.jpeg test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView sheepView3 = new ImageTextView(controller.getVersions().get("sheep"),
+    assertEquals(controller.getVersions().get("nyc").getDimensions()[0], controller.getVersions().get("test").getDimensions()[0]);
+    assertEquals(controller.getVersions().get("nyc").getDimensions()[1], controller.getVersions().get("test").getDimensions()[1]);
+
+    TextView nycView3 = new ImageTextView(controller.getVersions().get("nyc"),
             new StringBuilder());
     TextView saved3 = new ImageTextView(controller.getVersions().get("test"),
             new StringBuilder());
-    assertEquals(sheepView3.toString(), saved3.toString());
+    assertEquals(nycView3.toString(), saved3.toString());
 
     // JPG format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"

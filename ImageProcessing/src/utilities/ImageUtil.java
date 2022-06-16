@@ -30,7 +30,7 @@ public class ImageUtil {
    * @throws FileNotFoundException    if the file is of the correct format but cannot be found
    * @throws IllegalArgumentException if the file is of the incorrect format or is an invalid file
    */
-  public static ImageModel readPPM(String filename) throws FileNotFoundException,
+  public static ImageModel readFile(String filename) throws FileNotFoundException,
           IllegalArgumentException {
 
     String fileType = "";

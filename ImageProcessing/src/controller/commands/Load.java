@@ -42,9 +42,9 @@ public class Load implements Command {
   public void commandApply() {
     try {
       if (c.getVersions().containsKey(newName)) {
-        c.getVersions().replace(newName, ImageUtil.readPPM(source));
+        c.getVersions().replace(newName, ImageUtil.readFile(source));
       }
-      c.getVersions().put(newName, ImageUtil.readPPM(source));
+      c.getVersions().put(newName, ImageUtil.readFile(source));
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException(e);
     }
