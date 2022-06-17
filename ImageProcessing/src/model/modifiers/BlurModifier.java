@@ -7,6 +7,7 @@ public class BlurModifier extends AFilter {
 
   /**
    * Constructor for a blue modifier object.
+   *
    * @throws IllegalArgumentException if any of the entries of the kernel are odd
    */
   public BlurModifier() throws IllegalArgumentException {
@@ -18,14 +19,13 @@ public class BlurModifier extends AFilter {
 
   /**
    * A custom constructor for blurring an image.
+   *
    * @param kernel the kernel being applied for blurring an image
    * @throws IllegalArgumentException if any of the entries of the kernel are odd
    */
   public BlurModifier(double[][] kernel) throws IllegalArgumentException {
     super(kernel);
   }
-
-
 
 
 }

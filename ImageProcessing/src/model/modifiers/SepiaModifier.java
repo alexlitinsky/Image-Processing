@@ -7,6 +7,7 @@ public class SepiaModifier extends ATransform {
 
   /**
    * A constructor for sepia.
+   *
    * @throws IllegalArgumentException if the kernel array entries are odd
    */
   public SepiaModifier() throws IllegalArgumentException {
@@ -18,6 +19,7 @@ public class SepiaModifier extends ATransform {
 
   /**
    * A custom constructor for sepia.
+   *
    * @param kernel the kernel (filter) of seipa being appled
    * @throws IllegalArgumentException if the kernel array entries are odd
    */

@@ -2,8 +2,6 @@ import org.junit.Test;
 
 import model.Image;
 import model.ImageImpl;
-import model.ImageProcessingModel;
-import model.ImageProcessingModelImpl;
 import model.modifiers.BrightnessModifier;
 import model.modifiers.Modifier;
 import view.ImageTextView;

@@ -1,7 +1,7 @@
 package utilities;
 
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,7 +57,8 @@ public class ImageUtil {
         while (sc.hasNextLine()) {
           String s = sc.nextLine();
           if (s.charAt(0) != '#') {
-            builder.append(s + System.lineSeparator());
+            String line = s + System.lineSeparator();
+            builder.append(line);
           }
         }
 

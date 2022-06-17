@@ -19,17 +19,21 @@ public abstract class AForm implements Modifier {
 
   /**
    * Constructor for the abstract form modifier class. Enforces that all kernels are of odd size.
+   *
    * @param kernel the 2D array of values to be applied to each pixel
    * @throws IllegalArgumentException if the kernel is width and height are not odd
    */
   public AForm(double[][] kernel) throws IllegalArgumentException {
-    if (!this.isOddKernel(kernel)) { throw new IllegalArgumentException("Invalid kernel."); }
+    if (!this.isOddKernel(kernel)) {
+      throw new IllegalArgumentException("Invalid kernel.");
+    }
     this.kernel = kernel;
     this.linearKernel = this.linearize(kernel);
   }
 
   /**
    * Linearizes the kernel to make manipulation of each pixel easier.
+   *
    * @param kernel the 2D array of values to be applied to each pixel
    * @return a list of doubles containing each value to be applied to each pixel
    */
@@ -46,9 +50,10 @@ public abstract class AForm implements Modifier {
 
   /**
    * Applies this modifier to the image. Returns the new image model.
+   *
    * @param model the original image
    * @return the new image model created by applying this transformation filter
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException if the given model is null
    */
   public Image apply(Image model) throws IllegalArgumentException {
     if (model == null) {
@@ -58,7 +63,7 @@ public abstract class AForm implements Modifier {
     this.build = new ImageImpl(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
-        double[] pixels = this.applyToEachPixel(model.getPixel(i, j), new int[] {i, j});
+        double[] pixels = this.applyToEachPixel(model.getPixel(i, j), new int[]{i, j});
         build.assignPixels(i, j, (int) pixels[0], (int) pixels[1], (int) pixels[2]);
       }
     }
@@ -67,6 +72,7 @@ public abstract class AForm implements Modifier {
 
   /**
    * Checks the the kernel height and width is odd. Cannot have an even sized kernel.
+   *
    * @param kernel the 2D array of values to be applied to a pixel
    * @return true if the kernel has an odd width and height
    */
@@ -76,7 +82,8 @@ public abstract class AForm implements Modifier {
 
   /**
    * Applies this modifier to individual pixels. Applies to the pixel at the specified location.
-   * @param p the pixel being modified
+   *
+   * @param p      the pixel being modified
    * @param coords the location of the target pixel
    * @return an array of doubles representing the pixel's RGB values multiplied by the kernel
    */

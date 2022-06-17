@@ -12,6 +12,7 @@ public abstract class AFilter extends AForm {
 
   /**
    * Constructor for an abstract filter. Calls super constructor for the only argument.
+   *
    * @param kernel the 2D array of values to multiply pixels by
    * @throws IllegalArgumentException if the kernel is invalid (null or odd)
    */
@@ -21,7 +22,8 @@ public abstract class AFilter extends AForm {
 
   /**
    * Method to generate new RGB values based on the modification kernel being used.
-   * @param mod the modifier being used
+   *
+   * @param mod    the modifier being used
    * @param coords the coordinates of the pixel being modified
    * @return an array of doubles for the new values
    */
@@ -52,7 +54,8 @@ public abstract class AFilter extends AForm {
 
   /**
    * Applies the modifier to a specific pixel at a given location.
-   * @param p the pixel being modified
+   *
+   * @param p      the pixel being modified
    * @param coords the location of the target pixel
    * @return the new RGB values in an array of doubles
    */

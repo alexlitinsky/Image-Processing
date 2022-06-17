@@ -1,9 +1,7 @@
 package controller.commands;
 
 import controller.ImageController;
-import model.modifiers.BlueCompModifier;
 import model.modifiers.BlurModifier;
-import view.ImageTextView;
 
 public class Blur extends ACommand {
 

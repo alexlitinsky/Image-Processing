@@ -7,6 +7,7 @@ public class SharpenModifier extends AFilter {
 
   /**
    * A constructor for sharpening an image.
+   *
    * @throws IllegalArgumentException if any of the entries of the kernel are odd
    */
   public SharpenModifier() throws IllegalArgumentException {
@@ -20,6 +21,7 @@ public class SharpenModifier extends AFilter {
 
   /**
    * A custom constructor for sharpening an image.
+   *
    * @param kernel the kernel being represented for the image filter
    * @throws IllegalArgumentException if any of the entries of the kernel are odd
    */

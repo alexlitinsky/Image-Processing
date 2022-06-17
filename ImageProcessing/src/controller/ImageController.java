@@ -12,13 +12,15 @@ public interface ImageController {
 
   /**
    * Plays the controller.
+   *
    * @throws IllegalStateException if the controller breaks down
    */
   void playGame() throws IllegalStateException;
 
   /**
    * Gets the versions of images of a specific controller.
-   * @return  a hashmap of images
+   *
+   * @return a hashmap of images
    */
   Map<String, Image> getVersions();
 }

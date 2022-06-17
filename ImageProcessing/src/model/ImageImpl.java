@@ -35,6 +35,7 @@ public class ImageImpl implements Image {
   /**
    * Determines if this image is equal to another image. Two images are equal when all their pixels
    * are equal (meaning they have the same RGB values).
+   *
    * @param image the image this image is being compared to
    * @return true if this image equals that image
    * @throws IllegalArgumentException if that image is null
@@ -124,7 +125,7 @@ public class ImageImpl implements Image {
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
         if (this.getPixel(i, j) == p) {
-          return new int[] {i, j};
+          return new int[]{i, j};
         }
       }
     }

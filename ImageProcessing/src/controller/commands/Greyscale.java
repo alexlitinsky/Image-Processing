@@ -1,7 +1,6 @@
 package controller.commands;
 
 import controller.ImageController;
-import model.modifiers.BlueCompModifier;
 import model.modifiers.GreyscaleModifier;
 
 

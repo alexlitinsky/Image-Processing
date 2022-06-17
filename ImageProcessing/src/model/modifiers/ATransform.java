@@ -10,6 +10,7 @@ public abstract class ATransform extends AForm {
 
   /**
    * Constructor for the ATransform class. Just calls the AForm constructor.
+   *
    * @param kernel the 2D array of values passed to the modifier, changes based on modifier type
    * @throws IllegalArgumentException if the kernel is even
    */
@@ -20,6 +21,7 @@ public abstract class ATransform extends AForm {
   /**
    * Generates new RGB values for a pixel by applying the correct kernel value to each item in the
    * linearized kernel.
+   *
    * @param p the pixel being worked with
    * @return an array of doubles representing each new RGB value
    */
@@ -40,9 +42,10 @@ public abstract class ATransform extends AForm {
 
   /**
    * Applies the filter to the RGB values of the pixel at the given coordinates.
-   * @param p the pixel being manipulated
+   *
+   * @param p      the pixel being manipulated
    * @param coords the location of the pixel to apply the filter to
-   * @return
+   * @return the array of doubles that represents the new RGB values
    */
   public double[] applyToEachPixel(Pixel p, int[] coords) {
     return this.genNewRGBs(p);

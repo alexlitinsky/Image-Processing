@@ -17,6 +17,7 @@ import model.modifiers.SharpenModifier;
 import model.modifiers.ValueCompModifier;
 import view.ImageTextView;
 import view.TextView;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -31,11 +32,11 @@ import static org.junit.Assert.assertNotEquals;
  * luma component
  * red component
  * value component
- *
+ * <p>
  * FILTER MODIFIERS
  * blur
  * sharpen
- *
+ * <p>
  * TRANSFORM MODIFIERS
  * greyscale modifier
  * sepia modifier

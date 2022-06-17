@@ -118,9 +118,9 @@ public class PixelImplTest {
    */
   @Test
   public void testEquals() {
-    Pixel p1 = new PixelImpl(1, 2,3);
-    Pixel p2 = new PixelImpl(1, 2,3);
-    Pixel p3 = new PixelImpl(1, 2,4);
+    Pixel p1 = new PixelImpl(1, 2, 3);
+    Pixel p2 = new PixelImpl(1, 2, 3);
+    Pixel p3 = new PixelImpl(1, 2, 4);
     assertTrue(p1.equals(p2));
     assertFalse(p1.equals(p3));
   }
