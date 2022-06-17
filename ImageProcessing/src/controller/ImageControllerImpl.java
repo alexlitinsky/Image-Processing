@@ -34,7 +34,6 @@ import model.ImageProcessingModel;
 public class ImageControllerImpl implements ImageController {
   private final Readable input;
   private final Map<String, Function<Scanner, Command>> allCommands;
-  private Map<String, Image> versions;
   private ImageProcessingModel model;
 
   /**
@@ -51,7 +50,6 @@ public class ImageControllerImpl implements ImageController {
     }
     this.input = input;
     this.model = model;
-    this.versions = new HashMap<>();
     allCommands = new HashMap<>();
     allCommands.put("load", s -> new Load(s.next(), s.next(), this));
     allCommands.put("save", s -> new Save(this, s.next(), s.next()));
@@ -104,7 +102,7 @@ public class ImageControllerImpl implements ImageController {
    */
   @Override
   public Map<String, Image> getVersions() {
-    return this.versions;
+    return this.model.getImages();
   }
 
   /**
@@ -115,7 +113,7 @@ public class ImageControllerImpl implements ImageController {
    */
   public static class VerifyControllerParsing implements ImageController {
     private final Appendable log;
-    private Readable input;
+    private final Readable input;
 
     /**
      * Constructor for this mock controller class. Verifies the parsing of inputs by the controller.

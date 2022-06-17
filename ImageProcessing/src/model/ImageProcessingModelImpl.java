@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,6 +9,13 @@ import java.util.Map;
  */
 public class ImageProcessingModelImpl implements ImageProcessingModel {
   private Map<String, Image> images;
+
+  /**
+   * Constructor for this image processing model implementation. Initializes a new HashMap().
+   */
+  public ImageProcessingModelImpl() {
+    this.images = new HashMap<>();
+  }
 
   /**
    * Method to retrieve all the images in this image processing model.

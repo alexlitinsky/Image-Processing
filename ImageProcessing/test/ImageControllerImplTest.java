@@ -93,6 +93,7 @@ public class ImageControllerImplTest {
 
     // valid PNG input
     this.input = new StringReader("load Images/nyc.png nyc");
+    this.model = new ImageProcessingModelImpl();
     this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertTrue(controller.getVersions().containsKey("nyc"));
@@ -100,8 +101,32 @@ public class ImageControllerImplTest {
     assertEquals(200, controller.getVersions().get("nyc").getDimensions()[1]);
     assertEquals(1, controller.getVersions().size());
     // valid JPEG input
+    this.input = new StringReader("load res/saveTest.jpeg test");
+    this.model = new ImageProcessingModelImpl();
+    this.controller = new ImageControllerImpl(input, model);
+    controller.playGame();
+    assertTrue(controller.getVersions().containsKey("test"));
+    assertEquals(200, controller.getVersions().get("test").getDimensions()[0]);
+    assertEquals(113, controller.getVersions().get("test").getDimensions()[1]);
+    assertEquals(1, controller.getVersions().size());
     // valid JPG input
+    this.input = new StringReader("load res/saveTest.jpg test");
+    this.model = new ImageProcessingModelImpl();
+    this.controller = new ImageControllerImpl(input, model);
+    controller.playGame();
+    assertTrue(controller.getVersions().containsKey("test"));
+    assertEquals(200, controller.getVersions().get("test").getDimensions()[0]);
+    assertEquals(113, controller.getVersions().get("test").getDimensions()[1]);
+    assertEquals(1, controller.getVersions().size());
     // valid BMP input
+    this.input = new StringReader("load res/saveTest.bmp test");
+    this.model = new ImageProcessingModelImpl();
+    this.controller = new ImageControllerImpl(input, model);
+    controller.playGame();
+    assertTrue(controller.getVersions().containsKey("test"));
+    assertEquals(200, controller.getVersions().get("test").getDimensions()[0]);
+    assertEquals(113, controller.getVersions().get("test").getDimensions()[1]);
+    assertEquals(1, controller.getVersions().size());
 
     // EXCEPTIONS
     // file does not exist
@@ -133,6 +158,7 @@ public class ImageControllerImplTest {
       assertEquals("Invalid command.", e.getMessage());
     }
     // test overriding the same key
+    this.model = new ImageProcessingModelImpl();
     this.input = new StringReader("load Images/Koala.ppm koala " +
             "load Images/koala-brighter.ppm koala");
     this.controller = new ImageControllerImpl(input, model);
@@ -426,6 +452,7 @@ public class ImageControllerImplTest {
 
     // empty command case
     this.input = new StringReader("");
+    this.model = new ImageProcessingModelImpl();
     this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertEquals(0, controller.getVersions().size());
