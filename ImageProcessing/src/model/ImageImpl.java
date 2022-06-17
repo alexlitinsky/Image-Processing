@@ -33,6 +33,33 @@ public class ImageImpl implements Image {
   }
 
   /**
+   * Determines if this image is equal to another image. Two images are equal when all their pixels
+   * are equal (meaning they have the same RGB values).
+   * @param image the image this image is being compared to
+   * @return true if this image equals that image
+   * @throws IllegalArgumentException if that image is null
+   */
+  @Override
+  public boolean equals(Image image) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image to be compared to must not be null.");
+    }
+    if (this.width != image.getDimensions()[0] || this.height != image.getDimensions()[1]) {
+      return false;
+    }
+    for (int i = 0; i < this.width; i++) {
+      for (int j = 0; j < this.height; j++) {
+        Pixel p1 = this.imagePixels[j][i];
+        Pixel p2 = image.getPixel(i, j);
+        if (!p1.equals(p2)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  /**
    * Assigns the given RBG values to this pixel in this position.
    *
    * @param x the x coordinate

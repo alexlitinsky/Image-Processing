@@ -2,12 +2,16 @@ import org.junit.Test;
 
 import model.Image;
 import model.ImageImpl;
+import model.ImageProcessingModel;
+import model.ImageProcessingModelImpl;
 import model.modifiers.BrightnessModifier;
 import model.modifiers.Modifier;
 import view.ImageTextView;
 import view.TextView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -178,6 +182,41 @@ public class ImageImplTest {
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Null modifier", e.getMessage());
+    }
+  }
+
+  /**
+   * Method to test the image equals method. Should return true when two images have pixels that are
+   * all equal.
+   */
+  @Test
+  public void testEquals() {
+    initModel2x2();
+    // identical to init testing image
+    Image test = new ImageImpl(2, 2);
+    test.assignPixels(0, 0, 0, 0, 0);
+    test.assignPixels(1, 0, 1, 1, 1);
+    test.assignPixels(0, 1, 2, 2, 2);
+    test.assignPixels(1, 1, 3, 3, 3);
+    // different than init testing image
+    Image test2 = new ImageImpl(2, 2);
+    test2.assignPixels(0, 0, 1, 0, 0);
+    test2.assignPixels(1, 0, 1, 1, 1);
+    test2.assignPixels(0, 1, 2, 2, 2);
+    test2.assignPixels(1, 1, 3, 3, 3);
+    assertTrue(this.img.equals(this.img));
+    assertTrue(this.img.equals(test));
+    assertFalse(this.img.equals(test2));
+    assertFalse(test.equals(test2));
+    assertTrue(test2.equals(test2));
+
+    // case when comparing to a null object
+    try {
+      Image fail = null;
+      this.img.equals(fail);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals("Image to be compared to must not be null.", e.getMessage());
     }
   }
 }
