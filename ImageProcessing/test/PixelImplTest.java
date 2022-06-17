@@ -4,6 +4,8 @@ import model.Pixel;
 import model.PixelImpl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Represents testing for the pixel class. Tests the pixel constructor and all the class methods.
@@ -109,5 +111,17 @@ public class PixelImplTest {
     assertEquals(255, p.applyToB(256), 0);
     assertEquals(0.0, p.applyToB(0.0), 0);
     assertEquals(0.0, p.applyToB(-1), 0);
+  }
+
+  /**
+   * Test the pixel equals method. Two pixels should be equal if they have the same RGB values.
+   */
+  @Test
+  public void testEquals() {
+    Pixel p1 = new PixelImpl(1, 2,3);
+    Pixel p2 = new PixelImpl(1, 2,3);
+    Pixel p3 = new PixelImpl(1, 2,4);
+    assertTrue(p1.equals(p2));
+    assertFalse(p1.equals(p3));
   }
 }

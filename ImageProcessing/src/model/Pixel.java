@@ -5,6 +5,14 @@ package model;
  */
 public interface Pixel {
   /**
+   * Method to determine if this pixel is equal to another pixel. Equality is generally when two
+   * pixels share the same RGB values.
+   * @param pixel the pixel being compared to
+   * @return true if this pixel is equal to that pixel
+   */
+  boolean equals(Pixel pixel);
+
+  /**
    * Gets each individual component of a rgb.
    * @return an array of ints including the rgb values
    */
