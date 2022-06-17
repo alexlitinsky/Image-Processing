@@ -35,7 +35,7 @@ public class PixelImpl implements Pixel {
    * @return true if this pixel is equal to that pixel
    */
   @Override
-  public boolean equals(Pixel pixel) {
+  public boolean pixelEquals(Pixel pixel) {
     return this.red == pixel.getRGB()[0]
             && this.green == pixel.getRGB()[1]
             && this.blue == pixel.getRGB()[2];
@@ -51,7 +51,8 @@ public class PixelImpl implements Pixel {
   }
 
   /**
-   * Multiplies the RGB values of this pixel by the given value. Returns 0 or 255 if the result is < 0 or > 255.
+   * Multiplies the RGB values of this pixel by the given value. Returns 0 or 255 if the result
+   * is < 0 or > 255.
    *
    * @param val the value being applied
    * @return double to represent the product of the RGB values and the specified value

@@ -1,6 +1,6 @@
 package controller.commands;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
@@ -36,7 +36,6 @@ public class Save implements Command {
       throw new IllegalArgumentException("Invalid parameters.");
     }
     this.filename = filename;
-    Appendable app = new StringBuilder();
     this.model = c.getVersions().get(name);
     if (this.model == null) {
       throw new IllegalArgumentException("This name is not in the list of image versions");
@@ -63,8 +62,8 @@ public class Save implements Command {
         try {
           File ppm = new File(filename);
           FileWriter ppmWriter = new FileWriter(filename);
-          StringBuilder writtenFile = new StringBuilder("P3\n" + this.model.getDimensions()[0] + "\n"
-                  + this.model.getDimensions()[1] + "\n255\n");
+          StringBuilder writtenFile = new StringBuilder("P3\n" + this.model.getDimensions()[0]
+                  + "\n" + this.model.getDimensions()[1] + "\n255\n");
           for (int i = 0; i < this.model.getDimensions()[1]; i++) {
             for (int j = 0; j < this.model.getDimensions()[0]; j++) {
               Pixel cur = this.model.getPixel(j, i);

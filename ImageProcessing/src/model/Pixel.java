@@ -11,7 +11,7 @@ public interface Pixel {
    * @param pixel the pixel being compared to
    * @return true if this pixel is equal to that pixel
    */
-  boolean equals(Pixel pixel);
+  boolean pixelEquals(Pixel pixel);
 
   /**
    * Gets each individual component of a rgb.

@@ -183,7 +183,7 @@ public class ImageControllerImplTest {
     controller.playGame();
     Image sheep = controller.getVersions().get("sheep");
     Image test = controller.getVersions().get("test");
-    assertTrue(sheep.equals(test));
+    assertTrue(sheep.imgEquals(test));
 
     // PNG format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
@@ -191,7 +191,7 @@ public class ImageControllerImplTest {
             + "load res/saveTest.png test");
     this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
-    assertTrue(sheep.equals(test));
+    assertTrue(sheep.imgEquals(test));
 
     // JPEG format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
@@ -199,7 +199,7 @@ public class ImageControllerImplTest {
             + "load res/saveTest.jpeg test");
     this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
-    assertTrue(sheep.equals(test));
+    assertTrue(sheep.imgEquals(test));
 
     // JPG format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
@@ -207,7 +207,7 @@ public class ImageControllerImplTest {
             + "load res/saveTest.jpg test");
     this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
-    assertTrue(sheep.equals(test));
+    assertTrue(sheep.imgEquals(test));
 
     // BMP format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
@@ -215,7 +215,7 @@ public class ImageControllerImplTest {
             + "load res/saveTest.bmp loadedSaveTest");
     this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
-    assertTrue(sheep.equals(test));
+    assertTrue(sheep.imgEquals(test));
 
     // EXCEPTIONS
     // invalid command
@@ -246,9 +246,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaBlue = controller.getVersions().get("koala-blue");
     Image testBlue = controller.getVersions().get("testBlue");
-    assertFalse(koala.equals(koalaBlue));
-    assertFalse(koala.equals(testBlue));
-    assertTrue(koalaBlue.equals(testBlue));
+    assertFalse(koala.imgEquals(koalaBlue));
+    assertFalse(koala.imgEquals(testBlue));
+    assertTrue(koalaBlue.imgEquals(testBlue));
   }
 
   /**
@@ -265,9 +265,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaBright = controller.getVersions().get("koala-brighter");
     Image test = controller.getVersions().get("testBrighter");
-    assertFalse(koala.equals(koalaBright));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaBright.equals(test));
+    assertFalse(koala.imgEquals(koalaBright));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaBright.imgEquals(test));
 
     // maxed-out brightness
     this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
@@ -318,9 +318,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-horizontal");
     Image test = controller.getVersions().get("testHorizontal");
-    assertFalse(koala.equals(koalaMod));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaMod.equals(test));
+    assertFalse(koala.imgEquals(koalaMod));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaMod.imgEquals(test));
   }
 
   /**
@@ -337,9 +337,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-vertical");
     Image test = controller.getVersions().get("testVertical");
-    assertFalse(koala.equals(koalaMod));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaMod.equals(test));
+    assertFalse(koala.imgEquals(koalaMod));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaMod.imgEquals(test));
   }
 
   /**
@@ -356,9 +356,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-green");
     Image test = controller.getVersions().get("testGreen");
-    assertFalse(koala.equals(koalaMod));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaMod.equals(test));
+    assertFalse(koala.imgEquals(koalaMod));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaMod.imgEquals(test));
   }
 
   /**
@@ -375,9 +375,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-intensity");
     Image test = controller.getVersions().get("test");
-    assertFalse(koala.equals(koalaMod));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaMod.equals(test));
+    assertFalse(koala.imgEquals(koalaMod));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaMod.imgEquals(test));
   }
 
   /**
@@ -394,9 +394,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-luma");
     Image test = controller.getVersions().get("test");
-    assertFalse(koala.equals(koalaMod));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaMod.equals(test));
+    assertFalse(koala.imgEquals(koalaMod));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaMod.imgEquals(test));
   }
 
   /**
@@ -413,9 +413,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-red");
     Image test = controller.getVersions().get("test");
-    assertFalse(koala.equals(koalaMod));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaMod.equals(test));
+    assertFalse(koala.imgEquals(koalaMod));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaMod.imgEquals(test));
   }
 
   /**
@@ -433,9 +433,9 @@ public class ImageControllerImplTest {
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-value");
     Image test = controller.getVersions().get("test");
-    assertFalse(koala.equals(koalaMod));
-    assertFalse(koala.equals(test));
-    assertTrue(koalaMod.equals(test));
+    assertFalse(koala.imgEquals(koalaMod));
+    assertFalse(koala.imgEquals(test));
+    assertTrue(koalaMod.imgEquals(test));
   }
 
   /**
@@ -516,7 +516,7 @@ public class ImageControllerImplTest {
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image nycGrey = controller.getVersions().get("nyc-greyscaled");
-    assertFalse(nyc.equals(nycGrey));
+    assertFalse(nyc.imgEquals(nycGrey));
     for (int i = 0; i < nycGrey.getDimensions()[0]; i++) {
       for (int j = 0; j < nycGrey.getDimensions()[1]; j++) {
         int red = nycGrey.getPixel(i, j).getRGB()[0];
@@ -540,7 +540,7 @@ public class ImageControllerImplTest {
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image test = controller.getVersions().get("nyc-sepia");
-    assertFalse(nyc.equals(test));
+    assertFalse(nyc.imgEquals(test));
   }
 
   /**
@@ -556,7 +556,7 @@ public class ImageControllerImplTest {
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image test = controller.getVersions().get("nyc-sharpened");
-    assertFalse(nyc.equals(test));
+    assertFalse(nyc.imgEquals(test));
   }
 
   /**
@@ -572,6 +572,6 @@ public class ImageControllerImplTest {
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image test = controller.getVersions().get("nyc-blurred");
-    assertFalse(nyc.equals(test));
+    assertFalse(nyc.imgEquals(test));
   }
 }

@@ -32,12 +32,12 @@ import static org.junit.Assert.assertNotEquals;
  * luma component
  * red component
  * value component
- * <p>
- * FILTER MODIFIERS
+ *
+ * <p>FILTER MODIFIERS
  * blur
  * sharpen
- * <p>
- * TRANSFORM MODIFIERS
+ *
+ * <p>TRANSFORM MODIFIERS
  * greyscale modifier
  * sepia modifier
  */

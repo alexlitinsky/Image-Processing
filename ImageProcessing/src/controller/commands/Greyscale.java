@@ -3,7 +3,9 @@ package controller.commands;
 import controller.ImageController;
 import model.modifiers.GreyscaleModifier;
 
-
+/**
+ * Class to represent the greyscale command. Contains commandApply() to apply the command.
+ */
 public class Greyscale extends ACommand {
 
   /**

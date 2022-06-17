@@ -202,16 +202,16 @@ public class ImageImplTest {
     test2.assignPixels(1, 0, 1, 1, 1);
     test2.assignPixels(0, 1, 2, 2, 2);
     test2.assignPixels(1, 1, 3, 3, 3);
-    assertTrue(this.img.equals(this.img));
-    assertTrue(this.img.equals(test));
-    assertFalse(this.img.equals(test2));
-    assertFalse(test.equals(test2));
-    assertTrue(test2.equals(test2));
+    assertTrue(this.img.imgEquals(this.img));
+    assertTrue(this.img.imgEquals(test));
+    assertFalse(this.img.imgEquals(test2));
+    assertFalse(test.imgEquals(test2));
+    assertTrue(test2.imgEquals(test2));
 
     // case when comparing to a null object
     try {
       Image fail = null;
-      this.img.equals(fail);
+      this.img.imgEquals(fail);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Image to be compared to must not be null.", e.getMessage());

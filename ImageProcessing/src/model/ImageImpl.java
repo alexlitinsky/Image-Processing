@@ -41,7 +41,7 @@ public class ImageImpl implements Image {
    * @throws IllegalArgumentException if that image is null
    */
   @Override
-  public boolean equals(Image image) throws IllegalArgumentException {
+  public boolean imgEquals(Image image) throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image to be compared to must not be null.");
     }
@@ -52,7 +52,7 @@ public class ImageImpl implements Image {
       for (int j = 0; j < this.height; j++) {
         Pixel p1 = this.imagePixels[j][i];
         Pixel p2 = image.getPixel(i, j);
-        if (!p1.equals(p2)) {
+        if (!p1.pixelEquals(p2)) {
           return false;
         }
       }

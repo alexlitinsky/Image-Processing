@@ -3,8 +3,10 @@ package controller.commands;
 import controller.ImageController;
 import model.modifiers.BlurModifier;
 
+/**
+ * Class to represent the blur command. Contains the required commandApply() to apply the command.
+ */
 public class Blur extends ACommand {
-
 
   /**
    * Constructor for the blue component command. Consumes the current controller to access its

@@ -3,7 +3,9 @@ package controller.commands;
 import controller.ImageController;
 import model.modifiers.SharpenModifier;
 
-
+/**
+ * Class to represent the sharpen command. Contains the commandApply() to apply the command.
+ */
 public class Sharpen extends ACommand {
   /**
    * Constructor for the blue component command. Consumes the current controller to access its

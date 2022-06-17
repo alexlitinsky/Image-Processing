@@ -3,6 +3,9 @@ package controller.commands;
 import controller.ImageController;
 import model.modifiers.SepiaModifier;
 
+/**
+ * Class to represent sepia blur command. Contains the required commandApply() to apply the command.
+ */
 public class Sepia extends ACommand {
   /**
    * Constructor for the blue component command. Consumes the current controller to access its

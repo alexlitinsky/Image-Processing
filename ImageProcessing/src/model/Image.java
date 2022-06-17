@@ -18,7 +18,7 @@ public interface Image {
    * @return true if the two images are equal
    * @throws IllegalArgumentException if the given image is null
    */
-  boolean equals(Image image) throws IllegalArgumentException;
+  boolean imgEquals(Image image) throws IllegalArgumentException;
 
   /**
    * Assigns pixels to an image.
