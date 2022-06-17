@@ -1,7 +1,7 @@
 import org.junit.Test;
 
-import model.ImageModel;
-import model.ImageModelImpl;
+import model.Image;
+import model.ImageImpl;
 import model.modifiers.BrightnessModifier;
 import model.modifiers.Modifier;
 import view.ImageTextView;
@@ -14,15 +14,15 @@ import static org.junit.Assert.fail;
  * Class to contain testing methods for the image model class. Tests the constructor and its
  * exceptions, as well as the assignPixels() and newModdedImage() method.
  */
-public class ImageModelImplTest {
-  private ImageModel img;
+public class ImageImplTest {
+  private Image img;
   private Appendable out;
 
   /**
    * Method to abstract testing modifiers and initialize a commonly used test model.
    */
   private void initModel1x1() {
-    img = new ImageModelImpl(1, 1);
+    img = new ImageImpl(1, 1);
     img.assignPixels(0, 0, 1, 1, 1);
     out = new StringBuilder();
   }
@@ -31,7 +31,7 @@ public class ImageModelImplTest {
    * Method to abstract testing modifiers and initialize a commonly used test model.
    */
   private void initModel2x2() {
-    img = new ImageModelImpl(2, 2);
+    img = new ImageImpl(2, 2);
     img.assignPixels(0, 0, 0, 0, 0);
     img.assignPixels(1, 0, 1, 1, 1);
     img.assignPixels(0, 1, 2, 2, 2);
@@ -45,42 +45,42 @@ public class ImageModelImplTest {
    */
   @Test
   public void testConstructor() {
-    ImageModel image = new ImageModelImpl(1, 1);
+    Image image = new ImageImpl(1, 1);
     assertEquals(1, image.getDimensions()[0]);
     assertEquals(1, image.getDimensions()[1]);
     // EXCEPTIONS
     try {
-      ImageModel img = new ImageModelImpl(0, 1);
+      Image img = new ImageImpl(0, 1);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid width or height.", e.getMessage());
     }
     try {
-      ImageModel img = new ImageModelImpl(1, 0);
+      Image img = new ImageImpl(1, 0);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid width or height.", e.getMessage());
     }
     try {
-      ImageModel img = new ImageModelImpl(0, 0);
+      Image img = new ImageImpl(0, 0);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid width or height.", e.getMessage());
     }
     try {
-      ImageModel img = new ImageModelImpl(-1, 0);
+      Image img = new ImageImpl(-1, 0);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid width or height.", e.getMessage());
     }
     try {
-      ImageModel img = new ImageModelImpl(-1, -1);
+      Image img = new ImageImpl(-1, -1);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid width or height.", e.getMessage());
     }
     try {
-      ImageModel img = new ImageModelImpl(0, -1);
+      Image img = new ImageImpl(0, -1);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Invalid width or height.", e.getMessage());
@@ -167,7 +167,7 @@ public class ImageModelImplTest {
     Modifier mod = new BrightnessModifier(1);
     TextView view = new ImageTextView(img, new StringBuilder());
     assertEquals("(1, 1, 1) ", view.toString());
-    ImageModel test = img.newModdedImage(mod);
+    Image test = img.newModdedImage(mod);
     TextView view2 = new ImageTextView(test, new StringBuilder());
     assertEquals("(2, 2, 2) ", view2.toString());
 

@@ -8,7 +8,7 @@ import model.modifiers.Modifier;
  * Represents an interface for an image. Has the ability to assign each individual pixel an image.
  * Can get the dimensions of an image. Can produce a new modded image. Can get a particular pixel.
  */
-public interface ImageModel {
+public interface Image {
   /**
    * Assigns pixels to an image.
    * @param x the x coordinate
@@ -25,7 +25,7 @@ public interface ImageModel {
    * @return the new iamge
    * @throws IllegalArgumentException if modifier is invalid
    */
-  ImageModel newModdedImage(Modifier mod) throws IllegalArgumentException;
+  Image newModdedImage(Modifier mod) throws IllegalArgumentException;
 
 
   /**

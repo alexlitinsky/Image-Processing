@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import model.ImageModel;
-import model.ImageModelImpl;
+import model.Image;
+import model.ImageImpl;
 
 
 /**
@@ -23,14 +23,14 @@ public class ImageUtil {
 
   /**
    * This method reads a ppm file, checking that the file exists and is of the right type, and
-   * returns an ImageModelImpl representation of the ppm file.
+   * returns an ImageImpl representation of the ppm file.
    *
    * @param filename the name and path of the file to be read
    * @return the image model representation of the ppm file
    * @throws FileNotFoundException    if the file is of the correct format but cannot be found
    * @throws IllegalArgumentException if the file is of the incorrect format or is an invalid file
    */
-  public static ImageModel readFile(String filename) throws FileNotFoundException,
+  public static Image readFile(String filename) throws FileNotFoundException,
           IllegalArgumentException {
 
     String fileType = "";
@@ -77,7 +77,7 @@ public class ImageUtil {
         int maxValue = sc.nextInt();
         System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
-        ImageModel image = new ImageModelImpl(width, height);
+        Image image = new ImageImpl(width, height);
 
         for (int i = 0; i < height; i++) {
           for (int j = 0; j < width; j++) {
@@ -95,7 +95,7 @@ public class ImageUtil {
       case "bmp":
         try {
           BufferedImage img = ImageIO.read(new File(filename));
-          ImageModel typeImage = new ImageModelImpl(img.getWidth(), img.getHeight());
+          Image typeImage = new ImageImpl(img.getWidth(), img.getHeight());
           for (int i = 0; i < img.getWidth(); i++) {
             for (int j = 0; j < img.getHeight(); j++) {
               Color col = new Color(img.getRGB(i, j));

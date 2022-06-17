@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 import controller.ImageController;
 import controller.ImageControllerImpl;
-import model.ImageModelImpl;
+import model.ImageImpl;
 import view.ImageTextView;
 import view.TextView;
 
@@ -141,7 +141,7 @@ public class ImageControllerImplTest {
 
   /**
    * Method to test the save command.
-   * Should take the specified ImageModelImpl and convert it to a PPM
+   * Should take the specified ImageImpl and convert it to a PPM
    * file, and save that PPM under a specified name.
    * Tested by verifying the creation of a new PPM file and then loading it to make sure that
    * no values are changed in the save/load process.
@@ -563,7 +563,7 @@ public class ImageControllerImplTest {
     controller.playGame();
     assertTrue(controller.getVersions().containsKey("nyc-sepia"));
     assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-sepia")));
-    assertEquals(ImageModelImpl.class, controller.getVersions().get("nyc-sepia").getClass());
+    assertEquals(ImageImpl.class, controller.getVersions().get("nyc-sepia").getClass());
     TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
     TextView test = new ImageTextView(controller.getVersions().get("nyc-sepia"),
             new StringBuilder());
@@ -583,7 +583,7 @@ public class ImageControllerImplTest {
     controller.playGame();
     assertTrue(controller.getVersions().containsKey("nyc-sharpened"));
     assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-sharpened")));
-    assertEquals(ImageModelImpl.class, controller.getVersions().get("nyc-sharpened").getClass());
+    assertEquals(ImageImpl.class, controller.getVersions().get("nyc-sharpened").getClass());
     TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
     TextView test = new ImageTextView(controller.getVersions().get("nyc-sharpened"),
             new StringBuilder());
@@ -603,7 +603,7 @@ public class ImageControllerImplTest {
     controller.playGame();
     assertTrue(controller.getVersions().containsKey("nyc-blurred"));
     assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-blurred")));
-    assertEquals(ImageModelImpl.class, controller.getVersions().get("nyc-blurred").getClass());
+    assertEquals(ImageImpl.class, controller.getVersions().get("nyc-blurred").getClass());
     TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
     TextView test = new ImageTextView(controller.getVersions().get("nyc-blurred"),
             new StringBuilder());

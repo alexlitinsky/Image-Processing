@@ -24,7 +24,7 @@ import controller.commands.Save;
 import controller.commands.Sepia;
 import controller.commands.Sharpen;
 import controller.commands.ValueComp;
-import model.ImageModel;
+import model.Image;
 
 /**
  * Class to represent the controller for an image. Takes in a readable input. Has a set list of
@@ -33,7 +33,7 @@ import model.ImageModel;
 public class ImageControllerImpl implements ImageController {
   private final Readable input;
   private final Map<String, Function<Scanner, Command>> allCommands;
-  private Map<String, ImageModel> versions;
+  private Map<String, Image> versions;
 
   /**
    * Constructor for this implementation of an image controller.
@@ -99,7 +99,7 @@ public class ImageControllerImpl implements ImageController {
    * @return the versions of the models
    */
   @Override
-  public Map<String, ImageModel> getVersions() {
+  public Map<String, Image> getVersions() {
     return this.versions;
   }
 
@@ -148,7 +148,7 @@ public class ImageControllerImpl implements ImageController {
      * @return null as we don't care about the versions of this controller type
      */
     @Override
-    public Map<String, ImageModel> getVersions() {
+    public Map<String, Image> getVersions() {
       return null;
     }
   }

@@ -1,8 +1,6 @@
 package model.modifiers;
 
-import java.util.List;
-
-import model.ImageModel;
+import model.Image;
 import model.Pixel;
 
 /**
@@ -27,7 +25,7 @@ public abstract class AFilter extends AForm {
    * @param coords the coordinates of the pixel being modified
    * @return an array of doubles for the new values
    */
-  protected double[] genNewRGBs(ImageModel mod, int[] coords) {
+  protected double[] genNewRGBs(Image mod, int[] coords) {
     double[] applyRGB = {0.0, 0.0, 0.0};
     int key = (kernel.length - 1) / 2;
     int x = coords[0];

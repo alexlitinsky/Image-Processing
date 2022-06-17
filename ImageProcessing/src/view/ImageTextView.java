@@ -2,14 +2,14 @@ package view;
 
 import java.io.IOException;
 
-import model.ImageModel;
+import model.Image;
 
 
 /**
  * Represents an ImageTextView. prints out the pixels of a specific model and destination.
  */
 public class ImageTextView implements TextView {
-  protected ImageModel model;
+  protected Image model;
   protected Appendable destination;
 
   /**
@@ -19,7 +19,7 @@ public class ImageTextView implements TextView {
    * @param model       the model being viewed
    * @param destination location where the view is sent
    */
-  public ImageTextView(ImageModel model, Appendable destination) {
+  public ImageTextView(Image model, Appendable destination) {
     this.model = model;
     this.destination = destination;
   }

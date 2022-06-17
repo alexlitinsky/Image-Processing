@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Map;
 
-import model.ImageModel;
+import model.Image;
 
 /**
  * Represents an interface for an image controller. Has the ability to play a controller as well
@@ -20,5 +20,5 @@ public interface ImageController {
    * Gets the versions of images of a specific controller.
    * @return  a hashmap of images
    */
-  Map<String, ImageModel> getVersions();
+  Map<String, Image> getVersions();
 }

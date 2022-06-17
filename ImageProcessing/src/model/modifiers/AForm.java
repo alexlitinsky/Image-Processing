@@ -3,8 +3,8 @@ package model.modifiers;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ImageModel;
-import model.ImageModelImpl;
+import model.Image;
+import model.ImageImpl;
 import model.Pixel;
 
 /**
@@ -12,8 +12,8 @@ import model.Pixel;
  */
 public abstract class AForm implements Modifier {
 
-  protected ImageModel build;
-  protected ImageModel oldModel;
+  protected Image build;
+  protected Image oldModel;
   protected double[][] kernel;
   protected List<Double> linearKernel;
 
@@ -50,12 +50,12 @@ public abstract class AForm implements Modifier {
    * @return the new image model created by applying this transformation filter
    * @throws IllegalArgumentException
    */
-  public ImageModel apply(ImageModel model) throws IllegalArgumentException {
+  public Image apply(Image model) throws IllegalArgumentException {
     if (model == null) {
       throw new IllegalArgumentException("invalid model");
     }
     this.oldModel = model;
-    this.build = new ImageModelImpl(model.getDimensions()[0], model.getDimensions()[1]);
+    this.build = new ImageImpl(model.getDimensions()[0], model.getDimensions()[1]);
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
         double[] pixels = this.applyToEachPixel(model.getPixel(i, j), new int[] {i, j});

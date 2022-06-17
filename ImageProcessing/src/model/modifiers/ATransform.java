@@ -1,6 +1,5 @@
 package model.modifiers;
 
-import model.ImageModel;
 import model.Pixel;
 
 /**

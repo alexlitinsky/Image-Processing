@@ -1,7 +1,7 @@
 import org.junit.Test;
 
-import model.ImageModel;
-import model.ImageModelImpl;
+import model.Image;
+import model.ImageImpl;
 import model.modifiers.BlueCompModifier;
 import model.modifiers.BlurModifier;
 import model.modifiers.BrightnessModifier;
@@ -41,14 +41,14 @@ import static org.junit.Assert.assertNotEquals;
  * sepia modifier
  */
 public class ModifierTest {
-  private ImageModel img;
+  private Image img;
   private Appendable out;
 
   /**
    * Method to abstract testing modifiers and initialize a commonly used test model.
    */
   private void initModel1x1() {
-    img = new ImageModelImpl(1, 1);
+    img = new ImageImpl(1, 1);
     img.assignPixels(0, 0, 1, 1, 1);
     out = new StringBuilder();
   }
@@ -57,7 +57,7 @@ public class ModifierTest {
    * Method to abstract testing modifiers and initialize a commonly used test model.
    */
   private void initModel2x2() {
-    img = new ImageModelImpl(2, 2);
+    img = new ImageImpl(2, 2);
     img.assignPixels(0, 0, 0, 0, 0);
     img.assignPixels(1, 0, 1, 1, 1);
     img.assignPixels(0, 1, 2, 2, 2);
@@ -299,7 +299,7 @@ public class ModifierTest {
     assertEquals(view.toString(), view2.toString());
 
     // Case 2: pixels are not already grey
-    this.img = new ImageModelImpl(2, 2);
+    this.img = new ImageImpl(2, 2);
     this.img.assignPixels(0, 0, 1, 2, 3);
     this.img.assignPixels(1, 0, 4, 5, 6);
     this.img.assignPixels(0, 1, 7, 8, 9);

@@ -2,7 +2,7 @@ package controller.commands;
 
 import controller.ImageController;
 
-import model.ImageModel;
+import model.Image;
 
 
 /**
@@ -12,7 +12,7 @@ import model.ImageModel;
  */
 public abstract class ACommand implements Command {
   protected final ImageController c;
-  protected final ImageModel model;
+  protected final Image model;
   protected final String newName;
 
   /**

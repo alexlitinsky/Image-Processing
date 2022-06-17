@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import controller.ImageControllerImpl;
-import model.ImageModel;
+import model.Image;
 import model.Pixel;
 
 
@@ -20,7 +20,7 @@ import model.Pixel;
 public class Save implements Command {
 
   private final String filename;
-  private final ImageModel model;
+  private final Image model;
 
 
   /**
