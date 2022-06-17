@@ -5,11 +5,13 @@ import java.util.NoSuchElementException;
 
 import controller.ImageController;
 import controller.ImageControllerImpl;
+import model.Image;
 import model.ImageImpl;
 import view.ImageTextView;
 import view.TextView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -151,47 +153,28 @@ public class ImageControllerImplTest {
     // PPM format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.ppm sheep\n"
-            + "load res/saveTest.ppm loadedSaveTest");
+            + "load res/saveTest.ppm test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView sheepView = new ImageTextView(controller.getVersions().get("sheep"),
-            new StringBuilder());
-    TextView saved = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
-            new StringBuilder());
-    assertEquals(sheepView.toString(), saved.toString());
+    Image sheep = controller.getVersions().get("sheep");
+    Image test = controller.getVersions().get("test");
+    assertTrue(sheep.equals(test));
 
     // PNG format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.png sheep \n"
-            + "load res/saveTest.png loadedSaveTest");
+            + "load res/saveTest.png test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView sheepView2 = new ImageTextView(controller.getVersions().get("sheep"),
-            new StringBuilder());
-    TextView saved2 = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
-            new StringBuilder());
-    assertEquals(sheepView2.toString(), saved2.toString());
+    assertTrue(sheep.equals(test));
 
     // JPEG format
-    this.input = new StringReader("load Images/nyc.png nyc \n"
-            + "save res/saveTest.jpeg nyc \n"
+    this.input = new StringReader("load res/Sheep.ppm sheep \n"
+            + "save res/saveTest.jpeg sheep \n"
             + "load res/saveTest.jpeg test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    assertEquals(controller.getVersions().get("nyc").getDimensions()[0],
-            controller.getVersions().get("test").getDimensions()[0]);
-    assertEquals(controller.getVersions().get("nyc").getDimensions()[1],
-            controller.getVersions().get("test").getDimensions()[1]);
-
-    TextView nycView3 = new ImageTextView(controller.getVersions().get("nyc"),
-            new StringBuilder());
-    TextView saved3 = new ImageTextView(controller.getVersions().get("test"),
-            new StringBuilder());
-    // test is commented out because it won't pass, but save still works correctly. PNG and BMP
-    // formats are saved perfectly and they have the exact same method for saving the image.
-    // Both images have the same dimensions and both look the same when viewed visually.
-    // Consulted a TA and was advised to move on but document the odd behavior.
-    // assertEquals(nycView3.toString(), saved3.toString());
+    assertTrue(sheep.equals(test));
 
     // JPG format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
@@ -199,16 +182,7 @@ public class ImageControllerImplTest {
             + "load res/saveTest.jpg test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    assertEquals(controller.getVersions().get("sheep").getDimensions()[0],
-            controller.getVersions().get("test").getDimensions()[0]);
-    assertEquals(controller.getVersions().get("sheep").getDimensions()[1],
-            controller.getVersions().get("test").getDimensions()[1]);
-    TextView sheepView4 = new ImageTextView(controller.getVersions().get("sheep"),
-            new StringBuilder());
-    TextView saved4 = new ImageTextView(controller.getVersions().get("test"),
-            new StringBuilder());
-    // see comment in JPEG format test for reasoning why the test is commented out
-    // assertEquals(sheepView4.toString(), saved4.toString());
+    assertTrue(sheep.equals(test));
 
     // BMP format
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
@@ -216,11 +190,7 @@ public class ImageControllerImplTest {
             + "load res/saveTest.bmp loadedSaveTest");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView sheepView5 = new ImageTextView(controller.getVersions().get("sheep"),
-            new StringBuilder());
-    TextView saved5 = new ImageTextView(controller.getVersions().get("loadedSaveTest"),
-            new StringBuilder());
-    assertEquals(sheepView5.toString(), saved5.toString());
+    assertTrue(sheep.equals(test));
 
     // EXCEPTIONS
     // invalid command
@@ -248,14 +218,12 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n blue-component koala testBlue");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testBlueView = new ImageTextView(controller.getVersions().get("testBlue"),
-            new StringBuilder());
-    TextView koalaBlueView = new ImageTextView(controller.getVersions().get("koala-blue"),
-            new StringBuilder());
-    assertNotEquals(koalaView.toString(), testBlueView.toString());
-    assertEquals(testBlueView.toString(), koalaBlueView.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaBlue = controller.getVersions().get("koala-blue");
+    Image testBlue = controller.getVersions().get("testBlue");
+    assertFalse(koala.equals(koalaBlue));
+    assertFalse(koala.equals(testBlue));
+    assertTrue(koalaBlue.equals(testBlue));
   }
 
   /**
@@ -269,14 +237,12 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n brighten 50 koala testBrighter");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testBrightenView = new ImageTextView(controller.getVersions().get("testBrighter"),
-            new StringBuilder());
-    TextView brightView = new ImageTextView(controller.getVersions().get("koala-brighter"),
-            new StringBuilder());
-    assertNotEquals(koalaView.toString(), testBrightenView.toString());
-    assertEquals(testBrightenView.toString(), brightView.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaBright = controller.getVersions().get("koala-brighter");
+    Image test = controller.getVersions().get("testBrighter");
+    assertFalse(koala.equals(koalaBright));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaBright.equals(test));
 
     // maxed-out brightness
     this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
@@ -324,14 +290,12 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n horizontal-flip koala testHorizontal");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testHorizontal = new ImageTextView(controller.getVersions().get("testHorizontal"),
-            new StringBuilder());
-    TextView horizontal = new ImageTextView(controller.getVersions().get("koala-horizontal"),
-            new StringBuilder());
-    assertNotEquals(koalaView.toString(), testHorizontal.toString());
-    assertEquals(testHorizontal.toString(), horizontal.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaMod = controller.getVersions().get("koala-horizontal");
+    Image test = controller.getVersions().get("testHorizontal");
+    assertFalse(koala.equals(koalaMod));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaMod.equals(test));
   }
 
   /**
@@ -345,14 +309,12 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n vertical-flip koala testVertical");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testVertical = new ImageTextView(controller.getVersions().get("testVertical"),
-            new StringBuilder());
-    TextView vertical = new ImageTextView(controller.getVersions().get("koala-vertical"),
-            new StringBuilder());
-    assertNotEquals(koalaView.toString(), testVertical.toString());
-    assertEquals(testVertical.toString(), vertical.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaMod = controller.getVersions().get("koala-vertical");
+    Image test = controller.getVersions().get("testVertical");
+    assertFalse(koala.equals(koalaMod));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaMod.equals(test));
   }
 
   /**
@@ -366,14 +328,12 @@ public class ImageControllerImplTest {
             "load Images/Koala.ppm koala \n green-component koala testGreen");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testView = new ImageTextView(controller.getVersions().get("testGreen"),
-            new StringBuilder());
-    TextView koalaGreenView = new ImageTextView(controller.getVersions().get("koala-green"),
-            new StringBuilder());
-    assertNotEquals(koalaView.toString(), testView.toString());
-    assertEquals(testView.toString(), koalaGreenView.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaMod = controller.getVersions().get("koala-green");
+    Image test = controller.getVersions().get("testGreen");
+    assertFalse(koala.equals(koalaMod));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaMod.equals(test));
   }
 
   /**
@@ -387,14 +347,12 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n intensity-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testView = new ImageTextView(controller.getVersions().get("test"),
-            new StringBuilder());
-    TextView intensityView =
-            new ImageTextView(controller.getVersions().get("koala-intensity"), new StringBuilder());
-    assertNotEquals(koalaView.toString(), testView.toString());
-    assertEquals(testView.toString(), intensityView.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaMod = controller.getVersions().get("koala-intensity");
+    Image test = controller.getVersions().get("test");
+    assertFalse(koala.equals(koalaMod));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaMod.equals(test));
   }
 
   /**
@@ -408,14 +366,12 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n luma-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testView = new ImageTextView(controller.getVersions().get("test"),
-            new StringBuilder());
-    TextView luma =
-            new ImageTextView(controller.getVersions().get("koala-luma"), new StringBuilder());
-    assertNotEquals(koalaView.toString(), testView.toString());
-    assertEquals(testView.toString(), luma.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaMod = controller.getVersions().get("koala-luma");
+    Image test = controller.getVersions().get("test");
+    assertFalse(koala.equals(koalaMod));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaMod.equals(test));
   }
 
   /**
@@ -429,14 +385,12 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n red-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testView = new ImageTextView(controller.getVersions().get("test"),
-            new StringBuilder());
-    TextView red =
-            new ImageTextView(controller.getVersions().get("koala-red"), new StringBuilder());
-    assertNotEquals(koalaView.toString(), testView.toString());
-    assertEquals(testView.toString(), red.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaMod = controller.getVersions().get("koala-red");
+    Image test = controller.getVersions().get("test");
+    assertFalse(koala.equals(koalaMod));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaMod.equals(test));
   }
 
   /**
@@ -451,14 +405,12 @@ public class ImageControllerImplTest {
             + "load Images/Koala.ppm koala \n value-component koala test");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView koalaView = new ImageTextView(controller.getVersions().get("koala"),
-            new StringBuilder());
-    TextView testView = new ImageTextView(controller.getVersions().get("test"),
-            new StringBuilder());
-    TextView value =
-            new ImageTextView(controller.getVersions().get("koala-value"), new StringBuilder());
-    assertNotEquals(koalaView.toString(), testView.toString());
-    assertEquals(testView.toString(), value.toString());
+    Image koala = controller.getVersions().get("koala");
+    Image koalaMod = controller.getVersions().get("koala-value");
+    Image test = controller.getVersions().get("test");
+    assertFalse(koala.equals(koalaMod));
+    assertFalse(koala.equals(test));
+    assertTrue(koalaMod.equals(test));
   }
 
   /**
@@ -536,16 +488,15 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-greyscaled");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-greyscaled"),
-            new StringBuilder());
-    assertNotEquals(view.toString(), test.toString());
-    for (int i = 0; i < controller.getVersions().get("nyc-greyscaled").getDimensions()[0]; i++) {
-      for (int j = 0; j < controller.getVersions().get("nyc-greyscaled").getDimensions()[1]; j++) {
-        int red = controller.getVersions().get("nyc-greyscaled").getPixel(i, j).getRGB()[0];
-        int green = controller.getVersions().get("nyc-greyscaled").getPixel(i, j).getRGB()[1];
-        int blue = controller.getVersions().get("nyc-greyscaled").getPixel(i, j).getRGB()[2];
-        assertTrue(red == green && red == blue && green == blue);
+    Image nyc = controller.getVersions().get("nyc");
+    Image nycGrey = controller.getVersions().get("nyc-greyscaled");
+    assertFalse(nyc.equals(nycGrey));
+    for (int i = 0; i < nycGrey.getDimensions()[0]; i++) {
+      for (int j = 0; j < nycGrey.getDimensions()[1]; j++) {
+        int red = nycGrey.getPixel(i, j).getRGB()[0];
+        int green = nycGrey.getPixel(i, j).getRGB()[1];
+        int blue = nycGrey.getPixel(i, j).getRGB()[2];
+        assertTrue(red == green && red == blue);
       }
     }
   }
@@ -553,60 +504,48 @@ public class ImageControllerImplTest {
   /**
    * Method to test the sepia command in the imageController. Should properly create a new
    * sepia-filtered image. Due to testing complexity, this test only tests that a new version is
-   * created and that its text representation of RGB values is different than the starter image,
-   * as the sepia modifier is tested elsewhere.
+   * created and that it is not equal to the starter image, as the sepia modifier is tested
+   * elsewhere.
    */
   @Test
   public void testSepia() {
     this.input = new StringReader("load Images/nyc.png nyc \n sepia nyc nyc-sepia");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    assertTrue(controller.getVersions().containsKey("nyc-sepia"));
-    assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-sepia")));
-    assertEquals(ImageImpl.class, controller.getVersions().get("nyc-sepia").getClass());
-    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-sepia"),
-            new StringBuilder());
-    assertNotEquals(view.toString(), test.toString());
+    Image nyc = controller.getVersions().get("nyc");
+    Image test = controller.getVersions().get("nyc-sepia");
+    assertFalse(nyc.equals(test));
   }
 
   /**
    * Method to test the sharpen command in the imageController. Should properly create a new
    * sharpened image. Due to testing complexity, this test only tests that a new version is
-   * created and that its text representation of RGB values is different than the starter image,
-   * as the sharpen modifier is tested in the modifier tests.
+   * created and that it is different than the starter image, as the sharpen modifier is tested
+   * in the modifier tests.
    */
   @Test
   public void testSharpen() {
     this.input = new StringReader("load Images/nyc.png nyc \n sharpen nyc nyc-sharpened");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    assertTrue(controller.getVersions().containsKey("nyc-sharpened"));
-    assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-sharpened")));
-    assertEquals(ImageImpl.class, controller.getVersions().get("nyc-sharpened").getClass());
-    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-sharpened"),
-            new StringBuilder());
-    assertNotEquals(view.toString(), test.toString());
+    Image nyc = controller.getVersions().get("nyc");
+    Image test = controller.getVersions().get("nyc-sharpened");
+    assertFalse(nyc.equals(test));
   }
 
   /**
    * Method to test the blur command in the imageController. Should properly create a new
    * blurred image. Due to testing complexity, this test only tests that a new version is
-   * created and that its text representation of RGB values is different than the starter image,
-   * as the blur modifier is tested in the modifier tests.
+   * created and that it is different than the starter image, as the blur modifier is tested
+   * in the modifier tests.
    */
   @Test
   public void testBlur() {
     this.input = new StringReader("load Images/nyc.png nyc \n blur nyc nyc-blurred");
     this.controller = new ImageControllerImpl(input);
     controller.playGame();
-    assertTrue(controller.getVersions().containsKey("nyc-blurred"));
-    assertTrue(controller.getVersions().containsValue(controller.getVersions().get("nyc-blurred")));
-    assertEquals(ImageImpl.class, controller.getVersions().get("nyc-blurred").getClass());
-    TextView view = new ImageTextView(controller.getVersions().get("nyc"), new StringBuilder());
-    TextView test = new ImageTextView(controller.getVersions().get("nyc-blurred"),
-            new StringBuilder());
-    assertNotEquals(view.toString(), test.toString());
+    Image nyc = controller.getVersions().get("nyc");
+    Image test = controller.getVersions().get("nyc-blurred");
+    assertFalse(nyc.equals(test));
   }
 }
