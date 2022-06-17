@@ -35,9 +35,9 @@ import static org.junit.Assert.fail;
  * blur
  */
 public class ImageControllerImplTest {
-  Readable input;
-  ImageProcessingModel model = new ImageProcessingModelImpl();
-  ImageController controller;
+  private Readable input;
+  private ImageProcessingModel model = new ImageProcessingModelImpl();
+  private ImageController controller;
 
   /**
    * Method to test the constructor for an image controller. Should be initialized with an empty

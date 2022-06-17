@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  * Class to represent testing for the image processing model.
  */
 public class ImageProcessingModelImplTest {
-  ImageProcessingModel model = new ImageProcessingModelImpl();
+  private final ImageProcessingModel model = new ImageProcessingModelImpl();
 
   /**
    * Method to test the constructor for this model. Verifies that the model has been properly
