@@ -4,6 +4,8 @@ import java.io.StringReader;
 import java.util.Scanner;
 
 import controller.ImageControllerImpl;
+import model.ImageProcessingModel;
+import model.ImageProcessingModelImpl;
 
 /**
  * Represents the main Image Processing class. Contains the main method to run the game. Edit
@@ -42,8 +44,9 @@ public class ImageProcessing {
     }
     String commands = builder.toString();
 
+    ImageProcessingModel model = new ImageProcessingModelImpl();
     Readable input = new StringReader(commands);
-    ImageControllerImpl controller = new ImageControllerImpl(input);
+    ImageControllerImpl controller = new ImageControllerImpl(input, model);
     controller.playGame();
   }
 }

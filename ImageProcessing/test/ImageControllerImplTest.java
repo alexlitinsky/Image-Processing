@@ -6,9 +6,8 @@ import java.util.NoSuchElementException;
 import controller.ImageController;
 import controller.ImageControllerImpl;
 import model.Image;
-import model.ImageImpl;
-import view.ImageTextView;
-import view.TextView;
+import model.ImageProcessingModel;
+import model.ImageProcessingModelImpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -37,6 +36,7 @@ import static org.junit.Assert.fail;
  */
 public class ImageControllerImplTest {
   Readable input;
+  ImageProcessingModel model = new ImageProcessingModelImpl();
   ImageController controller;
 
   /**
@@ -47,12 +47,12 @@ public class ImageControllerImplTest {
   public void testConstructor() {
     // no user input
     this.input = new StringReader("");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertEquals(0, controller.getVersions().size());
     // EXCEPTIONS
     try {
-      this.controller = new ImageControllerImpl(null);
+      this.controller = new ImageControllerImpl(null, model);
       controller.playGame();
       fail();
     } catch (IllegalArgumentException e) {
@@ -84,7 +84,7 @@ public class ImageControllerImplTest {
   public void testLoad() {
     // valid PPM input
     this.input = new StringReader("load Images/Koala.ppm koala");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertTrue(controller.getVersions().containsKey("koala"));
     assertEquals(1024, controller.getVersions().get("koala").getDimensions()[0]);
@@ -93,7 +93,7 @@ public class ImageControllerImplTest {
 
     // valid PNG input
     this.input = new StringReader("load Images/nyc.png nyc");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertTrue(controller.getVersions().containsKey("nyc"));
     assertEquals(500, controller.getVersions().get("nyc").getDimensions()[0]);
@@ -107,7 +107,7 @@ public class ImageControllerImplTest {
     // file does not exist
     try {
       this.input = new StringReader("load Images/Koal.ppm koala");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       fail();
     } catch (IllegalArgumentException e) {
@@ -117,7 +117,7 @@ public class ImageControllerImplTest {
     // wrong file type
     try {
       this.input = new StringReader("load Images/Koala.pp koala");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       fail();
     } catch (IllegalArgumentException e) {
@@ -126,7 +126,7 @@ public class ImageControllerImplTest {
     // invalid command
     try {
       this.input = new StringReader("loa Images/Koala.ppm koala");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       fail();
     } catch (IllegalArgumentException e) {
@@ -135,7 +135,7 @@ public class ImageControllerImplTest {
     // test overriding the same key
     this.input = new StringReader("load Images/Koala.ppm koala " +
             "load Images/koala-brighter.ppm koala");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertEquals(1, controller.getVersions().size());
     assertTrue(controller.getVersions().containsKey("koala"));
@@ -154,7 +154,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.ppm sheep\n"
             + "load res/saveTest.ppm test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image sheep = controller.getVersions().get("sheep");
     Image test = controller.getVersions().get("test");
@@ -164,7 +164,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.png sheep \n"
             + "load res/saveTest.png test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertTrue(sheep.equals(test));
 
@@ -172,7 +172,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.jpeg sheep \n"
             + "load res/saveTest.jpeg test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertTrue(sheep.equals(test));
 
@@ -180,7 +180,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.jpg sheep\n"
             + "load res/saveTest.jpg test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertTrue(sheep.equals(test));
 
@@ -188,7 +188,7 @@ public class ImageControllerImplTest {
     this.input = new StringReader("load res/Sheep.ppm sheep \n"
             + "save res/saveTest.bmp sheep\n"
             + "load res/saveTest.bmp loadedSaveTest");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertTrue(sheep.equals(test));
 
@@ -199,7 +199,7 @@ public class ImageControllerImplTest {
               "\n brighten 10 koala saveTest \n"
               + "save res/saveTest.ppm \n"
               + "load res/saveTest.ppm loadedSaveTest");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       fail();
     } catch (IllegalArgumentException e) {
@@ -216,7 +216,7 @@ public class ImageControllerImplTest {
   public void testBlueComponent() {
     this.input = new StringReader("load Images/koala-blue-greyscale.png koala-blue \n" +
             "load Images/Koala.ppm koala \n blue-component koala testBlue");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaBlue = controller.getVersions().get("koala-blue");
@@ -235,7 +235,7 @@ public class ImageControllerImplTest {
   public void testBrighten() {
     this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
             "load Images/Koala.ppm koala \n brighten 50 koala testBrighter");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaBright = controller.getVersions().get("koala-brighter");
@@ -247,7 +247,7 @@ public class ImageControllerImplTest {
     // maxed-out brightness
     this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
             "load Images/Koala.ppm koala \n brighten 256 koala testBrighter");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     for (int i = 0; i < controller.getVersions().get("testBrighter").getDimensions()[0] - 1; i++) {
       for (int j = 0; j <
@@ -264,7 +264,7 @@ public class ImageControllerImplTest {
     // min brightness
     this.input = new StringReader("load Images/koala-brighter-by-50.png koala-brighter \n" +
             "load Images/Koala.ppm koala \n brighten -256 koala testBrighter");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     for (int i = 0; i < controller.getVersions().get("testBrighter").getDimensions()[0] - 1; i++) {
       for (int j = 0; j <
@@ -288,7 +288,7 @@ public class ImageControllerImplTest {
   public void testFlipHorizontal() {
     this.input = new StringReader("load Images/koala-horizontal.png koala-horizontal \n" +
             "load Images/Koala.ppm koala \n horizontal-flip koala testHorizontal");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-horizontal");
@@ -307,7 +307,7 @@ public class ImageControllerImplTest {
   public void testFlipVertical() {
     this.input = new StringReader("load Images/koala-vertical.png koala-vertical \n" +
             "load Images/Koala.ppm koala \n vertical-flip koala testVertical");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-vertical");
@@ -326,7 +326,7 @@ public class ImageControllerImplTest {
   public void testGreenComponent() {
     this.input = new StringReader("load Images/koala-green-greyscale.png koala-green \n" +
             "load Images/Koala.ppm koala \n green-component koala testGreen");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-green");
@@ -345,7 +345,7 @@ public class ImageControllerImplTest {
   public void testIntensityComponent() {
     this.input = new StringReader("load Images/koala-intensity-greyscale.png koala-intensity \n"
             + "load Images/Koala.ppm koala \n intensity-component koala test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-intensity");
@@ -364,7 +364,7 @@ public class ImageControllerImplTest {
   public void testLumaComponent() {
     this.input = new StringReader("load Images/koala-luma-greyscale.png koala-luma \n"
             + "load Images/Koala.ppm koala \n luma-component koala test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-luma");
@@ -383,7 +383,7 @@ public class ImageControllerImplTest {
   public void testRedComponent() {
     this.input = new StringReader("load Images/koala-red-greyscale.png koala-red \n"
             + "load Images/Koala.ppm koala \n red-component koala test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-red");
@@ -403,7 +403,7 @@ public class ImageControllerImplTest {
   public void testValueComponent() {
     this.input = new StringReader("load Images/koala-value-greyscale.png koala-value \n"
             + "load Images/Koala.ppm koala \n value-component koala test");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image koala = controller.getVersions().get("koala");
     Image koalaMod = controller.getVersions().get("koala-value");
@@ -419,14 +419,14 @@ public class ImageControllerImplTest {
   @Test
   public void testGetVersions() {
     this.input = new StringReader("load Images/koala-value-greyscale.png koala-value");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertEquals(1, controller.getVersions().size());
     assertTrue(controller.getVersions().containsKey("koala-value"));
 
     // empty command case
     this.input = new StringReader("");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     assertEquals(0, controller.getVersions().size());
     assertTrue(controller.getVersions().isEmpty());
@@ -434,7 +434,7 @@ public class ImageControllerImplTest {
     // invalid command case
     try {
       this.input = new StringReader("asdf");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       assertEquals(0, controller.getVersions().size());
       fail();
@@ -443,7 +443,7 @@ public class ImageControllerImplTest {
     }
     try {
       this.input = new StringReader("asdf asdf");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       assertEquals(0, controller.getVersions().size());
       fail();
@@ -452,7 +452,7 @@ public class ImageControllerImplTest {
     }
     try {
       this.input = new StringReader("asdf asdf asdf");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       assertEquals(0, controller.getVersions().size());
       fail();
@@ -461,7 +461,7 @@ public class ImageControllerImplTest {
     }
     try {
       this.input = new StringReader("load");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       fail();
     } catch (NoSuchElementException e) {
@@ -470,7 +470,7 @@ public class ImageControllerImplTest {
     }
     try {
       this.input = new StringReader("load Images/Koala.ppm");
-      this.controller = new ImageControllerImpl(input);
+      this.controller = new ImageControllerImpl(input, model);
       controller.playGame();
       fail();
     } catch (NoSuchElementException e) {
@@ -486,7 +486,7 @@ public class ImageControllerImplTest {
   @Test
   public void testGreyscale() {
     this.input = new StringReader("load Images/nyc.png nyc \n greyscale nyc nyc-greyscaled");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image nycGrey = controller.getVersions().get("nyc-greyscaled");
@@ -510,7 +510,7 @@ public class ImageControllerImplTest {
   @Test
   public void testSepia() {
     this.input = new StringReader("load Images/nyc.png nyc \n sepia nyc nyc-sepia");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image test = controller.getVersions().get("nyc-sepia");
@@ -526,7 +526,7 @@ public class ImageControllerImplTest {
   @Test
   public void testSharpen() {
     this.input = new StringReader("load Images/nyc.png nyc \n sharpen nyc nyc-sharpened");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image test = controller.getVersions().get("nyc-sharpened");
@@ -542,7 +542,7 @@ public class ImageControllerImplTest {
   @Test
   public void testBlur() {
     this.input = new StringReader("load Images/nyc.png nyc \n blur nyc nyc-blurred");
-    this.controller = new ImageControllerImpl(input);
+    this.controller = new ImageControllerImpl(input, model);
     controller.playGame();
     Image nyc = controller.getVersions().get("nyc");
     Image test = controller.getVersions().get("nyc-blurred");

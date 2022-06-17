@@ -25,6 +25,7 @@ import controller.commands.Sepia;
 import controller.commands.Sharpen;
 import controller.commands.ValueComp;
 import model.Image;
+import model.ImageProcessingModel;
 
 /**
  * Class to represent the controller for an image. Takes in a readable input. Has a set list of
@@ -34,19 +35,22 @@ public class ImageControllerImpl implements ImageController {
   private final Readable input;
   private final Map<String, Function<Scanner, Command>> allCommands;
   private Map<String, Image> versions;
+  private ImageProcessingModel model;
 
   /**
    * Constructor for this implementation of an image controller.
    *
    * @param input the input being given to the controller
+   * @param model the model being manipulated by the controller
    * @throws IllegalArgumentException if one of the parameters passed to it is null
    */
-  public ImageControllerImpl(Readable input)
+  public ImageControllerImpl(Readable input, ImageProcessingModel model)
           throws IllegalArgumentException {
-    if (input == null) {
+    if (input == null || model == null) {
       throw new IllegalArgumentException("Parameters cannot be null");
     }
     this.input = input;
+    this.model = model;
     this.versions = new HashMap<>();
     allCommands = new HashMap<>();
     allCommands.put("load", s -> new Load(s.next(), s.next(), this));
