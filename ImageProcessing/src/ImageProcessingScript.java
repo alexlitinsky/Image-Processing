@@ -8,32 +8,31 @@ import model.ImageProcessingModel;
 import model.ImageProcessingModelImpl;
 
 /**
- * Represents the main Image Processing class. Contains the main method to run the game. Edit
+ * Represents the  Image Processing class for a script. Contains a method to run the game. Edit
  * game inputs by editing run configuration.
  */
-public class ImageProcessing {
+public class ImageProcessingScript {
   /**
-   * Initializes the program to start initializing images.
+   * Initializes the program to start initializing images with a script.
    *
-   * @param args the input and their associated commands.
+   * @param args the input (text file) and their associated commands.
    */
-  public static void main(String[] args) throws FileNotFoundException {
+  public static void runScript(String[] args) throws FileNotFoundException {
     Scanner sc;
     String fileType = "";
-    for (int i = 0; i < args[0].length(); i++) {
-      if (args[0].charAt(i) == '.') {
-        fileType = args[0].substring(i + 1);
+    for (int i = 0; i < args[1].length(); i++) {
+      if (args[1].charAt(i) == '.') {
+        fileType = args[1].substring(i + 1);
       }
     }
     if (!fileType.equals("txt")) {
       throw new IllegalArgumentException("If entering a script, it must be a .txt file");
     }
 
-
     try {
-      sc = new Scanner(new FileInputStream(args[0]));
+      sc = new Scanner(new FileInputStream(args[1]));
     } catch (FileNotFoundException e) {
-      throw new FileNotFoundException("Filename " + args[0] + " not found!");
+      throw new FileNotFoundException("Filename " + args[1] + " not found!");
     }
     StringBuilder builder = new StringBuilder();
     while (sc.hasNextLine()) {
