@@ -24,6 +24,9 @@ import javax.swing.ImageIcon;
 
 import histomodel.ImageHistogram;
 import model.Image;
+import view.dialogs.AlertState;
+import view.dialogs.LoadState;
+import view.dialogs.SaveState;
 
 public class GraphicalViewImpl implements GraphicalView {
 
@@ -83,7 +86,7 @@ public class GraphicalViewImpl implements GraphicalView {
     }
     // have to accompany histogram in view using different JLable, somewhere else on the screen
     if (currentHisto != null) {
-      this.imageDisplay.setViewportView(new JLabel(new ImageIcon(currentModel.createHistogram())));
+      this.imageDisplay.setViewportView(new JLabel(new ImageIcon(currentHisto.createHistogram())));
     } else {
       this.imageDisplay.setViewportView(new JLabel(new ImageIcon()));
     }
@@ -103,10 +106,11 @@ public class GraphicalViewImpl implements GraphicalView {
   @Override
   public List<String> dialogHandler(String dialog) {
     switch (dialog) {
-      case "toggle":
-        return new ToggleState().getState();
-      case "set":
-        return new CurrentState().getState();
+      // not sure if we need these
+//      case "toggle":
+//        return new ToggleState().getState();
+//      case "set":
+//        return new CurrentState().getState();
       case "load":
         return new LoadState().getState();
       case "save":

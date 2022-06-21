@@ -82,7 +82,7 @@ public class ImageHistogramImpl implements ImageHistogram {
     data.add(imageDataI);
     return data;
   }
-  
+
   // link to create histograms:
   // https://helpdesk.objects.com.au/java/how-to-display-bar-chart-using-swing
 
