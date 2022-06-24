@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import model.modifiers.Modifier;
@@ -71,4 +72,10 @@ public interface Image {
    * @return a list of pixels
    */
   List<Pixel> convertToList();
+
+  /**
+   * Converts one of our image representations to a buffered image to be displayed.
+   * @return the buffered image created from our image representation
+   */
+  BufferedImage createBufferedImage();
 }

@@ -1,6 +1,8 @@
 package model;
 
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,5 +145,21 @@ public class ImageImpl implements Image {
     return list;
   }
 
-
+  /**
+   * Converts one of our image representations to a buffered image to be displayed.
+   *
+   * @return the buffered image created from our image representation
+   */
+  @Override
+  public BufferedImage createBufferedImage() {
+    BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    for (int i = 0; i < imagePixels[0].length; i++) {
+      for (int j = 0; j < imagePixels.length; j++) {
+        Pixel pixel = this.imagePixels[i][j];
+        Color color = new Color(pixel.getRGB()[0], pixel.getRGB()[1], pixel.getRGB()[2]);
+        image.setRGB(i, j, color.getRGB());
+      }
+    }
+    return image;
+  }
 }

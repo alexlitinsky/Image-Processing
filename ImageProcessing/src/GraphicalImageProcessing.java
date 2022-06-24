@@ -32,9 +32,9 @@ public class GraphicalImageProcessing {
       try {
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
         ImageHistogram histo = new ImageHistogramImpl();
-        Image model = new ImageImpl(0, 0);
+        Image model = new ImageImpl(1, 1);
         GraphicalView gView = new GraphicalViewImpl("GRIME", histo, model);
-        ImageController gController = new GUIControllerImpl(gView, histo);
+        ImageController gController = new GUIControllerImpl(gView, model);
         gController.playGame();
 
       } catch (UnsupportedLookAndFeelException e) {

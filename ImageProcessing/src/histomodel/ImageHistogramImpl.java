@@ -1,12 +1,17 @@
 package histomodel;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.swing.*;
+
 import model.Image;
 import model.Pixel;
+import view.BarChartGraphic;
 
 /**
  * Represents the implementation for an ImageHistogram
@@ -83,7 +88,28 @@ public class ImageHistogramImpl implements ImageHistogram {
     return data;
   }
 
-  // link to create histograms:
-  // https://helpdesk.objects.com.au/java/how-to-display-bar-chart-using-swing
+  /**
+   * Creates an image of the bar chart representing this histogram to be displayed by other methods.
+   *
+   * @return the image created to represent this histogram
+   */
+  @Override
+  public java.awt.Image createHistogram() {
+    BarChartGraphic chart = new BarChartGraphic();
+    chart.addBar(Color.red, imageDataR.size());
+    chart.addBar(Color.green, imageDataG.size());
+    chart.addBar(Color.blue, imageDataB.size());
+    chart.addBar(Color.black, imageDataI.size());
+    BufferedImage image = new BufferedImage(chart.getPreferredSize().width,
+            chart.getPreferredSize().height,
+            BufferedImage.TYPE_INT_RGB);
+    Graphics graphics = image.createGraphics();
+    chart.paint(graphics);
+    graphics.drawImage(image, image.getWidth(new JLabel()), image.getHeight(new JLabel()),
+            new JLabel());
+    graphics.dispose();
+    return image;
+  }
+
 
 }

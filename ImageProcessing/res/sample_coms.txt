@@ -1,5 +1,5 @@
 #load Sheep.ppm and call it 'sheep'
-load Sheep.ppm sheep
+load res/Sheep.ppm sheep
 
 #brighten sheep by adding 10 to each RGB component
 brighten 10 sheep sheep-brighter

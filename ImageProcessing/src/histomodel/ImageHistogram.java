@@ -25,4 +25,9 @@ public interface ImageHistogram {
 
   ArrayList<Map<Integer, Integer>> getHistogramData();
 
+  /**
+   * Creates an image of the bar chart representing this histogram to be displayed by other methods.
+   * @return the image created to represent this histogram
+   */
+  java.awt.Image createHistogram();
 }

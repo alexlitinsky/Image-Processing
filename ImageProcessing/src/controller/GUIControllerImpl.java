@@ -26,7 +26,7 @@ public class GUIControllerImpl implements ActionListener, ImageController {
    * Constructs a GraphicalController object with a view and model.
    *
    * @param view  IGraphicalView view object
-   * @param model ILayer model obj
+   * @param model image model obj
    */
   public GUIControllerImpl(GraphicalView view, Image model) {
     this.view = view;

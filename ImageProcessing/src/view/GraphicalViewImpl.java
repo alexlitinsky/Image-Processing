@@ -80,7 +80,8 @@ public class GraphicalViewImpl implements GraphicalView {
     Image currentModel = this.model;
     ImageHistogram currentHisto = this.histo;
     if (currentModel != null) {
-      this.imageDisplay.setViewportView(new JLabel(new ImageIcon(currentModel.createImage())));
+      this.imageDisplay.setViewportView(new JLabel
+              (new ImageIcon(currentModel.createBufferedImage())));
     } else {
       this.imageDisplay.setViewportView(new JLabel(new ImageIcon()));
     }
