@@ -10,13 +10,24 @@ import controller.commands.BetterSave;
 import controller.commands.Command;
 import histomodel.ImageHistogram;
 import model.Image;
+import model.modifiers.BlueCompModifier;
 import model.modifiers.BlurModifier;
+import model.modifiers.BrightnessModifier;
+import model.modifiers.FlipModifier;
+import model.modifiers.GreenCompModifier;
 import model.modifiers.GreyscaleModifier;
+import model.modifiers.IntensityCompModifier;
+import model.modifiers.LumaCompModifier;
+import model.modifiers.RedCompModifier;
 import model.modifiers.SepiaModifier;
 import model.modifiers.SharpenModifier;
+import model.modifiers.ValueCompModifier;
 import utilities.ImageUtil;
 import view.GraphicalView;
 
+/**
+ * Implementation of a GUI-controlled controller.
+ */
 public class GUIControllerImpl implements ActionListener, ImageController {
 
   private final GraphicalView view;
@@ -33,12 +44,18 @@ public class GUIControllerImpl implements ActionListener, ImageController {
     this.model = model;
   }
 
+  /**
+   * Method to start the imageProcessing program.
+   */
   @Override
   public void playGame() {
     this.view.setListener(this);
     this.view.display();
   }
 
+  /**
+   * Method to handle the case where the user clicks the load button.
+   */
   private void loadHandler() {
     List<String> res = this.view.dialogHandler("load");
 
@@ -46,31 +63,26 @@ public class GUIControllerImpl implements ActionListener, ImageController {
       return;
     }
 
+    try {
+      System.out.println(ImageUtil.readFile(res.get(1)));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     if (res.size() == 2) {
-      if (res.get(0).equals("Image")) {
+      if (res.contains("Image")) {
         try {
-          this.model = ImageUtil.readFile(res.get(0) + res.get(1));
-          //this.model.addLayer(this.fileController.readImage(res.get(1)));
+          this.model = ImageUtil.readFile(res.get(1));
+          this.view.alert("Image loaded successfully!");
         } catch (IOException ioException) {
           this.view.alert("There was an error loading that image");
           return;
         }
-        this.view.alert("Image loaded successfully!");
       } else {
         throw new IllegalArgumentException("Couldn't load image.");
       }
     }
   }
-
-  private boolean isNumeric(String str) {
-    try {
-      Double.parseDouble(str);
-    } catch (NumberFormatException e) {
-      return false;
-    }
-    return true;
-  }
-
 
 
 //  private void toggleVisHandler() {
@@ -139,6 +151,9 @@ public class GUIControllerImpl implements ActionListener, ImageController {
 //    }
 //  }
 
+  /**
+   * Method to handle the case where the user chooses to save the current image.
+   */
   private void saveHandler() {
     List<String> res = this.view.dialogHandler("export");
 
@@ -157,6 +172,10 @@ public class GUIControllerImpl implements ActionListener, ImageController {
     }
   }
 
+  /**
+   * Method which manipulates the model based on which action is performed by the user.
+   * @param e the event to be processed
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     String command = e.getActionCommand();
@@ -166,6 +185,46 @@ public class GUIControllerImpl implements ActionListener, ImageController {
     } else {
       if (this.model != null) {
         switch (command) {
+          case "Vertical flip":
+            this.model.newModdedImage(new FlipModifier(true));
+            this.view.alert("Vertical flip applied successfully!");
+            break;
+          case "Horizontal flip":
+            this.model.newModdedImage(new FlipModifier(false));
+            this.view.alert("Horizontal flip applied successfully!");
+            break;
+          case "Red component":
+            this.model.newModdedImage(new RedCompModifier());
+            this.view.alert("Red component applied successfully!");
+            break;
+          case "Green component":
+            this.model.newModdedImage(new GreenCompModifier());
+            this.view.alert("Green component applied successfully!");
+            break;
+          case "Blue component":
+            this.model.newModdedImage(new BlueCompModifier());
+            this.view.alert("Blue component applied successfully!");
+            break;
+          case "Value component":
+            this.model.newModdedImage(new ValueCompModifier());
+            this.view.alert("Value component applied successfully!");
+            break;
+          case "Intensity component":
+            this.model.newModdedImage(new IntensityCompModifier());
+            this.view.alert("Intensity component applied successfully!");
+            break;
+          case "Luma component":
+            this.model.newModdedImage(new LumaCompModifier());
+            this.view.alert("Luma component applied successfully!");
+            break;
+          case "Brighten":
+            this.model.newModdedImage(new BrightnessModifier(10));
+            this.view.alert("Brighten applied successfully!");
+            break;
+          case "Darken":
+            this.model.newModdedImage(new BrightnessModifier(-10));
+            this.view.alert("Darken applied successfully!");
+            break;
           case "Blur":
             this.model.newModdedImage(new BlurModifier());
             this.view.alert("Blur applied successfully!");
@@ -206,6 +265,11 @@ public class GUIControllerImpl implements ActionListener, ImageController {
     }
   }
 
+  /**
+   * Method to retrieve the versions of this controller. For a GUI controller, the only model
+   * version is the one currently being manipulated by the user.
+   * @return null because there is no map of versions to return because there is only one version
+   */
   @Override
   public Map<String, Image> getVersions() {
     return null;

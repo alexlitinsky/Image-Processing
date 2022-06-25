@@ -15,6 +15,18 @@ src/ImageProcessingScript.txt
 
 To run a JAR file correctly, use the command: java -jar ImageProcessing.jar sample_coms.txt.
 
+*ASSIGNMENT 5 CHANGES*
+
+Added blur, sepia, sharpen and greyscale commands and underlying functionality, as well as
+improved testing efficiency by implementing RGB value equality methods for pixel and image.
+
+*ASSIGNMENT 6 CHANGES*
+
+Added graphic-user-interface representation of existing functionality. To access GUI functionality, 
+run main method with just the argument "interactive".
+
+Citations:
+
 The sample sheep image used in our script was pulled from unsplash.com, a website offering free images downloadable for any use. Click link and click "Unsplash License" in image details to see use license:
 https://unsplash.com/photos/zAlxWHx0vNc
 

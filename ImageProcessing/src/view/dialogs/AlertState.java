@@ -25,6 +25,10 @@ public class AlertState extends JDialog {
    * @param message String error message.
    */
   public AlertState(String message) {
+    this.contentPane = new JPanel();
+    this.buttonCancel = new JButton();
+    this.textPane1 = new JTextPane();
+    this.alertTextPane = new JTextPane();
     setContentPane(contentPane);
     setModal(true);
     setResizable(false);
