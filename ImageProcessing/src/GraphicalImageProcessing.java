@@ -28,7 +28,7 @@ public class GraphicalImageProcessing {
       } catch (FileNotFoundException e) {
         throw new RuntimeException(e);
       }
-    } else if (args[0].equals("interactive")) {
+    } else if (args[0].equals("interactive") || args.length == 0) {
       try {
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
         ImageHistogram histo = new ImageHistogramImpl();

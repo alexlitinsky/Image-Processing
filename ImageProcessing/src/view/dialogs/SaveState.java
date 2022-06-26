@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JFileChooser;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 import view.Dialog;
 
@@ -22,17 +23,17 @@ public class SaveState extends JDialog implements Dialog {
    * the image in as well as enter a file name.
    */
   public SaveState() {
-    JFileChooser fileChooser = new JFileChooser();
-
+    JFileChooser fileChooser = new JFileChooser
+            (FileSystemView.getFileSystemView().getHomeDirectory());
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Image",
+            "jpeg", "jpg", "png", "bmp", "gif");
+    fileChooser.setFileFilter(filter);
     setContentPane(contentPane);
     setModal(true);
     setResizable(false);
     res = new ArrayList<>();
 
     contentPane.add(fileChooser);
-    fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-    fileChooser.setAcceptAllFileFilterUsed(false);
-    fileChooser.setFileFilter(new FileNameExtensionFilter("State", "txt"));
 
     int result = fileChooser.showSaveDialog(this.contentPane);
 

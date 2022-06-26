@@ -153,11 +153,11 @@ public class ImageImpl implements Image {
   @Override
   public BufferedImage createBufferedImage() {
     BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    for (int i = 0; i < imagePixels[0].length; i++) {
-      for (int j = 0; j < imagePixels.length; j++) {
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
         Pixel pixel = this.imagePixels[i][j];
         Color color = new Color(pixel.getRGB()[0], pixel.getRGB()[1], pixel.getRGB()[2]);
-        image.setRGB(i, j, color.getRGB());
+        image.setRGB(j, i, color.getRGB());
       }
     }
     return image;

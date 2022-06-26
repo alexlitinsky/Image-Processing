@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.awt.image.BufferedImage;
+
 import model.Image;
 import model.ImageImpl;
 import model.modifiers.BrightnessModifier;
@@ -216,5 +218,25 @@ public class ImageImplTest {
     } catch (IllegalArgumentException e) {
       assertEquals("Image to be compared to must not be null.", e.getMessage());
     }
+  }
+
+  /**
+   * Method to test the createBufferedImage() method.
+   */
+  @Test
+  public void testCreateBufferedImage() {
+    initModel2x2();
+    assertEquals(0, img.getPixel(0,0).getRGB()[0]);
+    assertEquals(1, img.getPixel(1,0).getRGB()[0]);
+    assertEquals(2, img.getPixel(0,1).getRGB()[0]);
+    assertEquals(3, img.getPixel(1,1).getRGB()[0]);
+    BufferedImage test = img.createBufferedImage();
+    assertEquals(2, test.getHeight());
+    assertEquals(2, test.getWidth());
+    assertEquals(1, test.getType());
+    assertEquals(-16777216, test.getRGB(0, 0));
+    assertEquals(-16645630, test.getRGB(1, 0));
+    assertEquals(-16711423, test.getRGB(0, 1));
+    assertEquals(-16579837, test.getRGB(1, 1));
   }
 }

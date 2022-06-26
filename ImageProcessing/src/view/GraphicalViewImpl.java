@@ -12,6 +12,9 @@ import view.dialogs.AlertState;
 import view.dialogs.LoadState;
 import view.dialogs.SaveState;
 
+/**
+ * Class to represent an implementation of a graphical view.
+ */
 public class GraphicalViewImpl implements GraphicalView {
 
   private final JButton darkenBtn;
@@ -49,6 +52,7 @@ public class GraphicalViewImpl implements GraphicalView {
     //this.create();
     this.histo = histo;
     this.model = model;
+    this.imageDisplay = new JScrollPane();
     this.flipVBtn = new JButton("Vertical flip");
     flipVBtn.setActionCommand("Vertical flip");
     flipHBtn = new JButton("Horizontal flip");
@@ -88,7 +92,7 @@ public class GraphicalViewImpl implements GraphicalView {
     //main modificaitons made start here
     frame = new JFrame("Image Processing Application");
     frame.setVisible(true);
-    frame.setPreferredSize(new Dimension(1200,800));
+    frame.setPreferredSize(new Dimension(1200, 800));
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setResizable(false);
     frame.pack();
@@ -97,8 +101,8 @@ public class GraphicalViewImpl implements GraphicalView {
     // add image mod area
     imageModArea = new JPanel();
     imageModArea.setBorder(BorderFactory.createTitledBorder("Image Modify Area"));
-    imageModArea.setPreferredSize(new Dimension(950,600));
-    frame.add(imageModArea,BorderLayout.WEST);
+    imageModArea.setPreferredSize(new Dimension(950, 600));
+    frame.add(imageModArea, BorderLayout.WEST);
 
     // add histogram area
     imageHistoArea = new JPanel();
@@ -110,6 +114,7 @@ public class GraphicalViewImpl implements GraphicalView {
     buttons = new JPanel();
     buttons.setPreferredSize(new Dimension(200, 200));
     buttons.add(loadBtn);
+    buttons.add(saveBtn);
     buttons.add(flipVBtn);
     buttons.add(flipHBtn);
     buttons.add(redCompBtn);
@@ -133,36 +138,65 @@ public class GraphicalViewImpl implements GraphicalView {
     this.frame.setVisible(true);
   }
 
+  /**
+   * Updates the model shown to be the current model, affected by whatever the last modification
+   * was.
+   */
   @Override
   public void refresh() {
     Image currentModel = this.model;
     ImageHistogram currentHisto = this.histo;
-    imageModArea.add(new JLabel(new ImageIcon(model.createBufferedImage())));
+    ImageIcon picture = new ImageIcon(currentModel.createBufferedImage());
+    JLabel label = new JLabel(picture);
     if (currentModel != null) {
-      this.imageDisplay.setViewportView(new JLabel
-              (new ImageIcon(currentModel.createBufferedImage())));
+      this.imageModArea.add(label);
+      this.imageModArea.updateUI();
+      if (this.imageModArea.getComponentCount() >= 2) {
+        imageModArea.remove(0);
+      }
     } else {
       this.imageDisplay.setViewportView(new JLabel(new ImageIcon()));
     }
     // have to accompany histogram in view using different JLable, somewhere else on the screen
     if (currentHisto != null) {
-      this.imageDisplay.setViewportView(new JLabel(new ImageIcon(currentHisto.createHistogram())));
+      this.imageHistoArea.add(new JLabel(new ImageIcon(currentHisto.createHistogram())));
+      this.imageHistoArea.updateUI();
+      if (this.imageHistoArea.getComponentCount() >= 2) {
+        imageHistoArea.remove(0);
+      }
+      //this.imageDisplay.setViewportView(new JLabel(new ImageIcon(currentHisto.createHistogram())));
     } else {
-      this.imageDisplay.setViewportView(new JLabel(new ImageIcon()));
+      //this.imageDisplay.setViewportView(new JLabel(new ImageIcon()));
     }
   }
 
+  /**
+   * Publishes an alert.
+   *
+   * @param msg the message to be printed
+   */
   @Override
   public void alert(String msg) {
     new AlertState(msg);
 
   }
 
+  /**
+   * Updates the histogram in the view.
+   *
+   * @param histo the histogram to be displayed
+   */
   @Override
   public void setHistogram(ImageHistogram histo) {
     this.histo = histo;
   }
 
+  /**
+   * The dialog handler for various results and commands.
+   *
+   * @param dialog the dialog to be monitored (based on which command is executed)
+   * @return the result of a dialog interaction
+   */
   @Override
   public List<String> dialogHandler(String dialog) {
     switch (dialog) {
@@ -180,13 +214,38 @@ public class GraphicalViewImpl implements GraphicalView {
     }
   }
 
+  /**
+   * Sets the listener for this view.
+   *
+   * @param listener the action listener
+   */
   @Override
   public void setListener(ActionListener listener) {
     this.listener = listener;
     this.setListeners();
   }
 
+  /**
+   * Updates the view model to the image model currently being manipulated by the user.
+   *
+   * @param newModel the new image model
+   */
+  @Override
+  public void updateModel(Image newModel) {
+    this.model = newModel;
+  }
+
   private void setListeners() {
+    flipVBtn.addActionListener(listener);
+    flipHBtn.addActionListener(listener);
+    redCompBtn.addActionListener(listener);
+    greenCompBtn.addActionListener(listener);
+    blueCompBtn.addActionListener(listener);
+    valueCompBtn.addActionListener(listener);
+    intensityCompBtn.addActionListener(listener);
+    lumaCompBtn.addActionListener(listener);
+    brightenBtn.addActionListener(listener);
+    darkenBtn.addActionListener(listener);
     blurBtn.addActionListener(listener);
     sharpenBtn.addActionListener(listener);
     sepiaBtn.addActionListener(listener);
@@ -194,9 +253,5 @@ public class GraphicalViewImpl implements GraphicalView {
     loadBtn.addActionListener(listener);
     saveBtn.addActionListener(listener);
     toggleVisBtn.addActionListener(listener);
-  }
-
-  private void createUIComponents() {
-    this.imageDisplay = new JScrollPane();
   }
 }
