@@ -45,15 +45,7 @@ public class LoadState extends JDialog implements Dialog {
     fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("State",
             "txt"));
     res.add(fileChooser.getFileFilter().getDescription());
-
-    int result = fileChooser.showOpenDialog(this.contentPane);
-
-    if (result == JFileChooser.APPROVE_OPTION) {
-      System.out.println("File loaded...");
-      res.add(fileChooser.getSelectedFile().getAbsolutePath());
-    } else if (result == JFileChooser.CANCEL_OPTION) {
-      System.out.println("No file loaded!");
-    }
+    res.add(String.valueOf(fileChooser.getSelectedFile()));
   }
 
   /**

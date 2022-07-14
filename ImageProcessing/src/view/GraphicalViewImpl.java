@@ -34,7 +34,6 @@ public class GraphicalViewImpl implements GraphicalView {
   private final JButton loadBtn;
   private final JButton saveBtn;
   private final JButton toggleVisBtn;
-  private JTextField toolsField;
   private JPanel imageModArea;
   private JScrollPane imageDisplay;
   private JFrame frame;
@@ -44,7 +43,6 @@ public class GraphicalViewImpl implements GraphicalView {
   private ImageHistogram histo;
 
   private Image model;
-  private JLabel imageAreaLabel;
   private JPanel buttons;
 
   //constructor and
@@ -87,7 +85,6 @@ public class GraphicalViewImpl implements GraphicalView {
     saveBtn.setActionCommand("Save");
     toggleVisBtn = new JButton("Toggle visibility");
     toggleVisBtn.setActionCommand("Toggle visibility");
-    toolsField = new JTextField();
 
     //main modificaitons made start here
     frame = new JFrame("Image Processing Application");
@@ -200,11 +197,6 @@ public class GraphicalViewImpl implements GraphicalView {
   @Override
   public List<String> dialogHandler(String dialog) {
     switch (dialog) {
-      // not sure if we need these
-//      case "toggle":
-//        return new ToggleState().getState();
-//      case "set":
-//        return new CurrentState().getState();
       case "load":
         return new LoadState().getState();
       case "save":

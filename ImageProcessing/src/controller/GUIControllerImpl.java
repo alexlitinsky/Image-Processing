@@ -150,7 +150,7 @@ public class GUIControllerImpl implements ActionListener, ImageController {
    * Method to handle the case where the user chooses to save the current image.
    */
   private void saveHandler() {
-    List<String> res = this.view.dialogHandler("export");
+    List<String> res = this.view.dialogHandler("save");
 
     if (res == null) {
       return;
@@ -243,13 +243,6 @@ public class GUIControllerImpl implements ActionListener, ImageController {
             this.view.updateModel(this.model.newModdedImage(new GreyscaleModifier()));
             this.view.alert("Greyscale applied successfully!");
             break;
-            // don't think I need these
-//          case "Toggle Visibility":
-//            this.toggleVisHandler();
-//            break;
-//          case "Set Current":
-//            this.setCurrentHandler();
-//            break;
           case "Save":
             this.saveHandler();
             break;
