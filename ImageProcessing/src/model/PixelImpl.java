@@ -59,7 +59,8 @@ public class PixelImpl implements Pixel {
    */
   @Override
   public double[] applyToAll(double val) {
-    return new double[]{applyToR(val), applyToG(val), applyToB(val)};
+    //return new double[]{applyToR(val), applyToG(val), applyToB(val)};
+    return new double[] { this.red * val, this.green * val, this.blue * val};
   }
 
   /**
