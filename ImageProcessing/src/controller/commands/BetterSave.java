@@ -59,7 +59,7 @@ public class BetterSave implements Command {
           }
         }
         try {
-          ImageIO.write(img, fileType, new File(path + fileType));
+          ImageIO.write(img, fileType, new File(path));
         } catch (IOException e) {
           throw new RuntimeException(e);
         }

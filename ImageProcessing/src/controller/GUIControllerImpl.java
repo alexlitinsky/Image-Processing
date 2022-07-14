@@ -8,6 +8,7 @@ import java.util.Map;
 
 import controller.commands.BetterSave;
 import controller.commands.Command;
+import controller.commands.Save;
 import histomodel.ImageHistogram;
 import model.Image;
 import model.modifiers.BlueCompModifier;
@@ -68,7 +69,7 @@ public class GUIControllerImpl implements ActionListener, ImageController {
         try {
           this.model = ImageUtil.readFile(res.get(1));
           this.view.updateModel(this.model);
-          this.view.alert("Image loaded successfully!");
+          //this.view.alert("Image loaded successfully!");
         } catch (IOException ioException) {
           this.view.alert("There was an error loading that image");
           return;
@@ -91,13 +92,13 @@ public class GUIControllerImpl implements ActionListener, ImageController {
     }
 
     String filePath = res.get(0);
-    String fileExt = res.get(1);
+    String fileExt = res.get(0).substring(res.get(0).length() - 3);
     try {
       Command saver = new BetterSave(filePath, fileExt, this.model);
       saver.commandApply();
-      this.view.alert("Image exported successfully!");
+      //this.view.alert("Image saved successfully!");
     } catch (IOException e) {
-      this.view.alert("Error exporting image!");
+      this.view.alert("Error saving image!");
     }
   }
 
@@ -122,60 +123,74 @@ public class GUIControllerImpl implements ActionListener, ImageController {
       if (this.model != null) {
         switch (command) {
           case "Vertical flip":
-            this.view.updateModel(this.model.newModdedImage(new FlipModifier(true)));
-            this.view.alert("Vertical flip applied successfully!");
+            this.model = this.model.newModdedImage(new FlipModifier(true));
+            this.view.updateModel(this.model);
+            //this.view.alert("Vertical flip applied successfully!");
             break;
           case "Horizontal flip":
-            this.view.updateModel(this.model.newModdedImage(new FlipModifier(false)));
-            this.view.alert("Horizontal flip applied successfully!");
+            this.model = this.model.newModdedImage(new FlipModifier(false));
+            this.view.updateModel(this.model);
+            //this.view.alert("Horizontal flip applied successfully!");
             break;
           case "Red component":
-            this.view.updateModel(this.model.newModdedImage(new RedCompModifier()));
-            this.view.alert("Red component applied successfully!");
+            this.model = this.model.newModdedImage(new RedCompModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Red component applied successfully!");
             break;
           case "Green component":
-            this.view.updateModel(this.model.newModdedImage(new GreenCompModifier()));
-            this.view.alert("Green component applied successfully!");
+            this.model = this.model.newModdedImage(new GreenCompModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Green component applied successfully!");
             break;
           case "Blue component":
-            this.view.updateModel(this.model.newModdedImage(new BlueCompModifier()));
-            this.view.alert("Blue component applied successfully!");
+            this.model = this.model.newModdedImage(new BlueCompModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Blue component applied successfully!");
             break;
           case "Value component":
-            this.view.updateModel(this.model.newModdedImage(new ValueCompModifier()));
-            this.view.alert("Value component applied successfully!");
+            this.model = this.model.newModdedImage(new ValueCompModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Value component applied successfully!");
             break;
           case "Intensity component":
-            this.view.updateModel(this.model.newModdedImage(new IntensityCompModifier()));
-            this.view.alert("Intensity component applied successfully!");
+            this.model = this.model.newModdedImage(new IntensityCompModifier());
+            this.view.updateModel(this.model);
+           // this.view.alert("Intensity component applied successfully!");
             break;
           case "Luma component":
-            this.view.updateModel(this.model.newModdedImage(new LumaCompModifier()));
-            this.view.alert("Luma component applied successfully!");
+            this.model = this.model.newModdedImage(new LumaCompModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Luma component applied successfully!");
             break;
           case "Brighten":
-            this.view.updateModel(this.model.newModdedImage(new BrightnessModifier(10)));
-            this.view.alert("Brighten applied successfully!");
+            this.model = this.model.newModdedImage(new BrightnessModifier(10));
+            this.view.updateModel(this.model);
+            //this.view.alert("Brighten applied successfully!");
             break;
           case "Darken":
-            this.view.updateModel(this.model.newModdedImage(new BrightnessModifier(-10)));
-            this.view.alert("Darken applied successfully!");
+            this.model = this.model.newModdedImage(new BrightnessModifier(-10));
+            this.view.updateModel(this.model);
+            //this.view.alert("Darken applied successfully!");
             break;
           case "Blur":
-            this.view.updateModel(this.model.newModdedImage(new BlurModifier()));
-            this.view.alert("Blur applied successfully!");
+            this.model = this.model.newModdedImage(new BlurModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Blur applied successfully!");
             break;
           case "Sepia":
-            this.view.updateModel(this.model.newModdedImage(new SepiaModifier()));
-            this.view.alert("Sepia applied successfully!");
+            this.model = this.model.newModdedImage(new SepiaModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Sepia applied successfully!");
             break;
           case "Sharpen":
-            this.view.updateModel(this.model.newModdedImage(new SharpenModifier()));
-            this.view.alert("Sharpen applied successfully!");
+            this.model = this.model.newModdedImage(new SharpenModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Sharpen applied successfully!");
             break;
           case "Greyscale":
-            this.view.updateModel(this.model.newModdedImage(new GreyscaleModifier()));
-            this.view.alert("Greyscale applied successfully!");
+            this.model = this.model.newModdedImage(new GreyscaleModifier());
+            this.view.updateModel(this.model);
+            //this.view.alert("Greyscale applied successfully!");
             break;
           case "Save":
             this.saveHandler();

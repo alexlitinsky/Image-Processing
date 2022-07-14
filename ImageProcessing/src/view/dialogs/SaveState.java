@@ -28,6 +28,7 @@ public class SaveState extends JDialog implements Dialog {
     FileNameExtensionFilter filter = new FileNameExtensionFilter("Image",
             "jpeg", "jpg", "png", "bmp", "gif");
     fileChooser.setFileFilter(filter);
+    this.contentPane = new JPanel();
     setContentPane(contentPane);
     setModal(true);
     setResizable(false);

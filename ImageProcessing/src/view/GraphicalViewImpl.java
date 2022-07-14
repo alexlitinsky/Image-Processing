@@ -67,9 +67,9 @@ public class GraphicalViewImpl implements GraphicalView {
     intensityCompBtn.setActionCommand("Intensity component");
     lumaCompBtn = new JButton("Luma component");
     lumaCompBtn.setActionCommand("Luma component");
-    brightenBtn = new JButton("Brightness + 10");
+    brightenBtn = new JButton("Brighten");
     brightenBtn.setActionCommand("Brighten");
-    darkenBtn = new JButton("Brightness - 10");
+    darkenBtn = new JButton("Darken");
     darkenBtn.setActionCommand("Darken");
     blurBtn = new JButton("Blur");
     blurBtn.setActionCommand("Blur");
