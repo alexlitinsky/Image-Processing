@@ -40,7 +40,7 @@ public class GraphicalViewImplTest {
     ImageHistogram histo = new ImageHistogramImpl();
     GraphicalView test2 = new GraphicalViewImpl("test", new ImageHistogramImpl(),
             new ImageImpl(1, 1));
-    test2.setHistogram(histo);
+    test2.updateHistogram(histo);
     assertFalse(test.equals(test2));
 
   }

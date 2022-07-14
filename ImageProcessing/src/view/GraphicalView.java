@@ -29,7 +29,7 @@ public interface GraphicalView {
    *
    * @param histo the histogram to be displayed
    */
-  void setHistogram(ImageHistogram histo);
+  void updateHistogram(ImageHistogram histo);
 
   /**
    * Acts as a liasion between the view and dialog outputs of various methods.

@@ -34,15 +34,18 @@ public class GUIControllerImpl implements ActionListener, ImageController {
   private final GraphicalView view;
   private Image model;
 
+  private ImageHistogram histo;
+
   /**
    * Constructs a GraphicalController object with a view and model.
    *
    * @param view  IGraphicalView view object
    * @param model image model obj
    */
-  public GUIControllerImpl(GraphicalView view, Image model) {
+  public GUIControllerImpl(GraphicalView view, Image model, ImageHistogram histo) {
     this.view = view;
     this.model = model;
+    this.histo = histo;
   }
 
   /**
@@ -68,7 +71,9 @@ public class GUIControllerImpl implements ActionListener, ImageController {
       if (res.contains("Image")) {
         try {
           this.model = ImageUtil.readFile(res.get(1));
+          this.histo = this.histo.update(this.model);
           this.view.updateModel(this.model);
+          this.view.updateHistogram(histo);
           //this.view.alert("Image loaded successfully!");
         } catch (IOException ioException) {
           this.view.alert("There was an error loading that image");
@@ -124,72 +129,101 @@ public class GUIControllerImpl implements ActionListener, ImageController {
         switch (command) {
           case "Vertical flip":
             this.model = this.model.newModdedImage(new FlipModifier(true));
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Vertical flip applied successfully!");
             break;
           case "Horizontal flip":
             this.model = this.model.newModdedImage(new FlipModifier(false));
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Horizontal flip applied successfully!");
             break;
           case "Red component":
             this.model = this.model.newModdedImage(new RedCompModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Red component applied successfully!");
             break;
           case "Green component":
             this.model = this.model.newModdedImage(new GreenCompModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Green component applied successfully!");
             break;
           case "Blue component":
             this.model = this.model.newModdedImage(new BlueCompModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Blue component applied successfully!");
             break;
           case "Value component":
             this.model = this.model.newModdedImage(new ValueCompModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Value component applied successfully!");
             break;
           case "Intensity component":
             this.model = this.model.newModdedImage(new IntensityCompModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
-           // this.view.alert("Intensity component applied successfully!");
+            this.view.updateHistogram(this.histo);
+            // this.view.alert("Intensity component applied successfully!");
             break;
           case "Luma component":
             this.model = this.model.newModdedImage(new LumaCompModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Luma component applied successfully!");
             break;
           case "Brighten":
             this.model = this.model.newModdedImage(new BrightnessModifier(10));
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Brighten applied successfully!");
             break;
           case "Darken":
             this.model = this.model.newModdedImage(new BrightnessModifier(-10));
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Darken applied successfully!");
             break;
           case "Blur":
             this.model = this.model.newModdedImage(new BlurModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Blur applied successfully!");
             break;
           case "Sepia":
             this.model = this.model.newModdedImage(new SepiaModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
+            this.view.refresh();
             //this.view.alert("Sepia applied successfully!");
             break;
           case "Sharpen":
             this.model = this.model.newModdedImage(new SharpenModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Sharpen applied successfully!");
             break;
           case "Greyscale":
             this.model = this.model.newModdedImage(new GreyscaleModifier());
+            this.histo = this.histo.update(this.model);
             this.view.updateModel(this.model);
+            this.view.updateHistogram(this.histo);
             //this.view.alert("Greyscale applied successfully!");
             break;
           case "Save":

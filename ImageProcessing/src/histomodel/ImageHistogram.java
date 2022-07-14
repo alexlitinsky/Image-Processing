@@ -21,7 +21,7 @@ public interface ImageHistogram {
    * Updates the image histogram with the updated model.
    * @param model the model being used to update the histogram
    */
-  void update(Image model);
+  ImageHistogram update(Image model);
 
   ArrayList<Map<Integer, Integer>> getHistogramData();
 

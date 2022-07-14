@@ -51,7 +51,7 @@ public class ImageHistogramImpl implements ImageHistogram {
   }
 
   @Override
-  public void update(Image model) {
+  public ImageHistogram update(Image model) {
     this.imageDataR = new TreeMap<Integer, Integer>();
     this.imageDataB = new TreeMap<Integer, Integer>();
     this.imageDataG = new TreeMap<Integer, Integer>();
@@ -75,6 +75,7 @@ public class ImageHistogramImpl implements ImageHistogram {
         else { imageDataI.put(intensity, 0); }
       }
     }
+    return this;
   }
 
   @Override

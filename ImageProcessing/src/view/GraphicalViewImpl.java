@@ -184,7 +184,7 @@ public class GraphicalViewImpl implements GraphicalView {
    * @param histo the histogram to be displayed
    */
   @Override
-  public void setHistogram(ImageHistogram histo) {
+  public void updateHistogram(ImageHistogram histo) {
     this.histo = histo;
   }
 

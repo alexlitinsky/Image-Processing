@@ -34,7 +34,7 @@ public class GraphicalImageProcessing {
         ImageHistogram histo = new ImageHistogramImpl();
         Image model = new ImageImpl(1, 1);
         GraphicalView gView = new GraphicalViewImpl("GRIME", histo, model);
-        ImageController gController = new GUIControllerImpl(gView, model);
+        ImageController gController = new GUIControllerImpl(gView, model, histo);
         gController.playGame();
 
       } catch (UnsupportedLookAndFeelException e) {
