@@ -144,6 +144,8 @@ public class GraphicalViewImpl implements GraphicalView {
     Image currentModel = this.model;
     ImageHistogram currentHisto = this.histo;
     ImageIcon picture = new ImageIcon(currentModel.createBufferedImage());
+    ImageIcon histogram = new ImageIcon(currentHisto.createHistogram());
+    JLabel histoLabel = new JLabel(histogram);
     JLabel label = new JLabel(picture);
     if (currentModel != null) {
       this.imageModArea.add(label);
@@ -156,14 +158,14 @@ public class GraphicalViewImpl implements GraphicalView {
     }
     // have to accompany histogram in view using different JLable, somewhere else on the screen
     if (currentHisto != null) {
-      this.imageHistoArea.add(new JLabel(new ImageIcon(currentHisto.createHistogram())));
+      this.imageHistoArea.add(histoLabel);
       this.imageHistoArea.updateUI();
       if (this.imageHistoArea.getComponentCount() >= 2) {
         imageHistoArea.remove(0);
       }
       //this.imageDisplay.setViewportView(new JLabel(new ImageIcon(currentHisto.createHistogram())));
     } else {
-      //this.imageDisplay.setViewportView(new JLabel(new ImageIcon()));
+      this.imageDisplay.setViewportView(new JLabel(new ImageIcon()));
     }
   }
 

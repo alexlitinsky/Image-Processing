@@ -74,7 +74,6 @@ public class GUIControllerImpl implements ActionListener, ImageController {
           this.histo = this.histo.update(this.model);
           this.view.updateModel(this.model);
           this.view.updateHistogram(histo);
-          //this.view.alert("Image loaded successfully!");
         } catch (IOException ioException) {
           this.view.alert("There was an error loading that image");
           return;

@@ -1,9 +1,10 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Dimension;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -12,16 +13,18 @@ import javax.swing.JPanel;
  * Class to represent a bar chart graphic - is displayed in the graphical view.
  */
 public class BarChartGraphic extends JPanel {
-  private Map<Color, Integer> bars = new LinkedHashMap<Color, Integer>();
+
+  private Map<Color, Map<Integer, Integer>> color_bars = new HashMap<Color, Map<Integer, Integer>>();
 
   /**
    * Adds a new bar to the chart.
    * @param color color to display bar
    * @param value size of bar
    */
-  public void addBar(Color color, int value)
+  public void addBar(Color color, Map<Integer, Integer> value)
   {
-    bars.put(color, value);
+    //bars.put(color, value);
+    color_bars.put(color, value);
     repaint();
   }
 
@@ -30,29 +33,62 @@ public class BarChartGraphic extends JPanel {
    *
    * @param g the Graphics object to paint
    */
-  @Override
-  protected void paintComponent(Graphics g)
-  {
-    // determines the longest bar (for sizing purposes)
-    int max = 0;
-    for (Integer value : bars.values())
-    {
-      max = Math.max(max, value);
-    }
+//  @Override
+//  public void paint(Graphics g) {
+//    super.paint(g);
+//    Graphics2D g2d = (Graphics2D) g;
+//    int height = 120;
+//    int width = 0;
+////    g.setColor(Color.white);
+////    g.fillRect(0, 0, width, height);
+//    // for each color
+//    for (Color col : color_bars.keySet()) {
+//      Map<Integer, Integer> values = color_bars.get(col);
+//      g2d.setColor(col);
+//      // for each individual value in the hashmap
+//      for (Integer map_vals : values.values()) {
+//        width+= 1;
+//        g2d.fillRect(width, height, 1,  (int)( .5 * map_vals));
+//        g2d.rotate(Math.PI);
+//      }
+//      // reset width
+//      width = 0;
+//      // draw axis
+//      g2d.drawLine(width, height, width + 255, height);
+//      g2d.drawLine(width, height, width, height - 300);
+//      // increment height to separate the graphs
+//      height += 300;
+//    }
+//  }
 
-    // paints the bars
-    int width = (getWidth() / bars.size()) - 2;
-    int x = 1;
-    for (Color color : bars.keySet())
-    {
-      int value = bars.get(color);
-      int height = (int)
-              ((getHeight() - 5) * ((double) value / max));
-      g.setColor(color);
-      g.fillRect(x, getHeight() - height, width, height);
-      g.setColor(Color.black);
-      g.drawRect(x, getHeight() - height, width, height);
-      x += (width + 2);
+  @Override
+  public void paint(Graphics g) {
+    Graphics2D g2d = (Graphics2D) g;
+    int height = 0;
+    int width = 0;
+    g2d.setColor(Color.white);
+    g2d.fillRect(0, 0, width, height);
+    // for each color
+    for (Color col : color_bars.keySet()) {
+      Map<Integer, Integer> values = color_bars.get(col);
+      g2d.setColor(col);
+      // for each individual value in the hashmap
+      int max = 0;
+      for (Integer map_vals : values.values()) {
+        width+= 1;
+        g2d.fillRect(width, height, 1,  (int)( .05 * map_vals));
+        //g2d.translate(width, height);
+        g2d.rotate(Math.PI);
+        max = Math.max((int)( .05 * map_vals), max);
+      }
+      // reset width
+      width = 0;
+      // draw axis
+      g2d.drawLine(width, height, width + 255, height);
+      g2d.drawLine(width, height, width, height + max);
+      // increment height to separate the graphs
+      // 120 before
+      height += max;
     }
   }
 
@@ -62,6 +98,19 @@ public class BarChartGraphic extends JPanel {
    */
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(bars.size() * 10 + 2, 50);
+    return new Dimension(256, 1200);
   }
 }
+
+/* BAR CHART PSEUDOCODE
+   4 charts - red, green, blue, intensity
+   Bar Chart takes in an instance of a histogram (how would we update it?) - I think it does it automatically given the code)
+   So now we have 4 hashmaps of values
+
+   width - 255 (amount of distinct values)
+   height - the max value of each specific hashmap
+
+   30 pixel differential among the graphs
+
+
+ */

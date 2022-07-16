@@ -94,16 +94,17 @@ public class ImageHistogramImpl implements ImageHistogram {
    * @return the image created to represent this histogram
    */
   @Override
-  public java.awt.Image createHistogram() {
+  public BufferedImage createHistogram() {
     BarChartGraphic chart = new BarChartGraphic();
-    chart.addBar(Color.red, imageDataR.size());
-    chart.addBar(Color.green, imageDataG.size());
-    chart.addBar(Color.blue, imageDataB.size());
-    chart.addBar(Color.black, imageDataI.size());
+    chart.addBar(Color.red, this.getHistogramData().get(0)); //addBar expands the image
+    chart.addBar(Color.green, this.getHistogramData().get(1));
+    chart.addBar(Color.blue, this.getHistogramData().get(2));
+    chart.addBar(Color.white, this.getHistogramData().get(3));
     BufferedImage image = new BufferedImage(chart.getPreferredSize().width,
             chart.getPreferredSize().height,
             BufferedImage.TYPE_INT_RGB);
-    Graphics graphics = image.createGraphics();
+    Graphics2D graphics = image.createGraphics();
+    //chart.paintComponents(graphics);
     chart.paint(graphics);
     graphics.drawImage(image, image.getWidth(new JLabel()), image.getHeight(new JLabel()),
             new JLabel());

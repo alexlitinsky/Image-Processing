@@ -1,8 +1,8 @@
 package histomodel;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.TreeMap;
 
 import model.Image;
 
@@ -27,7 +27,8 @@ public interface ImageHistogram {
 
   /**
    * Creates an image of the bar chart representing this histogram to be displayed by other methods.
+   *
    * @return the image created to represent this histogram
    */
-  java.awt.Image createHistogram();
+  BufferedImage createHistogram();
 }
