@@ -3,8 +3,7 @@ package histomodel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
+
 
 import javax.swing.*;
 
@@ -16,75 +15,71 @@ import view.BarChartGraphic;
  * Represents the implementation for an ImageHistogram
  */
 public class ImageHistogramImpl implements ImageHistogram {
-  private Map<Integer, Integer> imageDataR;
-  private Map<Integer, Integer> imageDataG;
-  private Map<Integer, Integer> imageDataB;
- private Map<Integer, Integer> imageDataI;
+  private int[] betterDataR;
+  private int[] betterDataG;
+  private int[] betterDataB;
+  private int[] betterDataI;
+
+
 
   /**
    * A Constructor for an ImageHistogram.
    */
   public ImageHistogramImpl() {
-    this.imageDataR = new TreeMap<Integer, Integer>();
-    this.imageDataB = new TreeMap<Integer, Integer>();
-    this.imageDataG = new TreeMap<Integer, Integer>();
-    this.imageDataI = new TreeMap<Integer, Integer>();
+
+    this.betterDataR = new int[256];
+    this.betterDataG = new int[256];
+    this.betterDataB = new int[256];
+    this.betterDataI = new int[256];
   }
 
   @Override
   public void scale(int s) {
-    Map<Integer, Integer> newDataR = new TreeMap<Integer, Integer>();
-    Map<Integer, Integer> newDataG = new TreeMap<Integer, Integer>();
-    Map<Integer, Integer> newDataB = new TreeMap<Integer, Integer>();
-    Map<Integer, Integer> newDataI = new TreeMap<Integer, Integer>();
-    for (int i = 0; i < imageDataR.size(); i++) {
-      newDataR.put(i, Math.min(Math.max(0, imageDataR.get(i) * s), 255));
-      newDataG.put(i, Math.min(Math.max(0, imageDataG.get(i) * s), 255));
-      newDataB.put(i, Math.min(Math.max(0, imageDataB.get(i) * s), 255));
-      newDataI.put(i, Math.min(Math.max(0, imageDataI.get(i) * s), 255));
-    }
-
-    this.imageDataR = newDataR;
-    this.imageDataG = newDataG;
-    this.imageDataB = newDataB;
-    this.imageDataI = newDataI;
+//    Map<Integer, Integer> newDataR = new TreeMap<Integer, Integer>();
+//    Map<Integer, Integer> newDataG = new TreeMap<Integer, Integer>();
+//    Map<Integer, Integer> newDataB = new TreeMap<Integer, Integer>();
+//    Map<Integer, Integer> newDataI = new TreeMap<Integer, Integer>();
+//    for (int i = 0; i < imageDataR.size(); i++) {
+//      newDataR.put(i, Math.min(Math.max(0, imageDataR.get(i) * s), 255));
+//      newDataG.put(i, Math.min(Math.max(0, imageDataG.get(i) * s), 255));
+//      newDataB.put(i, Math.min(Math.max(0, imageDataB.get(i) * s), 255));
+//      newDataI.put(i, Math.min(Math.max(0, imageDataI.get(i) * s), 255));
+//    }
+//
+//    this.imageDataR = newDataR;
+//    this.imageDataG = newDataG;
+//    this.imageDataB = newDataB;
+//    this.imageDataI = newDataI;
   }
 
   @Override
   public ImageHistogram update(Image model) {
-    this.imageDataR = new TreeMap<Integer, Integer>();
-    this.imageDataB = new TreeMap<Integer, Integer>();
-    this.imageDataG = new TreeMap<Integer, Integer>();
-    this.imageDataI = new TreeMap<Integer, Integer>();
+
+    this.betterDataR = new int[256];
+    this.betterDataG = new int[256];
+    this.betterDataB = new int[256];
+    this.betterDataI = new int[256];
 
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
         Pixel cur = model.getPixel(i, j);
-        if (imageDataR.containsKey(cur.getRGB()[0])) { imageDataR.put(cur.getRGB()[0],
-                imageDataR.get(cur.getRGB()[0]) + 1); }
-        else { imageDataR.put(cur.getRGB()[0], 0); }
-        if (imageDataG.containsKey(cur.getRGB()[1])) { imageDataG.put(cur.getRGB()[1],
-                imageDataG.get(cur.getRGB()[1]) + 1); }
-        else { imageDataG.put(cur.getRGB()[1], 0); }
-        if (imageDataB.containsKey(cur.getRGB()[2])) { imageDataB.put(cur.getRGB()[2],
-                imageDataB.get(cur.getRGB()[2]) + 1); }
-        else { imageDataB.put(cur.getRGB()[2], 0); }
+        this.betterDataR[cur.getRGB()[0]] += 1;
+        this.betterDataG[cur.getRGB()[1]] += 1;
+        this.betterDataB[cur.getRGB()[2]] += 1;
         int intensity = (cur.getRGB()[0] + cur.getRGB()[1] + cur.getRGB()[2]) / 3;
-        if (imageDataI.containsKey(intensity)) { imageDataI.put(intensity,
-                imageDataI.get(intensity) + 1); }
-        else { imageDataI.put(intensity, 0); }
+        this.betterDataI[intensity] += 1;
       }
     }
     return this;
   }
 
   @Override
-  public ArrayList<Map<Integer, Integer>> getHistogramData() {
-    ArrayList<Map<Integer, Integer>> data = new ArrayList<>();
-    data.add(imageDataR);
-    data.add(imageDataG);
-    data.add(imageDataB);
-    data.add(imageDataI);
+  public ArrayList<int[]> getHistogramData() {
+    ArrayList<int[]> data = new ArrayList<>();
+    data.add(betterDataR);
+    data.add(betterDataG);
+    data.add(betterDataB);
+    data.add(betterDataI);
     return data;
   }
 
@@ -104,7 +99,6 @@ public class ImageHistogramImpl implements ImageHistogram {
             chart.getPreferredSize().height,
             BufferedImage.TYPE_INT_RGB);
     Graphics2D graphics = image.createGraphics();
-    //chart.paintComponents(graphics);
     chart.paint(graphics);
     graphics.drawImage(image, image.getWidth(new JLabel()), image.getHeight(new JLabel()),
             new JLabel());

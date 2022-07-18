@@ -1,10 +1,7 @@
 package view;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -14,14 +11,14 @@ import javax.swing.JPanel;
  */
 public class BarChartGraphic extends JPanel {
 
-  private Map<Color, Map<Integer, Integer>> color_bars = new HashMap<Color, Map<Integer, Integer>>();
+  private Map<Color, int[]> color_bars = new HashMap<Color, int[]>();
 
   /**
    * Adds a new bar to the chart.
    * @param color color to display bar
    * @param value size of bar
    */
-  public void addBar(Color color, Map<Integer, Integer> value)
+  public void addBar(Color color, int[] value)
   {
     //bars.put(color, value);
     color_bars.put(color, value);
@@ -70,14 +67,14 @@ public class BarChartGraphic extends JPanel {
     g2d.fillRect(0, 0, width, height);
     // for each color
     for (Color col : color_bars.keySet()) {
-      Map<Integer, Integer> values = color_bars.get(col);
+      int[] values = color_bars.get(col);
       g2d.setColor(col);
       // for each individual value in the hashmap
       int min = 0;
       int max = 0;
       g2d.drawLine(width + 3, height, width + 3, height + 140);
-      g2d.drawLine(width, height, width + 255, height);
-      for (Integer map_vals : values.values()) {
+      g2d.drawLine(width, height, width + 256, height);
+      for (Integer map_vals : values) {
         width+= 1;
         max = Math.max((int)( .05 * map_vals), max);
         min = Math.min((int)( .05 * map_vals), 140);
@@ -101,7 +98,7 @@ public class BarChartGraphic extends JPanel {
    */
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(258, 1200);
+    return new Dimension(256, 1200);
   }
 }
 

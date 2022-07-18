@@ -2,7 +2,6 @@ package histomodel;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Map;
 
 import model.Image;
 
@@ -23,7 +22,7 @@ public interface ImageHistogram {
    */
   ImageHistogram update(Image model);
 
-  ArrayList<Map<Integer, Integer>> getHistogramData();
+  ArrayList<int[]> getHistogramData();
 
   /**
    * Creates an image of the bar chart representing this histogram to be displayed by other methods.
