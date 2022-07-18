@@ -73,22 +73,25 @@ public class BarChartGraphic extends JPanel {
       Map<Integer, Integer> values = color_bars.get(col);
       g2d.setColor(col);
       // for each individual value in the hashmap
+      int min = 0;
       int max = 0;
+      g2d.drawLine(width + 3, height, width + 3, height + 140);
+      g2d.drawLine(width, height, width + 255, height);
       for (Integer map_vals : values.values()) {
         width+= 1;
-        g2d.fillRect(width, height, 1,  (int)( .05 * map_vals));
-        //g2d.translate(width, height);
-        g2d.rotate(Math.PI);
         max = Math.max((int)( .05 * map_vals), max);
+        min = Math.min((int)( .05 * map_vals), 140);
+        g2d.fillRect(width, height, 1,  min);
+        g2d.rotate(Math.PI);
       }
       // reset width
       width = 0;
       // draw axis
-      g2d.drawLine(width, height, width + 255, height);
-      g2d.drawLine(width, height, width, height + max);
+      //g2d.drawLine(width, height, width + 255, height);
+      //g2d.drawLine(width, height, width, height + Math.min(max, 140));
       // increment height to separate the graphs
       // 120 before
-      height += max;
+      height += Math.min(max, 140);
     }
   }
 
@@ -98,7 +101,7 @@ public class BarChartGraphic extends JPanel {
    */
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(256, 1200);
+    return new Dimension(258, 1200);
   }
 }
 
