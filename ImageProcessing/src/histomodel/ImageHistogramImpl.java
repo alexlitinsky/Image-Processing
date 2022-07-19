@@ -63,11 +63,11 @@ public class ImageHistogramImpl implements ImageHistogram {
     for (int i = 0; i < model.getDimensions()[0]; i++) {
       for (int j = 0; j < model.getDimensions()[1]; j++) {
         Pixel cur = model.getPixel(i, j);
-        this.betterDataR[cur.getRGB()[0]] += 1;
-        this.betterDataG[cur.getRGB()[1]] += 1;
-        this.betterDataB[cur.getRGB()[2]] += 1;
+        this.betterDataR[Math.min(cur.getRGB()[0], 254)] += 1;
+        this.betterDataG[Math.min(cur.getRGB()[1], 254)] += 1;
+        this.betterDataB[Math.min(cur.getRGB()[2], 254)] += 1;
         int intensity = (cur.getRGB()[0] + cur.getRGB()[1] + cur.getRGB()[2]) / 3;
-        this.betterDataI[intensity] += 1;
+        this.betterDataI[Math.min(intensity, 254)] += 1;
       }
     }
     return this;

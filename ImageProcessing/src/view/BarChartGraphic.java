@@ -72,8 +72,8 @@ public class BarChartGraphic extends JPanel {
       // for each individual value in the hashmap
       int min = 0;
       int max = 0;
-      g2d.drawLine(width + 3, height, width + 3, height + 140);
-      g2d.drawLine(width, height, width + 256, height);
+      //g2d.drawLine(width + 3, height, width + 3, height + 140);
+      g2d.drawLine(width, height, width + 255, height);
       for (Integer map_vals : values) {
         width+= 1;
         max = Math.max((int)( .05 * map_vals), max);

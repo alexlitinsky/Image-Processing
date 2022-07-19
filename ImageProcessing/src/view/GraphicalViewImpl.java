@@ -98,13 +98,13 @@ public class GraphicalViewImpl implements GraphicalView {
     // add image mod area
     imageModArea = new JPanel();
     imageModArea.setBorder(BorderFactory.createTitledBorder("Image Modify Area"));
-    imageModArea.setPreferredSize(new Dimension(950, 600));
+    imageModArea.setPreferredSize(new Dimension(920, 600));
     frame.add(imageModArea, BorderLayout.WEST);
 
     // add histogram area
     imageHistoArea = new JPanel();
     imageHistoArea.setBorder(BorderFactory.createTitledBorder("Image Histogram Area"));
-    imageHistoArea.setPreferredSize(new Dimension(200, 600));
+    imageHistoArea.setPreferredSize(new Dimension(280, 600));
     frame.add(imageHistoArea, BorderLayout.EAST);
 
     // add buttons
