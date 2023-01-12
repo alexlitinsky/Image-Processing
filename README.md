@@ -3,7 +3,7 @@
 - Used MVC Paradigm
 - Implemented using Command Design Pattern
 - Tested using Mocks
-- Made using Java & JFrame
+- Made using Java & Java Swing
 
 # Features
 - Brighten: brightens the image
@@ -20,7 +20,7 @@
 - bluecomp: applies the blue value to every part of the pixel in the image
 - valuecomp: computes the average of each pixel in the image
 
-# How to run
+# How to run on your IDE
 - Open the file with your favorite java IDE
 - Make a run configuration using the GraphicalImageProcessing class
 - Under program arguments, type in either "interactive" or "script"
@@ -29,4 +29,13 @@
 - To the right side of the GUI, a histogram will be projected, where you can see the overall pixel densities of that image
 - With your accompanied transformation, you can save the new image you created!
 
+# How to run externally
+- Clone git repository
+- Open jar file
+
+
+# How to run on the terminal
+- CLone git repository
+- cd into the project file
+- Run the command "java -jar file.jar"
 
